@@ -7,6 +7,8 @@ import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainView extends JPanel{
 	
@@ -59,27 +61,28 @@ public class MainView extends JPanel{
 		
 		this.lblWelcom = new JLabel("Welcome");
 		this.lblWelcom.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		this.lblWelcom.setBounds(19, 48, 70, 16);
+		this.lblWelcom.setBounds(19, 23, 70, 16);
 		this.left.add(this.lblWelcom);
 		
 		this.lblUsername = new JLabel("name");
-		this.lblUsername.setBounds(103, 48, 70, 16);
+		this.lblUsername.setBounds(103, 23, 70, 16);
 		this.left.add(this.lblUsername);
 		
 		this.btnChangePassword = new JButton("Edit Password");
-		this.btnChangePassword.setBounds(19, 104, 154, 29);
+		this.btnChangePassword.setBounds(19, 79, 154, 29);
 		this.left.add(this.btnChangePassword);
 		
 		this.btnChangePhone = new JButton("Edit Phone #");
-		this.btnChangePhone.setBounds(19, 145, 154, 29);
+		this.btnChangePhone.setBounds(19, 120, 154, 29);
 		this.left.add(this.btnChangePhone);
 		
 		this.lblManageAccount = new JLabel("Manage Account");
-		this.lblManageAccount.setBounds(19, 76, 154, 16);
+		this.lblManageAccount.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		this.lblManageAccount.setBounds(19, 51, 154, 16);
 		this.left.add(this.lblManageAccount);
 		
 		this.btnChangeEmail = new JButton("Edit Email");
-		this.btnChangeEmail.setBounds(19, 186, 154, 29);
+		this.btnChangeEmail.setBounds(19, 161, 154, 29);
 		this.left.add(this.btnChangeEmail);
 		
 		this.right = new JPanel();
@@ -110,12 +113,12 @@ public class MainView extends JPanel{
 		
 		this.lblStockAccount = new JLabel("Stock Account Summary");
 		this.lblStockAccount.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		this.lblStockAccount.setBounds(6, 270, 168, 16);
+		this.lblStockAccount.setBounds(6, 123, 168, 16);
 		this.mainDisp.add(this.lblStockAccount);
 		
 		this.Maccount = new JPanel();
 		this.Maccount.setBackground(new Color(204, 153, 153));
-		this.Maccount.setBounds(16, 32, 555, 226);
+		this.Maccount.setBounds(16, 32, 555, 79);
 		this.mainDisp.add(this.Maccount);
 		this.Maccount.setLayout(null);
 		
@@ -128,22 +131,22 @@ public class MainView extends JPanel{
 		this.Maccount.add(this.lblAccountBalance);
 		
 		this.btnDeposit = new JButton("Deposit");
-		this.btnDeposit.setBounds(20, 178, 112, 29);
+		this.btnDeposit.setBounds(20, 34, 112, 29);
 		this.Maccount.add(this.btnDeposit);
 		
 		this.btnWithdraw = new JButton("Withdraw");
 		
-		this.btnWithdraw.setBounds(144, 178, 112, 29);
+		this.btnWithdraw.setBounds(144, 34, 112, 29);
 		this.Maccount.add(this.btnWithdraw);
 		
 		this.btnViewTransactions = new JButton("View Transactions");
-		this.btnViewTransactions.setBounds(268, 178, 155, 29);
+		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
 		this.Saccount = new JPanel();
 		this.Saccount.setLayout(null);
 		this.Saccount.setBackground(new Color(204, 153, 153));
-		this.Saccount.setBounds(16, 298, 555, 221);
+		this.Saccount.setBounds(16, 151, 555, 221);
 		this.mainDisp.add(this.Saccount);
 		
 		this.lblAccountS = new JLabel("Account #:");
@@ -151,11 +154,11 @@ public class MainView extends JPanel{
 		this.Saccount.add(this.lblAccountS);
 		
 		this.btnSellStocks = new JButton("Sell Stocks");
-		this.btnSellStocks.setBounds(20, 172, 112, 29);
+		this.btnSellStocks.setBounds(20, 34, 112, 29);
 		this.Saccount.add(this.btnSellStocks);
 		
 		this.btnBuyStocks = new JButton("Buy Stocks");
-		this.btnBuyStocks.setBounds(145, 172, 112, 29);
+		this.btnBuyStocks.setBounds(144, 34, 112, 29);
 		this.Saccount.add(this.btnBuyStocks);
 	
 		this.btnViewTransactionsS = new JButton("View Transactions");
