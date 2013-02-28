@@ -1,30 +1,19 @@
 package com.cs174.starrus.view;
 
-import javax.swing.JFrame;
-
-import java.awt.BorderLayout;
-import java.awt.Point;
-import java.awt.Dimension;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
-@SuppressWarnings("serial")
-public class Window extends JFrame{
-	//------------login window components-------------
-	private JPanel panel;
-	private JLabel lblUserLogin;
-	private JLabel lblUsername;
-	private JLabel lblPassword;
-	private JTextField txtEnterUsername;
-	private JTextField txtEnterPassword;
-	private JButton btnLogin;
-	private JButton btnReset;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+
+public class MainView extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//-------------main window components--------------
 	private JPanel left;
 	private JPanel right;
@@ -49,71 +38,23 @@ public class Window extends JFrame{
 	private JButton btnBuyStocks;
 	private JButton btnViewTransactions;
 	private JButton btnViewTransactionsS;
-	
-	public Window() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("StarRus");
-		setSize(new Dimension(800, 600));
-		setLocation(new Point(100, 100));
-		getContentPane().setLayout(null);
+	private JLabel lblUsername;
+		
+		
+	public MainView(){
+		this.setSize(new Dimension(800, 600));
+		this.setPreferredSize(new Dimension(800, 600));
+		setLayout(null);
+		this.setView();
 	}
 	
-	public void launchLoginWindow(){
-		this.panel = new JPanel();
-		this.panel.setBackground(new Color(204, 153, 153));
-		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		this.panel.setLocation(new Point(200, 150));
-		this.panel.setLocation(200, 150);
-		this.panel.setSize(new Dimension(400, 300));
-		this.panel.setPreferredSize(new Dimension(400, 300));
-		getContentPane().add(this.panel);
-		this.panel.setLayout(null);
-		
-		this.lblUserLogin = new JLabel("User Login");
-		this.lblUserLogin.setFont(new Font("Lucida Grande", Font.BOLD, 25));
-		this.lblUserLogin.setBounds(128, 6, 137, 51);
-		this.panel.add(this.lblUserLogin);
-		
-		this.lblUsername = new JLabel("Username:");
-		this.lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		this.lblUsername.setBounds(59, 106, 108, 22);
-		this.panel.add(this.lblUsername);
-		
-		this.lblPassword = new JLabel("Password:");
-		this.lblPassword.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		this.lblPassword.setBounds(59, 150, 108, 22);
-		this.panel.add(this.lblPassword);
-		
-		this.txtEnterUsername = new JTextField();
-		this.txtEnterUsername.setBounds(190, 105, 153, 28);
-		this.panel.add(this.txtEnterUsername);
-		this.txtEnterUsername.setColumns(10);
-		
-		this.txtEnterPassword = new JTextField();
-		this.txtEnterPassword.setBounds(190, 149, 153, 28);
-		this.panel.add(this.txtEnterPassword);
-		this.txtEnterPassword.setColumns(10);
-		
-		this.btnLogin = new JButton("Login");
-		this.btnLogin.setRequestFocusEnabled(false);
-		this.btnLogin.setBounds(70, 203, 117, 29);
-		this.panel.add(this.btnLogin);
-		
-		this.btnReset = new JButton("Reset");
-		this.btnReset.setRequestFocusEnabled(false);
-		this.btnReset.setBounds(207, 203, 117, 29);
-		this.panel.add(this.btnReset);
-		
-		setVisible(true);
-	}
-	
-	public void launchMainWindow(){
-		this.frameInit();
+	public void setView(){
 		this.left = new JPanel();
+		this.left.setBounds(0, 0, 200, 600);
 		this.left.setBackground(new Color(204, 153, 153));
 		this.left.setBorder(new LineBorder(new Color(0, 0, 0)));
 		this.left.setPreferredSize(new Dimension(200, 600));
-		getContentPane().add(this.left, BorderLayout.WEST);
+		this.add(left);
 		this.left.setLayout(null);
 		
 		this.lblWelcom = new JLabel("Welcome");
@@ -142,8 +83,10 @@ public class Window extends JFrame{
 		this.left.add(this.btnChangeEmail);
 		
 		this.right = new JPanel();
+		this.right.setBounds(200, 0, 600, 600);
 		this.right.setBorder(new LineBorder(new Color(0, 0, 0)));
-		getContentPane().add(this.right, BorderLayout.CENTER);
+		this.left.setPreferredSize(new Dimension(400, 600));
+		this.add(right);
 		this.right.setLayout(null);
 		
 		this.lblTime = new JLabel("02/16/13 8:55 pm");
@@ -151,7 +94,7 @@ public class Window extends JFrame{
 		this.right.add(this.lblTime);
 		
 		this.lblCurrentTime = new JLabel("Current Time:");
-		this.lblCurrentTime.setBounds(348, 6, 86, 16);
+		this.lblCurrentTime.setBounds(348, 6, 99, 16);
 		this.right.add(this.lblCurrentTime);
 		
 		this.mainDisp = new JPanel();
@@ -177,11 +120,11 @@ public class Window extends JFrame{
 		this.Maccount.setLayout(null);
 		
 		this.lblAccount = new JLabel("Account #:");
-		this.lblAccount.setBounds(20, 6, 68, 16);
+		this.lblAccount.setBounds(20, 6, 87, 16);
 		this.Maccount.add(this.lblAccount);
 		
 		this.lblAccountBalance = new JLabel("Account Balance:");
-		this.lblAccountBalance.setBounds(248, 6, 112, 16);
+		this.lblAccountBalance.setBounds(248, 6, 132, 16);
 		this.Maccount.add(this.lblAccountBalance);
 		
 		this.btnDeposit = new JButton("Deposit");
@@ -189,12 +132,12 @@ public class Window extends JFrame{
 		this.Maccount.add(this.btnDeposit);
 		
 		this.btnWithdraw = new JButton("Withdraw");
-
+		
 		this.btnWithdraw.setBounds(144, 178, 112, 29);
 		this.Maccount.add(this.btnWithdraw);
 		
 		this.btnViewTransactions = new JButton("View Transactions");
-		this.btnViewTransactions.setBounds(268, 178, 150, 29);
+		this.btnViewTransactions.setBounds(268, 178, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
 		this.Saccount = new JPanel();
@@ -204,7 +147,7 @@ public class Window extends JFrame{
 		this.mainDisp.add(this.Saccount);
 		
 		this.lblAccountS = new JLabel("Account #:");
-		this.lblAccountS.setBounds(20, 6, 68, 16);
+		this.lblAccountS.setBounds(20, 6, 87, 16);
 		this.Saccount.add(this.lblAccountS);
 		
 		this.btnSellStocks = new JButton("Sell Stocks");
@@ -214,11 +157,9 @@ public class Window extends JFrame{
 		this.btnBuyStocks = new JButton("Buy Stocks");
 		this.btnBuyStocks.setBounds(145, 172, 112, 29);
 		this.Saccount.add(this.btnBuyStocks);
-		
+	
 		this.btnViewTransactionsS = new JButton("View Transactions");
-		this.btnViewTransactionsS.setBounds(269, 172, 150, 29);
+		this.btnViewTransactionsS.setBounds(269, 172, 155, 29);
 		this.Saccount.add(this.btnViewTransactionsS);
-		
-		this.setVisible(true);
 	}
 }

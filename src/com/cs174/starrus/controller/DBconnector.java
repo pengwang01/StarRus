@@ -10,7 +10,7 @@ public class DBconnector {
 	private String strPassword = "5891775";
 	
 	
-	public void DBconnector(){
+	public DBconnector(){
 	}
 	
 	public void connect() throws SQLException{
@@ -22,6 +22,10 @@ public class DBconnector {
 		conn.close();
 	}
 
+	public Connection getConnection(){
+		return conn;
+	}
+	
 	public void test() throws SQLException { 
 		// Create a Statement
 		Statement stmt = conn.createStatement(); // Specify the SQL Query to run

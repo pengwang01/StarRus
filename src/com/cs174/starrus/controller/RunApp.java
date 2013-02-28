@@ -2,12 +2,13 @@ package com.cs174.starrus.controller;
 
 import java.sql.SQLException;
 
-import com.cs174.starrus.view.Window;
+import com.cs174.starrus.view.View;
 
 public class RunApp {
 	public static void main(String[] args){
 		
-		DBconnector db = new DBconnector();
+		//test DB connection
+		/*DBconnector db = new DBconnector();
 		try {
 			db.connect();
 			db.test();
@@ -16,12 +17,11 @@ public class RunApp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
-		
-		Window app = new Window();
-		//app.launchLoginWindow();
-		
-		Window app2 = new Window();
-		//app2.launchMainWindow();
+		//test GUI
+		View view = View.getWindow();
+		view.loadMainView();
+		//view.loadLoginView();
 	}
 }
