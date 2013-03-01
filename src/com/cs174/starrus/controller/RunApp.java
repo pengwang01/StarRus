@@ -8,7 +8,7 @@ public class RunApp {
 	public static void main(String[] args){
 		
 		//test DB connection
-		/*DBconnector db = new DBconnector();
+		DBconnector db = new DBconnector();
 		try {
 			db.connect();
 			db.test();
@@ -17,11 +17,11 @@ public class RunApp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 		//test GUI
-		View view = View.getWindow();
-		view.loadMainView();
+		//View view = View.getWindow();
+		//view.loadMainView();
 		//view.loadLoginView();
 	}
 }

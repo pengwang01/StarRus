@@ -29,11 +29,11 @@ public class DBconnector {
 	public void test() throws SQLException { 
 		// Create a Statement
 		Statement stmt = conn.createStatement(); // Specify the SQL Query to run
-		ResultSet rs = stmt.executeQuery ("SELECT username FROM customer"); // Iterate through the result and print the data
+		ResultSet rs = stmt.executeQuery ("SELECT * FROM customer"); // Iterate through the result and print the data
 		System.out.println("result:");
 		//System.out.println(rs.toString());
 		while(rs.next()){
-			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(1) +  rs.getString(2) + rs.getString(3));
 		}
 		// don't miss this
 		rs.close();
