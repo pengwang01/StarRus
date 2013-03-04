@@ -36,18 +36,27 @@ public class LoginController implements IController{
 			if(rs.next()){
 				System.out.println("find it");
 				Customer customer = new Customer(username, password);
+				System.out.println("test it " + customer.getUsername() + " " + customer.getPsd());
 				customer.setCname(rs.getString("cname"));
-				customer.setPhone_num(rs.getInt("phone_num"));
+				System.out.println("test it " + customer.getCname());
+				customer.setPhone_num(rs.getString("phone_num"));
+				System.out.println("test it " + customer.getPhone_num());
 				customer.setState(rs.getString("state"));
+				System.out.println("test it " + customer.getState());
 				customer.setAge(rs.getInt("Age"));
+				System.out.println("test it " + customer.getAge());
 				customer.setTax_id(rs.getInt("tax_id"));
+				System.out.println("test it " + customer.getTax_id());
 				customer.setEmail(rs.getString("email"));
+				System.out.println("test it " + customer.getEmail());
 				customer.setM_account_id(rs.getInt("m_account_id"));
+				System.out.println("test it " + customer.getM_account_id());
 				customer.setS_account_id(rs.getInt("s_account_id"));
+				System.out.println("test it " + customer.getS_account_id());
 				customer.setClevel(rs.getInt("clevel"));
+				System.out.println("test it " + customer.getClevel());
 				if(customer.getClevel() == 1){
 					view.loadCustomerView(customer);	// load customer view when login is checked
-					
 				}
 				else if(customer.getClevel() == 2){
 					view.loadCustomerView(customer);	// load customer view when login is checked
@@ -59,7 +68,7 @@ public class LoginController implements IController{
 		} catch (SQLException e){
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			System.out.println("exception happends");
+			System.out.println("SQL exception happends");
 		}
 	}
 }

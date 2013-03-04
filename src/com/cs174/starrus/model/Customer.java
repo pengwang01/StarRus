@@ -5,7 +5,7 @@ public class Customer {
 	private String psd;
 	private String cname;
 	private int age;
-	private int phone_num;
+	private String phone_num;
 	private String state;
 	private int tax_id;
 	private String email;
@@ -46,11 +46,11 @@ public class Customer {
 		this.cname = cname;
 	}
 
-	public int getPhone_num() {
+	public String getPhone_num() {
 		return phone_num;
 	}
 
-	public void setPhone_num(int phone_num) {
+	public void setPhone_num(String phone_num) {
 		this.phone_num = phone_num;
 	}
 

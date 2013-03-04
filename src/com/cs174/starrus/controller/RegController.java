@@ -11,7 +11,7 @@ public class RegController implements IController{
 	}
 	@Override
 	public void process(String model) {
-		System.out.println("do some shit after clicking");
+		//System.out.println("do some shit after clicking");
 		RegView reg = RegView.getView();
 		reg.setView();
 	    reg.setVisible(true);

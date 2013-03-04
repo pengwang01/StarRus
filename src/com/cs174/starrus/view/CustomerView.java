@@ -61,6 +61,9 @@ public class CustomerView extends JPanel{
 	private JLabel lblEmailfield;
 	private JLabel lblUserLevel;
 	private JLabel lblLevelfield;
+	private JLabel lblMAccountId;
+	private JLabel balancefiled;
+	private JLabel lblSAccountId;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -76,7 +79,7 @@ public class CustomerView extends JPanel{
 	}
 	
 	public void setView(Customer c){
-		
+		System.out.println("in setview: " + c.getCname());
 		//------------------------------left panel-------------------------------
 		this.left = new JPanel();
 		this.left.setBounds(0, 0, 200, 600);
@@ -92,7 +95,8 @@ public class CustomerView extends JPanel{
 		this.left.add(this.lblWelcom);
 		
 		this.lblUsername = new JLabel("name");
-		this.lblUsername.setBounds(99, 23, 70, 16);
+		this.lblUsername.setBounds(99, 23, 95, 16);
+		this.lblUsername.setText(c.getCname());
 		this.left.add(this.lblUsername);
 		this.left.setPreferredSize(new Dimension(400, 600));
 		
@@ -101,7 +105,7 @@ public class CustomerView extends JPanel{
 		this.left.add(this.lblUsername_1);
 		
 		this.lblUsfield = new JLabel("pengwang");
-		this.lblUsfield.setText(c.getCname());
+		this.lblUsfield.setText(c.getUsername());
 		this.lblUsfield.setBounds(99, 79, 95, 16);
 		this.left.add(this.lblUsfield);
 		
@@ -145,7 +149,7 @@ public class CustomerView extends JPanel{
 		this.left.add(this.lblPsdfield);
 		
 		this.lblPhonefiled = new JLabel("phonefiled");
-		this.lblPhonefiled.setText(Integer.toString(c.getPhone_num()));
+		this.lblPhonefiled.setText(c.getPhone_num());
 		this.lblPhonefiled.setBounds(97, 152, 97, 16);
 		this.left.add(this.lblPhonefiled);
 		
@@ -238,6 +242,15 @@ public class CustomerView extends JPanel{
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
+		this.lblMAccountId = new JLabel("accountIDfiled");
+		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
+		this.lblMAccountId.setBounds(119, 6, 117, 16);
+		this.Maccount.add(this.lblMAccountId);
+		
+		this.balancefiled = new JLabel("New label");
+		this.balancefiled.setBounds(392, 6, 132, 16);
+		this.Maccount.add(this.balancefiled);
+		
 		this.Saccount = new JPanel();
 		this.Saccount.setLayout(null);
 		this.Saccount.setBackground(new Color(204, 153, 153));
@@ -264,6 +277,11 @@ public class CustomerView extends JPanel{
 		this.dtrpnListOfStocks.setText("List of stocks that I currently have");
 		this.dtrpnListOfStocks.setBounds(30, 34, 505, 288);
 		this.Saccount.add(this.dtrpnListOfStocks);
+		
+		this.lblSAccountId = new JLabel("New label");
+		this.lblSAccountId.setText(Integer.toString(c.getS_account_id()));
+		this.lblSAccountId.setBounds(119, 6, 61, 16);
+		this.Saccount.add(this.lblSAccountId);
 		
 		
 		this.stockPanel = new JPanel();
