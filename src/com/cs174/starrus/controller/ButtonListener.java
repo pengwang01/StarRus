@@ -21,10 +21,16 @@ public class ButtonListener implements ActionListener{
 		ControllerMap.put(button, controller);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		IController controller = ControllerMap.get(ae.getSource());		
+		IController controller = ControllerMap.get(ae.getSource());
+		System.out.println(ae.getActionCommand() + " is being pressed!");
 		if(null != controller) {
+			System.out.println("in if");
+			
 			controller.process(ae.getActionCommand());
 		}
 	}

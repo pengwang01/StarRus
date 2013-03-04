@@ -1,16 +1,14 @@
 package com.cs174.starrus.controller;
 
 import com.cs174.starrus.view.IView;
+import com.cs174.starrus.view.RegView;
 
-public class RunApp implements IController{
+public class SubmitController implements IController{
+	private RegView regView;
 	
-	public RunApp(){
-		super();
+	public SubmitController(){
+		regView = RegView.getView();
 	}
-	public static void main(String[] args){
-		view.loadLoginView();
-	}
-
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -22,4 +20,5 @@ public class RunApp implements IController{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

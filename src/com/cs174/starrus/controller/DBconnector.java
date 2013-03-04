@@ -1,17 +1,22 @@
 package com.cs174.starrus.controller;
 import java.sql.*;
 
-import oracle.jdbc.driver.*;
-
 public class DBconnector {
-	private Connection conn = null;
+	private static Connection conn = null;
 	private String strConn = "jdbc:oracle:thin:@uml.cs.ucsb.edu:1521:xe"; 
 	private String strUsername = "cs174a_pengwang01";
 	private String strPassword = "5891775";
 	
 	
-	public DBconnector(){
+	private DBconnector(){
+		try {
+			connect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	 
 	
 	public void connect() throws SQLException{
 			DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
@@ -22,7 +27,9 @@ public class DBconnector {
 		conn.close();
 	}
 
-	public Connection getConnection(){
+	public static Connection getConnection(){
+		if(conn == null)
+			new DBconnector();
 		return conn;
 	}
 	

@@ -10,18 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import com.cs174.starrus.controller.ButtonListener;
 import com.cs174.starrus.controller.IController;
 import com.cs174.starrus.controller.LoginController;
+import com.cs174.starrus.controller.RegController;
 
-import java.awt.FlowLayout;
 
 public class LoginView extends JPanel implements IView{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	//------------login window components-------------
 	private JLabel lblUserLogin;
 	private JLabel lblUsername;
@@ -31,12 +28,20 @@ public class LoginView extends JPanel implements IView{
 	private JButton btnLogin;
 	private JButton btnRegister;
 	private JPanel panel;
-
-	public LoginView(){
+	private static LoginView loginView= null;
+	private JLabel lblMismatch;
+	
+	private LoginView(){
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
-		this.setView();
+		//setView();
+	}
+	
+	public static LoginView getView(){
+		if(loginView == null)
+			loginView = new LoginView();
+		return loginView;
 	}
 	
 	@Override
@@ -85,15 +90,39 @@ public class LoginView extends JPanel implements IView{
 		this.btnLogin.setBounds(208, 233, 105, 29);
 		
 		//associate a login listener with the login button
-		IController loginCon = new LoginController();
-		listeners.associate(this.btnLogin, loginCon);
+		IController loginController = new LoginController();
+		listeners.associate(this.btnLogin, loginController);
 		
 		this.panel.add(this.btnLogin);
-		
 		this.btnRegister = new JButton("Register");
 		this.btnRegister.setRequestFocusEnabled(false);
 		this.btnRegister.setBounds(88, 233, 105, 29);
 		this.panel.add(this.btnRegister);
+		//associate the register button with the register listener
+		IController regController = new RegController();
+		listeners.associate(this.btnRegister, regController);
+		
+		this.lblMismatch = new JLabel("");
+		this.lblMismatch.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		this.lblMismatch.setBounds(52, 194, 294, 22);
+		this.panel.add(this.lblMismatch);
+	}
+
+	public JTextField getTxtEnterUsername() {
+		return txtEnterUsername;
+	}
+
+
+	public JTextField getTxtEnterPassword() {
+		return txtEnterPassword;
+	}
+
+	public JLabel getLblMismatch() {
+		return lblMismatch;
+	}
+
+	public void setLblMismatch(JLabel lblMismatch) {
+		this.lblMismatch = lblMismatch;
 	}
 
 }
