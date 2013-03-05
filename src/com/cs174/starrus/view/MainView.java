@@ -42,11 +42,14 @@ public class MainView extends JFrame implements IView{
 	 * load login view to the main window
 	 */
 	public void loadLoginView(){
+		this.removeAll();
 		this.frameInit();							// initialize window
+		this.repaint();
 		LoginView loginView = LoginView.getView();	// get an instance of login view
 		loginView.setView();						// set the default login view
 		this.getContentPane().add(loginView);		// add loginView to the main window
 		this.displayView();
+		
 	}
 	
 	/*

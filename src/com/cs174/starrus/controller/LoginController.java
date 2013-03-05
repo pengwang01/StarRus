@@ -55,6 +55,7 @@ public class LoginController implements IController{
 				System.out.println("test it " + customer.getS_account_id());
 				customer.setClevel(rs.getInt("clevel"));
 				System.out.println("test it " + customer.getClevel());
+				rs.close();
 				if(customer.getClevel() == 1){
 					view.loadCustomerView(customer);	// load customer view when login is checked
 				}

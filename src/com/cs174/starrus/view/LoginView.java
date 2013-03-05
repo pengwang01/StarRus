@@ -50,6 +50,7 @@ public class LoginView extends JPanel implements IView{
 	}
 	
 	public void setView(){
+		this.removeAll();
 		this.panel = new JPanel();
 		this.panel.setBackground(new Color(204, 153, 153));
 		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -91,6 +92,7 @@ public class LoginView extends JPanel implements IView{
 		
 		//associate a login listener with the login button
 		IController loginController = new LoginController();
+		
 		listeners.associate(this.btnLogin, loginController);
 		
 		this.panel.add(this.btnLogin);

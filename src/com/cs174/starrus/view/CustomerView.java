@@ -8,11 +8,14 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.model.Customer;
 
 import java.awt.ComponentOrientation;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class CustomerView extends JPanel{
+public class CustomerView extends JPanel implements IView{
 	
 	/**
 	 * 
@@ -64,6 +67,7 @@ public class CustomerView extends JPanel{
 	private JLabel lblMAccountId;
 	private JLabel balancefiled;
 	private JLabel lblSAccountId;
+	private JButton btnLogout;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -79,7 +83,8 @@ public class CustomerView extends JPanel{
 	}
 	
 	public void setView(Customer c){
-		System.out.println("in setview: " + c.getCname());
+		this.removeAll();
+		System.out.println("in customer's setview: " + c.getCname());
 		//------------------------------left panel-------------------------------
 		this.left = new JPanel();
 		this.left.setBounds(0, 0, 200, 600);
@@ -176,6 +181,11 @@ public class CustomerView extends JPanel{
 		this.lblLevelfield.setText(Integer.toString(c.getClevel()));
 		this.lblLevelfield.setBounds(99, 292, 95, 16);
 		this.left.add(this.lblLevelfield);
+		
+		this.btnLogout = new JButton("Logout");
+		listeners.associate(this.btnLogout, new LogoutController());
+		this.btnLogout.setBounds(16, 545, 168, 29);
+		this.left.add(this.btnLogout);
 		//------------------------------- end of left panel --------------------------------
 		
 		//------------------------------ tabbed pane --------------------------------------
@@ -290,5 +300,11 @@ public class CustomerView extends JPanel{
 		
 		this.moviePanel = new JPanel();
 		tabbedPane.addTab("View Movies", null, this.moviePanel, "View All Available Movies");
+	}
+
+	@Override
+	public void present(String model) {
+		// TODO Auto-generated method stub
+		
 	}
 }
