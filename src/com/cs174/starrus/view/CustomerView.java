@@ -7,13 +7,13 @@ import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
+import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LogoutController;
+import com.cs174.starrus.controller.WithdrawController;
 import com.cs174.starrus.model.Customer;
-
 import java.awt.ComponentOrientation;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CustomerView extends JPanel implements IView{
 	
@@ -100,7 +100,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblWelcom);
 		
 		this.lblUsername = new JLabel("name");
-		this.lblUsername.setBounds(99, 23, 95, 16);
+		this.lblUsername.setBounds(87, 23, 107, 16);
 		this.lblUsername.setText(c.getCname());
 		this.left.add(this.lblUsername);
 		this.left.setPreferredSize(new Dimension(400, 600));
@@ -111,75 +111,75 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.lblUsfield = new JLabel("pengwang");
 		this.lblUsfield.setText(c.getUsername());
-		this.lblUsfield.setBounds(99, 79, 95, 16);
+		this.lblUsfield.setBounds(87, 79, 107, 16);
 		this.left.add(this.lblUsfield);
 		
-		this.lblMyAccountInfo = new JLabel("My Account Info: ");
-		this.lblMyAccountInfo.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		this.lblMyAccountInfo.setBounds(6, 51, 152, 16);
+		this.lblMyAccountInfo = new JLabel("My Account Infomation : ");
+		this.lblMyAccountInfo.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		this.lblMyAccountInfo.setBounds(6, 51, 178, 16);
 		this.left.add(this.lblMyAccountInfo);
 		
 		this.lblAge = new JLabel("Age:");
-		this.lblAge.setBounds(6, 100, 84, 16);
+		this.lblAge.setBounds(6, 107, 84, 16);
 		this.left.add(this.lblAge);
 		
 		this.lblAgefield = new JLabel("100");
 		this.lblAgefield.setText(Integer.toString(c.getAge()));
-		this.lblAgefield.setBounds(97, 100, 97, 16);
+		this.lblAgefield.setBounds(87, 107, 107, 16);
 		this.left.add(this.lblAgefield);
 		
 		this.lblPassword = new JLabel("Password:");
-		this.lblPassword.setBounds(6, 124, 84, 16);
+		this.lblPassword.setBounds(6, 135, 84, 16);
 		this.left.add(this.lblPassword);
 		
 		this.lblPhone = new JLabel("Phone #:");
-		this.lblPhone.setBounds(6, 152, 84, 16);
+		this.lblPhone.setBounds(6, 163, 84, 16);
 		this.left.add(this.lblPhone);
 		
 		this.lblState = new JLabel("State:");
-		this.lblState.setBounds(6, 180, 84, 16);
+		this.lblState.setBounds(6, 191, 84, 16);
 		this.left.add(this.lblState);
 		
 		this.lblTaxId = new JLabel("Tax ID:");
-		this.lblTaxId.setBounds(6, 208, 84, 16);
+		this.lblTaxId.setBounds(6, 219, 84, 16);
 		this.left.add(this.lblTaxId);
 		
 		this.lblEmail = new JLabel("Email:");
-		this.lblEmail.setBounds(6, 236, 84, 16);
+		this.lblEmail.setBounds(6, 247, 84, 16);
 		this.left.add(this.lblEmail);
 		
 		this.lblPsdfield = new JLabel("psdfield");
 		this.lblPsdfield.setText(c.getPsd());
-		this.lblPsdfield.setBounds(99, 124, 95, 16);
+		this.lblPsdfield.setBounds(87, 135, 107, 16);
 		this.left.add(this.lblPsdfield);
 		
 		this.lblPhonefiled = new JLabel("phonefiled");
 		this.lblPhonefiled.setText(c.getPhone_num());
-		this.lblPhonefiled.setBounds(97, 152, 97, 16);
+		this.lblPhonefiled.setBounds(87, 163, 107, 16);
 		this.left.add(this.lblPhonefiled);
 		
 		this.lblStatefield = new JLabel("statefield");
 		this.lblStatefield.setText(c.getState());
-		this.lblStatefield.setBounds(99, 180, 95, 16);
+		this.lblStatefield.setBounds(87, 191, 107, 16);
 		this.left.add(this.lblStatefield);
 		
 		this.lblTaxfield = new JLabel("taxfield");
 		this.lblTaxfield.setText(Integer.toString(c.getTax_id()));
-		this.lblTaxfield.setBounds(97, 208, 97, 16);
+		this.lblTaxfield.setBounds(87, 219, 107, 16);
 		this.left.add(this.lblTaxfield);
 		
 		this.lblEmailfield = new JLabel("emailfield");
 		this.lblEmailfield.setText(c.getEmail());
-		this.lblEmailfield.setBounds(16, 264, 178, 16);
+		this.lblEmailfield.setBounds(16, 275, 178, 16);
 		this.left.add(this.lblEmailfield);
 		
 		this.lblUserLevel = new JLabel("User Level:");
-		this.lblUserLevel.setBounds(6, 292, 81, 16);
+		this.lblUserLevel.setBounds(6, 303, 81, 16);
 		this.left.add(this.lblUserLevel);
 		
 		this.lblLevelfield = new JLabel("levelfield");
 		this.lblLevelfield.setText(Integer.toString(c.getClevel()));
-		this.lblLevelfield.setBounds(99, 292, 95, 16);
+		this.lblLevelfield.setBounds(87, 303, 107, 16);
 		this.left.add(this.lblLevelfield);
 		
 		this.btnLogout = new JButton("Logout");
@@ -188,7 +188,8 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.btnLogout);
 		//------------------------------- end of left panel --------------------------------
 		
-		//------------------------------ tabbed pane --------------------------------------
+		//------------------------------ tabbed pane -------------------------------------
+		this.tabbedPane.removeAll();
 		this.tabbedPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.tabbedPane.setMinimumSize(new Dimension(600, 600));
 		this.tabbedPane.setPreferredSize(new Dimension(600, 600));
@@ -196,17 +197,22 @@ public class CustomerView extends JPanel implements IView{
 		this.add(tabbedPane);
 		
 		//------------------------- right panel in the tabbed pane ----------------------
+		
 		this.right = new JPanel();
 		tabbedPane.addTab("My Account", null, this.right, "View Account Information");
 		this.right.setBorder(null);
 		this.right.setLayout(null);
 		
-		this.lblTime = new JLabel("02/16/13 8:55 pm");
-		this.lblTime.setBounds(459, 6, 135, 16);
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+	    Date now = new Date();
+	    String strDate = sdfDate.format(now);
+		this.lblTime = new JLabel();
+		this.lblTime.setText(strDate);
+		this.lblTime.setBounds(408, 6, 165, 16);
 		this.right.add(this.lblTime);
 		
 		this.lblCurrentTime = new JLabel("Current Time:");
-		this.lblCurrentTime.setBounds(348, 6, 99, 16);
+		this.lblCurrentTime.setBounds(282, 6, 99, 16);
 		this.right.add(this.lblCurrentTime);
 		
 		this.mainDisp = new JPanel();
@@ -241,10 +247,11 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.btnDeposit = new JButton("Deposit");
 		this.btnDeposit.setBounds(20, 34, 112, 29);
+		listeners.associate(this.btnDeposit, new DepositController());
 		this.Maccount.add(this.btnDeposit);
 		
 		this.btnWithdraw = new JButton("Withdraw");
-		
+		listeners.associate(this.btnWithdraw, new WithdrawController());
 		this.btnWithdraw.setBounds(144, 34, 112, 29);
 		this.Maccount.add(this.btnWithdraw);
 		
@@ -254,10 +261,13 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.lblMAccountId = new JLabel("accountIDfiled");
 		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
+		System.out.println(c.getM_account_id());
 		this.lblMAccountId.setBounds(119, 6, 117, 16);
 		this.Maccount.add(this.lblMAccountId);
 		
 		this.balancefiled = new JLabel("New label");
+		this.balancefiled.setText(Float.toString(c.getBalance()));
+		System.out.println(c.getBalance());
 		this.balancefiled.setBounds(392, 6, 132, 16);
 		this.Maccount.add(this.balancefiled);
 		
@@ -305,6 +315,62 @@ public class CustomerView extends JPanel implements IView{
 	@Override
 	public void present(String model) {
 		// TODO Auto-generated method stub
-		
 	}
+
+	public JLabel getLblAgefield() {
+		return lblAgefield;
+	}
+
+	public void setLblAgefield(JLabel lblAgefield) {
+		this.lblAgefield = lblAgefield;
+	}
+
+	public JLabel getLblPsdfield() {
+		return lblPsdfield;
+	}
+
+	public void setLblPsdfield(JLabel lblPsdfield) {
+		this.lblPsdfield = lblPsdfield;
+	}
+
+	public JLabel getLblPhonefiled() {
+		return lblPhonefiled;
+	}
+
+	public void setLblPhonefiled(JLabel lblPhonefiled) {
+		this.lblPhonefiled = lblPhonefiled;
+	}
+
+	public JLabel getLblStatefield() {
+		return lblStatefield;
+	}
+
+	public void setLblStatefield(JLabel lblStatefield) {
+		this.lblStatefield = lblStatefield;
+	}
+
+	public JLabel getLblEmailfield() {
+		return lblEmailfield;
+	}
+
+	public void setLblEmailfield(JLabel lblEmailfield) {
+		this.lblEmailfield = lblEmailfield;
+	}
+
+	public JLabel getLblLevelfield() {
+		return lblLevelfield;
+	}
+
+	public void setLblLevelfield(JLabel lblLevelfield) {
+		this.lblLevelfield = lblLevelfield;
+	}
+
+	public JLabel getBalancefiled() {
+		return balancefiled;
+	}
+
+	public void setBalancefiled(JLabel balancefiled) {
+		this.balancefiled = balancefiled;
+	}
+	
 }

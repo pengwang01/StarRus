@@ -13,11 +13,9 @@ public class RunApp implements IController{
 
 	@Override
 	public void setView(IView view) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void process(String model) {
-		// TODO Auto-generated method stub
 	}
 }
