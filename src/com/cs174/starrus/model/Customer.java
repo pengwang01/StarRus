@@ -12,10 +12,18 @@ public class Customer {
 	private int m_account_id;
 	private int s_account_id;
 	private int clevel;
+	private float balance;
 	private MarketAcc m_account;
 	private StockAcc s_account;
+	private static Customer c = null;
 	
-	public Customer(){}
+	private Customer(){}
+	
+	public static Customer getCustomer(){
+		if(c == null)
+			c = new Customer();
+		return c;
+	}
 	
 	public Customer(String username, String psd){
 		this.username = username;
@@ -134,6 +142,14 @@ public class Customer {
 				+ email + ", m_account_id=" + m_account_id + ", s_account_id="
 				+ s_account_id + ", clevel=" + clevel + ", m_account="
 				+ m_account + ", s_account=" + s_account + "]";
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
 	}
 	
 }

@@ -30,8 +30,14 @@ public class RegView extends JDialog implements IView{
 	private JTextField txtEmail;
 	private JButton btnSubmit;
 	private static RegView regView = null;
+	private JLabel lblClevel;
+	private JTextField txtClevel;
+	private JLabel lblAge;
+	private JTextField txtAge;
+	private JLabel lblWarning;
 	
 	private RegView(){
+		//setView();
 	}
 
 	public static RegView getView() {
@@ -41,8 +47,8 @@ public class RegView extends JDialog implements IView{
 	}
 	public void setView(){
 		setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 280));
-		this.setPreferredSize(new Dimension(280, 280));
+		this.setSize(new Dimension(280, 340));
+		this.setPreferredSize(new Dimension(280, 340));
 	    getContentPane().setLayout(null);
 	    
 	    this.lblUsername = new JLabel("Username:");
@@ -116,14 +122,116 @@ public class RegView extends JDialog implements IView{
 	    this.txtEmail.setColumns(10);
 	    
 	    this.btnSubmit = new JButton("Submit");
-	    this.btnSubmit.setBounds(79, 212, 117, 29);
+	    this.btnSubmit.setBounds(77, 283, 117, 29);
 	    listeners.associate(this.btnSubmit, new SubmitController());
 	    getContentPane().add(this.btnSubmit);
+	    
+	    this.lblClevel = new JLabel("Level:");
+	    this.lblClevel.setBounds(22, 202, 61, 16);
+	    getContentPane().add(this.lblClevel);
+	    
+	    this.txtClevel = new JTextField();
+	    this.txtClevel.setBounds(123, 196, 134, 28);
+	    getContentPane().add(this.txtClevel);
+	    this.txtClevel.setColumns(10);
+	    
+	    this.lblAge = new JLabel("Age:");
+	    this.lblAge.setBounds(22, 230, 61, 16);
+	    getContentPane().add(this.lblAge);
+	    
+	    this.txtAge = new JTextField();
+	    this.txtAge.setBounds(123, 224, 134, 28);
+	    getContentPane().add(this.txtAge);
+	    this.txtAge.setColumns(10);
+	    
+	    this.lblWarning = new JLabel("");
+	    this.lblWarning.setBounds(22, 258, 235, 16);
+	    getContentPane().add(this.lblWarning);
 	    this.setVisible(true);
 	}
 	@Override
 	public void present(String model) {
 		// TODO Auto-generated method stub
-		
 	}
+
+	public JTextField getTxtUsername() {
+		return txtUsername;
+	}
+
+	public void setTxtUsername(JTextField txtUsername) {
+		this.txtUsername = txtUsername;
+	}
+
+	public JTextField getTxtPassword() {
+		return txtPassword;
+	}
+
+	public void setTxtPassword(JTextField txtPassword) {
+		this.txtPassword = txtPassword;
+	}
+
+	public JTextField getTxtName() {
+		return txtName;
+	}
+
+	public void setTxtName(JTextField txtName) {
+		this.txtName = txtName;
+	}
+
+	public JTextField getTxtState() {
+		return txtState;
+	}
+
+	public void setTxtState(JTextField txtState) {
+		this.txtState = txtState;
+	}
+
+	public JTextField getTxtPhone() {
+		return txtPhone;
+	}
+
+	public void setTxtPhone(JTextField txtPhone) {
+		this.txtPhone = txtPhone;
+	}
+
+	public JTextField getTxtTaxid() {
+		return txtTaxid;
+	}
+
+	public void setTxtTaxid(JTextField txtTaxid) {
+		this.txtTaxid = txtTaxid;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JTextField getTxtClevel() {
+		return txtClevel;
+	}
+
+	public void setTxtClevel(JTextField txtClevel) {
+		this.txtClevel = txtClevel;
+	}
+
+	public JTextField getTxtAge() {
+		return txtAge;
+	}
+
+	public void setTxtAge(JTextField txtAge) {
+		this.txtAge = txtAge;
+	}
+
+	public JLabel getLblWarning() {
+		return lblWarning;
+	}
+
+	public void setLblWarning(JLabel lblWarning) {
+		this.lblWarning = lblWarning;
+	}
+	
 }
