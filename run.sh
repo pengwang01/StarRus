@@ -1,2 +1,2 @@
-java -cp bin com.cs174.starrus.controller.RunApp
+java -cp bin:ojdbc5.jar com.cs174.starrus.controller.RunApp
 
