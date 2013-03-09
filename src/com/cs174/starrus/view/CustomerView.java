@@ -10,6 +10,8 @@ import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.WithdrawController;
+import com.cs174.starrus.controller.BuyStockController;
+import com.cs174.starrus.controller.SellStockController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.text.SimpleDateFormat;
@@ -283,10 +285,12 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.btnSellStocks = new JButton("Sell Stocks");
 		this.btnSellStocks.setBounds(20, 334, 112, 29);
+		listeners.associate(this.btnSellStocks, new SellStockController());
 		this.Saccount.add(this.btnSellStocks);
 		
 		this.btnBuyStocks = new JButton("Buy Stocks");
 		this.btnBuyStocks.setBounds(144, 334, 112, 29);
+		listeners.associate(this.btnBuyStocks, new BuyStockController());
 		this.Saccount.add(this.btnBuyStocks);
 		
 		this.btnViewTransactionsS = new JButton("View Transactions");

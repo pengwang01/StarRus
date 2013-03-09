@@ -63,7 +63,7 @@ public class DepositSubmitController implements IController{
 									);
 				}
 
-				String mtStr        = 	"INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
+				String mtStr        = "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
 									+ "'"   + dateString        + "'"   + ","
 									+ "'"   + c.getUsername()   + "'"   + ","
 									+ 1                 		+ ","			// 1 fore deposit
