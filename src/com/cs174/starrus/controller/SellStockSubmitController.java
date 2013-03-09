@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.lang.Integer;
 
 import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.CustomerView;
@@ -18,6 +19,7 @@ public class SellStockSubmitController implements IController{
 	private Connection conn 	= null;
 	private Customer c 			= Customer.getCustomer();
 	private SellStockView ssV	= SellStockView.getView();
+	private CustomerView  cV	= CustomerView.getView();
 
 	@Override
 	public void setView(IView view) {
@@ -27,7 +29,8 @@ public class SellStockSubmitController implements IController{
 
 	@Override
 	public void process(String model) {
-		int numStocksAvailable = 0;
+		int numStocksAvailable 	= 0;
+		double currentPrice		= 0;
 		Statement stmt;
 
 		if( DEBUG == true){
@@ -39,14 +42,18 @@ public class SellStockSubmitController implements IController{
 			conn	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
 
+			String ticker	= ssV.getTxtTicker().getText().toUpperCase();
+			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
+			Date today          = new Date();
+			String dateString   = format.format(today);
+
+
 			// Query is case sensitive
 			if ( DEBUG == true ){
 	            System.out.println( "SELECT * FROM MANAGE WHERE MUSERNAME = "	+ 
 				                   	"'" + c.getUsername() + "'"					+
 									" AND SYMBOL = "							+
-									"'" 										+ 
-									ssV.getTxtTicker().getText().toUpperCase()	+
-									"'"			
+									"'"	+ ticker	+ "'"			
 									);
 			}
 			
@@ -54,9 +61,7 @@ public class SellStockSubmitController implements IController{
 			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE WHERE MUSERNAME = "	+
 			                                    "'" + c.getUsername() + "'"					+   
 												" AND SYMBOL = "							+
-												"'" 										+ 
-												ssV.getTxtTicker().getText().toUpperCase()	+
-												"'"			
+												"'"	+ ticker	+	"'"			
 											);    
 			
 
@@ -67,10 +72,73 @@ public class SellStockSubmitController implements IController{
 				}
 			}
 
-			if( numStocksAvailable < 100){// TODO: replace 100 with the value in text field
+			// While the client is trying to sell more shares than he posses, 
+			// The system should loop waiting until he puts in a valid number
+			int numStocksToSell	= Integer.parseInt(ssV.getTxtQuantityField().getText());
+			if( numStocksAvailable < numStocksToSell){
+				ssV.getLblWarning().setText("You do not have enough shares");
 				
-
 			}
+			else{
+				ssV.getLblWarning().setText("");
+				// Update manage to reflect the change in stock
+					stmt.executeQuery( 	"UPDATE MANAGE SET TOTAL_SHARE = TOTAL_SHARE - '"	+
+										numStocksToSell	+ "' "								+
+										"WHERE MUSERNAME = '"	+ c.getUsername()	+ "'"	+
+										"AND SYMBOL = '"		+ ticker			+ "'"	
+										);
+
+				// Pull price from stock table
+					rs	= stmt.executeQuery( "SELECT CUR_PRICE FROM STOCK WHERE SYMBOl ='"	+
+												ticker	+ "'"
+											);
+					if(rs.next()){
+						currentPrice = rs.getFloat("CUR_PRICE");
+					}
+
+				// Update stock_trans table to capture change in stock
+				// STYPE: 	0 for buy
+				//			1 for sell
+					if(DEBUG == true){
+					System.out.println("INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE) "	+
+										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
+										ticker		+ "'," 			+  1		+ ","				+ 
+										numStocksToSell				+ ","		+ currentPrice		+ ")" 
+										);
+
+					}
+					stmt.executeQuery(	"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE) "	+
+										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
+										ticker		+ "'," 			+  1		+ ","				+ 
+										numStocksToSell				+ ","		+ currentPrice		+ ")" 
+									);
+				
+				// Update users balance to reflect the sales
+					if(DEBUG == true){
+						System.out.println("UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
+											currentPrice*numStocksToSell				+
+											"WHERE USERNAME = '"						+
+											c.getUsername()								+
+											"'"
+											);
+					}
+					stmt.executeQuery( "UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
+										currentPrice*numStocksToSell				+
+										"WHERE USERNAME = '"						+
+										c.getUsername()								+
+										"'"
+									);
+
+
+				// Update balance in customer view
+					    rs = stmt.executeQuery (	"SELECT * FROM customer where " +
+															"username = '" + c.getUsername() +"'");
+						if( rs.next()){
+								cV.setBalancefield(Float.toString(rs.getFloat("BALANCE")));
+						}
+
+
+			}			
 
 		}	
 		catch (SQLException e) {
