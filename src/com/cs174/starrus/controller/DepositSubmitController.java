@@ -12,10 +12,6 @@ import com.cs174.starrus.view.CustomerView;
 import com.cs174.starrus.view.DepositView;
 import com.cs174.starrus.view.IView;
 
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 public class DepositSubmitController implements IController{
 	private boolean DEBUG = true;
 	private Connection conn = null;

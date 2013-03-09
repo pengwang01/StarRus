@@ -1,4 +1,3 @@
-package com.cs174.starrus.model;
 
 public class Customer {
 	private String 	username;
