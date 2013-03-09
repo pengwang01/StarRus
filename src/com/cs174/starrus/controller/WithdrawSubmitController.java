@@ -29,16 +29,25 @@ public class WithdrawSubmitController implements IController{
 			float balance = 0;
 			stmt = conn.createStatement();
 			
-			if(c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText()) < 0)
+			// checking for if enough money to withdraw
+			if(c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText()) < 0){
 				wdView.getLblWarning().setText("not enough money");
-			
-			balance = c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText());  
-			c.setBalance(balance);
-			stmt.executeQuery("UPDATE Customer set balance = " + balance + 
-								"WHERE username = '" + c.getUsername() + "'");
-			cView.getBalancefiled().setText(Float.toString(balance));
-			wdView.getTxtWithdraw().setText(null);
-			wdView.setVisible(false);
+				wdView.getTxtWithdraw().setText(null);
+			}
+			else{
+				balance = c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText());  
+				c.setBalance(balance);
+				
+				// execute query for withdrawing money from balance
+				stmt.executeQuery("UPDATE Customer set balance = " + balance + 
+									"WHERE username = '" + c.getUsername() + "'");
+				cView.getBalancefiled().setText(Float.toString(balance));
+				wdView.getTxtWithdraw().setText(null);
+				wdView.setVisible(false);
+				
+				// execute query for creating money transaction row in the transaction table
+				// add code here
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

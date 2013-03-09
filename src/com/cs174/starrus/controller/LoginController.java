@@ -28,7 +28,7 @@ public class LoginController implements IController{
 		try{
 			conn = DBconnector.getConnection();
 			Statement stmt = conn.createStatement(); // Specify the SQL Query to run
-			ResultSet rs = stmt.executeQuery ("SELECT * FROM Customer where " + 
+			ResultSet rs = stmt.executeQuery ("SELECT * FROM customer where " + 
 											"username = '" + username + "' AND " +
 											"psd = '" + password + "'");
 			if(rs.next()){

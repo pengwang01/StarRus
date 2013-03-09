@@ -3,6 +3,9 @@ package com.cs174.starrus.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.CustomerView;
@@ -28,18 +31,22 @@ public class DepositSubmitController implements IController{
 		try {
 			float balance = 0;
 			stmt = conn.createStatement();
-			System.out.println("testing " + depoV.getTxtDeposit().getText());
 
+			// deposit cannot be negative number
 			if(Float.parseFloat(depoV.getTxtDeposit().getText()) >= 0){
 				System.out.println(depoV.getTxtDeposit().getText());
 				balance = Float.parseFloat(depoV.getTxtDeposit().getText()) + c.getBalance();
 				c.setBalance(balance);
+				// execute query for deposit
 				stmt.executeQuery("UPDATE Customer set balance = " + balance + 
 									"WHERE username = '" + c.getUsername() + "'");
 				cView.getBalancefiled().setText(Float.toString(balance));
 				depoV.getTxtDeposit().setText(null);
 				depoV.getLblWarning().setText(null);
 				depoV.setVisible(false);
+				
+				// execute query for add row to money transaction table
+				// add code here
 			}
 			else{
 				depoV.getLblWarning().setText("No input or negative #");
