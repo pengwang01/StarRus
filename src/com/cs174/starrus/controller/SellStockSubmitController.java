@@ -1,6 +1,7 @@
 package com.cs174.starrus.controller;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -17,7 +18,7 @@ public class SellStockSubmitController implements IController{
 	private Connection conn 	= null;
 	private Customer c 			= Customer.getCustomer();
 	private SellStockView ssV	= SellStockView.getView();
-	private CustomerView cView 	= CustomerView.getView();
+
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -26,15 +27,52 @@ public class SellStockSubmitController implements IController{
 
 	@Override
 	public void process(String model) {
-		// TODO Auto-generated method stub
-		conn = DBconnector.getConnection();
+		int numStocksAvailable = 0;
 		Statement stmt;
+
+		if( DEBUG == true){
+			System.out.println("In SellStockSubmitController.process()");
+		}
+
+		// TODO Auto-generated method stub
 		try {
+			conn	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
+
+			// Query is case sensitive
+			if ( DEBUG == true ){
+	            System.out.println( "SELECT * FROM MANAGE WHERE MUSERNAME = "	+ 
+				                   	"'" + c.getUsername() + "'"					+
+									" AND SYMBOL = "							+
+									"'" 										+ 
+									ssV.getTxtTicker().getText().toUpperCase()	+
+									"'"			
+									);
+			}
 			
-			//If the person owns this stock:
+			// Check how many shares this person has of the stock
+			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE WHERE MUSERNAME = "	+
+			                                    "'" + c.getUsername() + "'"					+   
+												" AND SYMBOL = "							+
+												"'" 										+ 
+												ssV.getTxtTicker().getText().toUpperCase()	+
+												"'"			
+											);    
+			
+
+			if( rs.next()){
+				numStocksAvailable	= rs.getInt("TOTAL_SHARE");
+				if( DEBUG == true){
+					System.out.println("NumStocks Available:\t" + numStocksAvailable);
+				}
+			}
+
+			if( numStocksAvailable < 100){// TODO: replace 100 with the value in text field
+				
 
 			}
+
+		}	
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception in SellStockSubmitController");
