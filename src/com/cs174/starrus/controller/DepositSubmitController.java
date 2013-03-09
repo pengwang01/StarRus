@@ -29,14 +29,8 @@ public class DepositSubmitController implements IController{
 			float balance = 0;
 			stmt = conn.createStatement();
 			System.out.println("testing " + depoV.getTxtDeposit().getText());
-			if(depoV.getTxtDeposit().getText() == "")
-				System.out.println("empty string");
-			if(depoV.getTxtDeposit().getText() == null)
-				System.out.println("null");
-			if(depoV.getTxtDeposit().getText() == " ")
-				System.out.println("string with 1 space");
-			
-			if(depoV.getTxtDeposit().getText() != ""){
+
+			if(Float.parseFloat(depoV.getTxtDeposit().getText()) >= 0){
 				System.out.println(depoV.getTxtDeposit().getText());
 				balance = Float.parseFloat(depoV.getTxtDeposit().getText()) + c.getBalance();
 				c.setBalance(balance);

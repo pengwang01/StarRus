@@ -17,13 +17,14 @@ public class WithdrawView extends JDialog implements IView{
 	private JTextField txtWithdraw;
 	private JButton btnWithdraw;
 	private static WithdrawView wdView = null;
+	private JLabel lblWarning;
 	
 	private WithdrawView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 100));
-		this.setPreferredSize(new Dimension(280, 100));
+		this.setSize(new Dimension(280, 140));
+		this.setPreferredSize(new Dimension(280, 140));
 	    getContentPane().setLayout(null);
-		//setView();
+		setView();
 		
 	}
 
@@ -45,10 +46,14 @@ public class WithdrawView extends JDialog implements IView{
 	    this.getContentPane().add(this.txtWithdraw);
 	    this.txtWithdraw.setColumns(10);
 	    
-	    this.btnWithdraw= new JButton("Deposit");
-	    this.btnWithdraw.setBounds(72, 40, 117, 29);
+	    this.btnWithdraw= new JButton("Withdraw");
+	    this.btnWithdraw.setBounds(76, 83, 117, 29);
 	    listeners.associate(this.btnWithdraw, new WithdrawSubmitController());
 	    getContentPane().add(this.btnWithdraw);
+	    
+	    this.lblWarning = new JLabel("");
+	    this.lblWarning.setBounds(31, 40, 227, 16);
+	    getContentPane().add(this.lblWarning);
 	    //this.setVisible(true);
 	}
 	@Override
@@ -63,6 +68,14 @@ public class WithdrawView extends JDialog implements IView{
 
 	public void setTxtDeposit(JTextField txtWithdraw) {
 		this.txtWithdraw = txtWithdraw;
+	}
+
+	public JLabel getLblWarning() {
+		return lblWarning;
+	}
+
+	public void setLblWarning(JLabel lblWarning) {
+		this.lblWarning = lblWarning;
 	}
 	
 }

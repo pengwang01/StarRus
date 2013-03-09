@@ -63,7 +63,7 @@ public class LoginView extends JPanel implements IView{
 		
 		this.lblUserLogin = new JLabel("User Login");
 		this.lblUserLogin.setFont(new Font("Lucida Grande", Font.BOLD, 25));
-		this.lblUserLogin.setBounds(120, 31, 150, 31);
+		this.lblUserLogin.setBounds(114, 26, 166, 31);
 		this.panel.add(this.lblUserLogin);
 		
 		this.lblUsername = new JLabel("Username:");

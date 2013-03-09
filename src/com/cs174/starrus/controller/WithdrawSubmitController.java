@@ -28,7 +28,10 @@ public class WithdrawSubmitController implements IController{
 		try {
 			float balance = 0;
 			stmt = conn.createStatement();
-
+			
+			if(c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText()) < 0)
+				wdView.getLblWarning().setText("not enough money");
+			
 			balance = c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText());  
 			c.setBalance(balance);
 			stmt.executeQuery("UPDATE Customer set balance = " + balance + 
