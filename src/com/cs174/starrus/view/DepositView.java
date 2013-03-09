@@ -21,8 +21,8 @@ public class DepositView extends JDialog implements IView{
 	
 	private DepositView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 120));
-		this.setPreferredSize(new Dimension(280, 120));
+		this.setSize(new Dimension(280, 140));
+		this.setPreferredSize(new Dimension(280, 140));
 	    getContentPane().setLayout(null);
 		//setView();
 	}
@@ -45,7 +45,7 @@ public class DepositView extends JDialog implements IView{
 	    this.txtDeposit.setColumns(10);
 	    
 	    this.btnDeposit = new JButton("Deposit");
-	    this.btnDeposit.setBounds(76, 63, 117, 29);
+	    this.btnDeposit.setBounds(77, 68, 117, 29);
 	    listeners.associate(this.btnDeposit, new DepositSubmitController());
 	    getContentPane().add(this.btnDeposit);
 	    
