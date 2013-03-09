@@ -26,7 +26,7 @@ public class BuyStockView extends JDialog implements IView{
 		this.setSize(new Dimension(280, 170));
 		this.setPreferredSize(new Dimension(280, 170));
 	    getContentPane().setLayout(null);
-		setView();
+		//setView();
 	}
 
 	public static BuyStockView getView() {

@@ -26,7 +26,7 @@ public class SellStockView extends JDialog implements IView{
 		this.setSize(new Dimension(280, 170));
 		this.setPreferredSize(new Dimension(280, 170));
 	    getContentPane().setLayout(null);
-		setView();
+		//setView();
 	}
 
 	public static SellStockView getView() {
@@ -46,7 +46,7 @@ public class SellStockView extends JDialog implements IView{
 	    this.getContentPane().add(this.txtTicker);
 	    this.txtTicker.setColumns(10);
 	    
-	    this.btnTicker = new JButton("Submit");
+	    this.btnTicker = new JButton("Sell");
 	    this.btnTicker.setBounds(82, 102, 117, 29);
 	    listeners.associate(this.btnTicker, new SellStockSubmitController());
 	    getContentPane().add(this.btnTicker);
