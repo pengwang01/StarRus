@@ -31,11 +31,13 @@ public class SellStockSubmitController implements IController{
 		Statement stmt;
 		try {
 			stmt	= conn.createStatement();
+			
+			//If the person owns this stock:
 
 			}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Exception in BuyStockSubmitController");
+			System.out.println("Exception in SellStockSubmitController");
 		} // Specify the SQL Query to run
 		
 	}
