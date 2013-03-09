@@ -26,26 +26,32 @@ public class RegSubmitController implements IController{
 			float balance = 0;
 			stmt = conn.createStatement();
 			String username = rV.getTxtUsername().getText();
-			String cname = rV.getTxtName().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
-			String password = rV.getTxtPassword().getText();
+			String psd		= rV.getTxtPassword().getText();
+			String cname 	= rV.getTxtCName().getText();
+			String state	= rV.getTxtState().getText();
+			String phone	= rV.getTxtPhone().getText();
+			String taxid	= rV.getTxtTaxid().getText();
+			String email	= rV.getTxtEmail().getText();
+			String clevel	= rV.getTxtClevel().getText();
+			String age		= rV.getTxtAge().getText();
+		
+
+			String query	= "Insert into CUSTOMER (	username,cname,	phone_num,state,tax_id,psd,email,clevel,age)Values(" 
+																	+ 
+														username 	+ "," +
+														phone		+ "," +
+														state		+ "," +
+														taxid		+ "," +
+														psd			+ "," +
+														email		+ "," +
+														clevel		+ "," +
+														age			+ ")";
+								
+
 			
-			
-			
-			
-			
-			
-			stmt.executeQuery("UPDATE Customer set balance = " + balance + 
-								"WHERE username = '" + c.getUsername() + "'");
-			cView.getBalancefiled().setText(Float.toString(balance));
-			wdView.getTxtWithdraw().setText(null);
-			wdView.setVisible(false);
-		} catch (SQLException e) {
+			stmt.executeQuery(query);
+
+			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // Specify the SQL Query to run

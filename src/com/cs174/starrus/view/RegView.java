@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import com.cs174.starrus.controller.SubmitController;
+import com.cs174.starrus.controller.RegSubmitController;
 
 public class RegView extends JDialog implements IView{
 	/**
@@ -18,8 +18,8 @@ public class RegView extends JDialog implements IView{
 	private JTextField txtUsername;
 	private JLabel lblPassword;
 	private JTextField txtPassword;
-	private JLabel lblName;
-	private JTextField txtName;
+	private JLabel lblCName;
+	private JTextField txtCName;
 	private JLabel lblState;
 	private JTextField txtState;
 	private JLabel lblPhone;
@@ -71,15 +71,15 @@ public class RegView extends JDialog implements IView{
 	    this.getContentPane().add(this.txtPassword);
 	    this.txtPassword.setColumns(10);
 	    
-	    this.lblName = new JLabel("Name: ");
-	    this.lblName.setBounds(22, 62, 89, 16);
-	    this.getContentPane().add(this.lblName);
+	    this.lblCName = new JLabel("Name: ");
+	    this.lblCName.setBounds(22, 62, 89, 16);
+	    this.getContentPane().add(this.lblCName);
 	    
-	    this.txtName = new JTextField();
-	    this.txtName.setBounds(123, 56, 134, 28);
-	    //this.txtName.setText("name");
-	    this.getContentPane().add(this.txtName);
-	    this.txtName.setColumns(10);
+	    this.txtCName = new JTextField();
+	    this.txtCName.setBounds(123, 56, 134, 28);
+	    //this.txtCName.setText("name");
+	    this.getContentPane().add(this.txtCName);
+	    this.txtCName.setColumns(10);
 	    
 	    this.lblState = new JLabel("State: ");
 	    this.lblState.setBounds(22, 90, 89, 16);
@@ -123,7 +123,7 @@ public class RegView extends JDialog implements IView{
 	    
 	    this.btnSubmit = new JButton("Submit");
 	    this.btnSubmit.setBounds(77, 283, 117, 29);
-	    listeners.associate(this.btnSubmit, new SubmitController());
+	    listeners.associate(this.btnSubmit, new RegSubmitController());
 	    getContentPane().add(this.btnSubmit);
 	    
 	    this.lblClevel = new JLabel("Level:");
@@ -170,12 +170,12 @@ public class RegView extends JDialog implements IView{
 		this.txtPassword = txtPassword;
 	}
 
-	public JTextField getTxtName() {
-		return txtName;
+	public JTextField getTxtCName() {
+		return txtCName;
 	}
 
-	public void setTxtName(JTextField txtName) {
-		this.txtName = txtName;
+	public void setTxtCName(JTextField txtName) {
+		this.txtCName = txtName;
 	}
 
 	public JTextField getTxtState() {

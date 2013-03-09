@@ -1,18 +1,18 @@
 package com.cs174.starrus.model;
 
 public class Customer {
-	private String username;
-	private String psd;
-	private String cname;
-	private int age;
-	private String phone_num;
-	private String state;
-	private int tax_id;
-	private String email;
-	private int m_account_id;
-	private int s_account_id;
-	private int clevel;
-	private float balance;
+	private String 	username;
+	private String 	psd;
+	private String 	cname;
+	private int 	age;
+	private String 	phone_num;
+	private String 	state;
+	private int 	tax_id;
+	private String 	email;
+	private int 	m_account_id;
+	private int 	s_account_id;
+	private int 	clevel;
+	private float 	balance;
 	private MarketAcc m_account;
 	private StockAcc s_account;
 	private static Customer c = null;
