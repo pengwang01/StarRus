@@ -25,39 +25,8 @@ public class RegSubmitController implements IController{
 		try {
 			float balance = 0;
 			stmt = conn.createStatement();
-
 			String username = rV.getTxtUsername().getText();
-<<<<<<< HEAD
-			String psd		= rV.getTxtPassword().getText();
-			String cname 	= rV.getTxtCName().getText();
-			String state	= rV.getTxtState().getText();
-			String phone	= rV.getTxtPhone().getText();
-			String taxid	= rV.getTxtTaxid().getText();
-			String email	= rV.getTxtEmail().getText();
-			String clevel	= rV.getTxtClevel().getText();
-			String age		= rV.getTxtAge().getText();
-		
-
-			String query	= "Insert into CUSTOMER (	username,cname,	phone_num,state,tax_id,psd,email,clevel,age)Values(" 
-																	+ 
-														username 	+ "," +
-														phone		+ "," +
-														state		+ "," +
-														taxid		+ "," +
-														psd			+ "," +
-														email		+ "," +
-														clevel		+ "," +
-														age			+ ")";
-								
-
-			
-			stmt.executeQuery(query);
-
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-=======
-			String cname = rV.getTxtName().getText();
+			String cname = rV.getTxtCName().getText();
 			String phone = rV.getTxtPhone().getText();
 			String state = rV.getTxtState().getText();
 			String taxid = rV.getTxtTaxid().getText();
@@ -78,7 +47,7 @@ public class RegSubmitController implements IController{
 			stmt.executeQuery(query);
 			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);
-			rV.getTxtName().setText(null);
+			rV.getTxtCName().setText(null);
 			rV.getTxtPassword().setText(null);
 			rV.getTxtPhone().setText(null);
 			rV.getTxtState().setText(null);
@@ -89,13 +58,12 @@ public class RegSubmitController implements IController{
 			rV.getLblWarning().setText("username, password, taxID empty");
 			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);
-			rV.getTxtName().setText(null);
+			rV.getTxtCName().setText(null);
 			rV.getTxtPassword().setText(null);
 			rV.getTxtPhone().setText(null);
 			rV.getTxtState().setText(null);
 			rV.getTxtTaxid().setText(null);
 			rV.getTxtUsername().setText(null);
->>>>>>> bug fix
 		} // Specify the SQL Query to run
 	}
 

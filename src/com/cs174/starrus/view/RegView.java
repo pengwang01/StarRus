@@ -121,11 +121,7 @@ public class RegView extends JDialog implements IView{
 	    this.txtEmail.setColumns(10);
 	    
 	    this.btnSubmit = new JButton("Submit");
-<<<<<<< HEAD
-	    this.btnSubmit.setBounds(77, 283, 117, 29);
-=======
 	    this.btnSubmit.setBounds(77, 264, 117, 29);
->>>>>>> bug fix
 	    listeners.associate(this.btnSubmit, new RegSubmitController());
 	    getContentPane().add(this.btnSubmit);
 	    

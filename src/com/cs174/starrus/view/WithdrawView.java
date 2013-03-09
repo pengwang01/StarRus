@@ -24,8 +24,7 @@ public class WithdrawView extends JDialog implements IView{
 		this.setSize(new Dimension(280, 140));
 		this.setPreferredSize(new Dimension(280, 140));
 	    getContentPane().setLayout(null);
-		setView();
-		
+		//setView();
 	}
 
 	public static WithdrawView getView() {
