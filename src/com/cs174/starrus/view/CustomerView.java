@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LogoutController;
+import com.cs174.starrus.controller.MTransactionController;
+import com.cs174.starrus.controller.STransactionController;
 import com.cs174.starrus.controller.WithdrawController;
 import com.cs174.starrus.controller.BuyStockController;
 import com.cs174.starrus.controller.SellStockController;
@@ -258,7 +260,7 @@ public class CustomerView extends JPanel implements IView{
 		this.Maccount.add(this.btnWithdraw);
 		
 		this.btnViewTransactions = new JButton("View Transactions");
-		//listeners.associate(this.btnViewTransactions, new MTransactionController());
+		listeners.associate(this.btnViewTransactions, new MTransactionController());
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
@@ -295,6 +297,7 @@ public class CustomerView extends JPanel implements IView{
 		this.Saccount.add(this.btnBuyStocks);
 		
 		this.btnViewTransactionsS = new JButton("View Transactions");
+		listeners.associate(this.btnViewTransactionsS, new STransactionController());
 		this.btnViewTransactionsS.setBounds(268, 334, 155, 29);
 		this.Saccount.add(this.btnViewTransactionsS);
 		
