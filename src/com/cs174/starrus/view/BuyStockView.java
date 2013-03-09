@@ -18,11 +18,13 @@ public class BuyStockView extends JDialog implements IView{
 	private JButton btnTicker;
 	private static BuyStockView bsView = null;
 	private JLabel lblWarning;
+	private JLabel lblQuantity;
+	private JTextField textField;
 	
 	private BuyStockView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 120));
-		this.setPreferredSize(new Dimension(280, 120));
+		this.setSize(new Dimension(280, 170));
+		this.setPreferredSize(new Dimension(280, 170));
 	    getContentPane().setLayout(null);
 		//setView();
 	}
@@ -44,14 +46,23 @@ public class BuyStockView extends JDialog implements IView{
 	    this.getContentPane().add(this.txtTicker);
 	    this.txtTicker.setColumns(10);
 	    
-	    this.btnTicker = new JButton("Submit");
-	    this.btnTicker.setBounds(76, 63, 117, 29);
+	    this.btnTicker = new JButton("Buy");
+	    this.btnTicker.setBounds(75, 99, 117, 29);
 	    listeners.associate(this.btnTicker, new BuyStockSubmitController());
 	    getContentPane().add(this.btnTicker);
 	    
 	    this.lblWarning = new JLabel("");
-	    this.lblWarning.setBounds(6, 40, 268, 16);
+	    this.lblWarning.setBounds(6, 71, 268, 16);
 	    getContentPane().add(this.lblWarning);
+	    
+	    this.lblQuantity = new JLabel("Quantity:");
+	    this.lblQuantity.setBounds(21, 40, 92, 16);
+	    getContentPane().add(this.lblQuantity);
+	    
+	    this.textField = new JTextField();
+	    this.textField.setBounds(118, 34, 140, 28);
+	    getContentPane().add(this.textField);
+	    this.textField.setColumns(10);
 	    //this.setVisible(true);
 	}
 	@Override

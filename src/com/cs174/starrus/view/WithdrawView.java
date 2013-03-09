@@ -46,7 +46,7 @@ public class WithdrawView extends JDialog implements IView{
 	    this.txtWithdraw.setColumns(10);
 	    
 	    this.btnWithdraw= new JButton("Withdraw");
-	    this.btnWithdraw.setBounds(76, 83, 117, 29);
+	    this.btnWithdraw.setBounds(79, 68, 117, 29);
 	    listeners.associate(this.btnWithdraw, new WithdrawSubmitController());
 	    getContentPane().add(this.btnWithdraw);
 	    

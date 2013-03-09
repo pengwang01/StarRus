@@ -258,6 +258,7 @@ public class CustomerView extends JPanel implements IView{
 		this.Maccount.add(this.btnWithdraw);
 		
 		this.btnViewTransactions = new JButton("View Transactions");
+		//listeners.associate(this.btnViewTransactions, new MTransactionController());
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
