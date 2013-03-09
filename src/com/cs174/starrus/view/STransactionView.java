@@ -16,16 +16,16 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class MTransactionView extends JDialog implements IView{
+public class STransactionView extends JDialog implements IView{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static MTransactionView mtsView = null;
+	private static STransactionView stsView = null;
 	private JScrollPane scrollPane;
 	private JTable table;
 	
-	private MTransactionView(){
+	private STransactionView(){
 		this.setLocation(new Point(350, 200));
 		this.setSize(new Dimension(400, 400));
 		this.setPreferredSize(new Dimension(400, 400));
@@ -35,25 +35,29 @@ public class MTransactionView extends JDialog implements IView{
 	    setView();
 	}
 
-	public static MTransactionView getView() {
-		if(mtsView  == null){
-			mtsView  = new MTransactionView();
-			mtsView .setView();
+	public static STransactionView getView() {
+		if(stsView  == null){
+			stsView  = new STransactionView();
+			stsView .setView();
 		}
-		return mtsView;
+		return stsView;
 	}
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
+	    col.add("Symbo");
 	    col.add("Date");
-	    col.add("Amount");
+	    col.add("Quantity");
+	    col.add("Price");
 	    
 	    
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
 	    Vector<String> first = new Vector<String>();
 	    first.add("1");
+	    first.add("GOO");
 	    first.add("2013/03/09");
-	    first.add("$100");
+	    first.add("100");
+	    first.add("$2.13");
 	    Vector<Vector<String>> row = new Vector<Vector<String>>();
 	    row.add(first);
 	    //---------------------------------------------------------------------------------
