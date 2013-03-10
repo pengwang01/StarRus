@@ -31,6 +31,8 @@ public class SellStockSubmitController implements IController{
 	public void process(String model) {
 		int numStocksAvailable 	= 0;
 		double currentPrice		= 0;
+		double balance			= 0;
+		double sales			= 0;
 		Statement stmt;
 
 		if( DEBUG == true){
@@ -50,7 +52,7 @@ public class SellStockSubmitController implements IController{
 
 			// Query is case sensitive
 			if ( DEBUG == true ){
-	            System.out.println( "SELECT * FROM MANAGE WHERE MUSERNAME = "	+ 
+	            System.out.println( "SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	+ 
 				                   	"'" + c.getUsername() + "'"					+
 									" AND SYMBOL = "							+
 									"'"	+ ticker	+ "'"			
@@ -58,7 +60,7 @@ public class SellStockSubmitController implements IController{
 			}
 			
 			// Check how many shares this person has of the stock
-			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE WHERE MUSERNAME = "	+
+			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	+
 			                                    "'" + c.getUsername() + "'"					+   
 												" AND SYMBOL = "							+
 												"'"	+ ticker	+	"'"			
@@ -82,7 +84,7 @@ public class SellStockSubmitController implements IController{
 			else{
 				ssV.getLblWarning().setText("");
 				// Update manage to reflect the change in stock
-					stmt.executeQuery( 	"UPDATE MANAGE SET TOTAL_SHARE = TOTAL_SHARE - '"	+
+					stmt.executeQuery( 	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE - '"	+
 										numStocksToSell	+ "' "								+
 										"WHERE MUSERNAME = '"	+ c.getUsername()	+ "'"	+
 										"AND SYMBOL = '"		+ ticker			+ "'"	
@@ -94,6 +96,41 @@ public class SellStockSubmitController implements IController{
 											);
 					if(rs.next()){
 						currentPrice = rs.getFloat("CUR_PRICE");
+					}
+
+				if(DEBUG == true){
+					System.out.println("CurrentPrice: " 	+ currentPrice);
+					System.out.println("numStocksToSell: " 	+ numStocksToSell);
+				} 
+				
+				sales = currentPrice * numStocksToSell;
+
+				if( DEBUG == true){
+					System.out.println("Sales: " + sales);
+				}
+				// Update users balance to reflect the sales
+					if(DEBUG == true){
+						System.out.println("UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
+											sales										+
+											"WHERE USERNAME = '"						+
+											c.getUsername()								+
+											"'"
+											);
+					}
+					stmt.executeQuery( "UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
+										sales										+	
+										"WHERE USERNAME = '"						+
+										c.getUsername()								+
+										"'"
+									);
+
+				// Update balance in customer view
+					rs = stmt.executeQuery (	"SELECT * FROM customer where " +
+												"username = '" + c.getUsername() +"'");
+					if( rs.next()){
+							balance = rs.getFloat("BALANCE");
+							System.out.println("Double.toString(balance): " + Double.toString(balance));
+							cV.setBalancefield(Double.toString(balance));
 					}
 
 				// Update stock_trans table to capture change in stock
@@ -112,31 +149,21 @@ public class SellStockSubmitController implements IController{
 										ticker		+ "'," 			+  1		+ ","				+ 
 										numStocksToSell				+ ","		+ currentPrice		+ ")" 
 									);
-				
-				// Update users balance to reflect the sales
-					if(DEBUG == true){
-						System.out.println("UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
-											currentPrice*numStocksToSell				+
-											"WHERE USERNAME = '"						+
-											c.getUsername()								+
-											"'"
-											);
-					}
-					stmt.executeQuery( "UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
-										currentPrice*numStocksToSell				+
-										"WHERE USERNAME = '"						+
-										c.getUsername()								+
-										"'"
+
+				// Record transaction into money_trans
+				if( DEBUG == true){
+					System.out.println(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
+											"('"		+ dateString	+ "','"	+ c.getUsername()	+ "',"	+
+											1			+ ","			+ sales	+ ","				+ balance			+ 
+											")"
 									);
 
-
-				// Update balance in customer view
-					    rs = stmt.executeQuery (	"SELECT * FROM customer where " +
-															"username = '" + c.getUsername() +"'");
-						if( rs.next()){
-								cV.setBalancefield(Float.toString(rs.getFloat("BALANCE")));
-						}
-
+				}
+				stmt.executeQuery(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
+										"('"		+ dateString	+ "','"	+ c.getUsername()	+ "',"	+
+										1			+ ","			+ sales	+ ","				+ balance	+	
+										")"
+								);
 
 			}			
 
