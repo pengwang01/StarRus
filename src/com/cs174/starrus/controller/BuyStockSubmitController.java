@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.CustomerView;
@@ -31,9 +32,9 @@ public class BuyStockSubmitController implements IController{
 		ResultSet rs;
 		String ticker;
 		int quantity	= 0;
-		double balance	= 0;
-		double price	= 0;
-		double cost		= 0;
+		float balance	= 0;
+		float price		= 0;
+		float cost		= 0;
 
 		try {
 			conn 	= DBconnector.getConnection();
@@ -90,17 +91,17 @@ public class BuyStockSubmitController implements IController{
 				bsV.getLblWarning().setText("");
 				if( DEBUG==true ){
 					System.out.println(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE + "	+
-										"100 "												+	
-										"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"		+
+										quantity												+	
+										"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"			+
 										"AND SYMBOL = '"		+ 
-										bsV.getTxtTicker().getText().toUpperCase()			+
+										bsV.getTxtTicker().getText().toUpperCase()				+
 										"'"
 										);
 				}
 
 
 					stmt.executeQuery(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE + "	+
-										"100 "												+
+										quantity											+
 										"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"		+
 										"AND SYMBOL = '"		+ 
 										bsV.getTxtTicker().getText().toUpperCase()			+
@@ -131,8 +132,9 @@ public class BuyStockSubmitController implements IController{
 										);
 				if( rs.next() ){
 					balance = rs.getFloat("BALANCE");
-					System.out.println("Double.toString(balance): " + Double.toString(balance));
-					cV.setBalancefield(Double.toString(balance));
+					System.out.println("Float.toString(balance): " + Float.toString(balance));
+					cV.setBalancefield(Float.toString(balance));
+					c.setBalance(balance);
 				}
 
 			// Record transaction into stock_trans
@@ -171,7 +173,13 @@ public class BuyStockSubmitController implements IController{
 										")"
 							);
 
-
+			Vector<String> newRow = new Vector<String> ();
+			newRow.add("Buy");
+			newRow.add(ticker);
+			newRow.add(Double.toString(price));
+			newRow.add(Integer.toString(quantity));
+			cV.getRow_myStock().add(newRow);
+			cV.updateView(c);
 		}
 		}
 		catch (SQLException e) {
