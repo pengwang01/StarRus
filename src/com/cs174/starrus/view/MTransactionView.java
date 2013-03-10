@@ -38,8 +38,10 @@ public class MTransactionView extends JDialog implements IView{
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
+	    col.add("Type");
 	    col.add("Date");
 	    col.add("Amount");
+	    col.add("Balance");
 
 	    this.scrollPane = new JScrollPane();
 	    this.scrollPane.setBounds(6, 6, 388, 366);

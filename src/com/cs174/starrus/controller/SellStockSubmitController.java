@@ -173,9 +173,26 @@ public class SellStockSubmitController implements IController{
 										1			+ ","			+ sales	+ ","				+ balance	+	
 										")"
 								);
-
+				
+				// UPDATE CUSTOMER STOCK TABLE
+				System.out.println("SELECT * FROM MANAGE_STOCK WHERE musername = '" + 
+						c.getUsername() +"'");
+				
+				rs = stmt.executeQuery("SELECT * FROM MANAGE_STOCK WHERE musername = '" + 
+										c.getUsername() +"'");
+				
+				cV.getRow_myStock().clear();
+				while( rs.next() ){
+					Vector<String> newRow = new Vector<String>();
+					String symbol= rs.getString("SYMBOL");
+					int shares	= rs.getInt("TOTAL_SHARE");	
+					newRow.add(symbol);
+					newRow.add(Integer.toString(shares));
+					cV.getRow_myStock().add(newRow);
+				}
+				cV.updateView(c);
+				ssV.dispose();
 			}			
-			ssV.dispose();
 		}	
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

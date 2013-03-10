@@ -35,6 +35,7 @@ public class BuyStockSubmitController implements IController{
 		float balance	= 0;
 		float price		= 0;
 		float cost		= 0;
+		int total_share = 0;
 
 		try {
 			conn 	= DBconnector.getConnection();
@@ -89,24 +90,49 @@ public class BuyStockSubmitController implements IController{
 			// Complete and record the transaction
 			// Update manage to reflecat the new total shares
 				bsV.getLblWarning().setText("");
-				if( DEBUG==true ){
-					System.out.println(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE + "	+
-										quantity												+	
-										"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"			+
-										"AND SYMBOL = '"		+ 
-										bsV.getTxtTicker().getText().toUpperCase()				+
-										"'"
-										);
+				
+				rs = stmt.executeQuery("SELECT TOTAL_SHARE FROM MANAGE_STOCK WHERE musername = " +
+									"'" + c.getUsername() + "' AND symbol=" +
+									"'" + ticker + "'");
+				if(rs.next()){
+					System.out.println("debug: " + rs.getInt("TOTAL_SHARE") + quantity);
+					int shares = rs.getInt("TOTAL_SHARE");
+					total_share = shares + quantity;
+					if( DEBUG==true ){
+						System.out.println(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = "	+
+											total_share												+	
+											" WHERE MUSERNAME = '" 	+ c.getUsername() + "'"			+
+											"AND SYMBOL = '"		+ 
+											bsV.getTxtTicker().getText().toUpperCase()				+
+											"'"
+											);
+					}
+
+
+						stmt.executeQuery(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE =  "	+
+											total_share											+
+											"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"		+
+											"AND SYMBOL = '"		+ 
+											bsV.getTxtTicker().getText().toUpperCase()			+
+											"'"
+											);
 				}
+				else{
+					total_share = quantity;
+					if( DEBUG==true ){
+						System.out.println(	"INSERT INTO MANAGE_STOCK (MUSERNAME, SYMBOL, TOTAL_SHARE)" +
+											"VALUES ('" + c.getUsername() + "' ," + 
+													"'" + ticker + "', " + 
+													total_share + ")");
+					}
 
 
-					stmt.executeQuery(	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE + "	+
-										quantity											+
-										"WHERE MUSERNAME = '" 	+ c.getUsername() + "'"		+
-										"AND SYMBOL = '"		+ 
-										bsV.getTxtTicker().getText().toUpperCase()			+
-										"'"
-										);
+						stmt.executeQuery(	"INSERT INTO MANAGE_STOCK (MUSERNAME, SYMBOL, TOTAL_SHARE)" +
+											"VALUES ('" + c.getUsername() + "' ," + 
+											"'" + ticker + "', " + 
+											total_share + ")");
+				}
+				
 				
 
 			// Update Customer's balance
@@ -177,20 +203,30 @@ public class BuyStockSubmitController implements IController{
 										")"
 							);
 
-
-			//c.setBalance(balance);
-			CustomerView cV = CustomerView.getView();
-			Vector<String> newRow = new Vector<String> ();
-
-			newRow.add(ticker);
-			newRow.add(Double.toString(price));
-			newRow.add(Integer.toString(quantity));
-			cV.getRow_myStock().add(newRow);
+			
+			// UPDATE CUSTOMER STOCK TABLE
+			System.out.println("SELECT * FROM MANAGE_STOCK WHERE musername = '" + 
+					c.getUsername() +"'");
+			
+			rs = stmt.executeQuery("SELECT * FROM MANAGE_STOCK WHERE musername = '" + 
+									c.getUsername() +"'");
+			
+			cV.getRow_myStock().clear();
+			while( rs.next() ){
+				Vector<String> newRow = new Vector<String>();
+				String symbol= rs.getString("SYMBOL");
+				int shares	= rs.getInt("TOTAL_SHARE");	
+				newRow.add(symbol);
+				newRow.add(Integer.toString(shares));
+				cV.getRow_myStock().add(newRow);
+			}
 			cV.updateView(c);
+			bsV.dispose();
 		}
 
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("Exception in BuyStockSubmitController");
 		} // Specify the SQL Query to run
