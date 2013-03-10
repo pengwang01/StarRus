@@ -38,16 +38,19 @@ public class MTransactionView extends JDialog implements IView{
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
-	    col.add("Type");
 	    col.add("Date");
+	    col.add("Type");
 	    col.add("Amount");
-
 	    col.add("Balance");
 	    this.scrollPane = new JScrollPane();
 	    this.scrollPane.setBounds(6, 6, 388, 366);
 	    getContentPane().add(this.scrollPane);
 	    
-	    this.table = new JTable(row, col);
+	    this.table = new JTable(row, col){
+			public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
 	    this.table.setPreferredSize(new Dimension(400, 400));
 	    this.scrollPane.setViewportView(this.table);
 	    //this.setVisible(true);

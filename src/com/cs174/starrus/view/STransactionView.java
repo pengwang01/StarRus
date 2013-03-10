@@ -48,7 +48,11 @@ public class STransactionView extends JDialog implements IView{
 	    this.scrollPane.setBounds(6, 6, 388, 366);
 	    getContentPane().add(this.scrollPane);
 	    
-	    this.table = new JTable(row, col);
+	    this.table = new JTable(row, col){
+			public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
 	    this.table.setPreferredSize(new Dimension(400, 400));
 	    this.scrollPane.setViewportView(this.table);
 	    //this.setVisible(true);
