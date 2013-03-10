@@ -38,6 +38,7 @@ public class STransactionView extends JDialog implements IView{
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
+	    col.add("Type");
 	    col.add("Symbo");
 	    col.add("Date");
 	    col.add("Quantity");
