@@ -72,9 +72,9 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel balancefield;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
-	Vector<Vector<String>> row_listStock;
-	Vector<Vector<String>> row_myStock;
-	Vector<Vector<String>> row_listMovie;
+	Vector<Vector<String>> row_listStock = new Vector<Vector<String>>();
+	Vector<Vector<String>> row_myStock = new Vector<Vector<String>>();
+	Vector<Vector<String>> row_listMovie = new Vector<Vector<String>>();
 	private JScrollPane scrollPane_myStock;
 	private JScrollPane scrollPane_listStock;
 	private JPanel panel_myStock;
@@ -320,19 +320,12 @@ public class CustomerView extends JPanel implements IView{
 		
 		//making table col and row
 		Vector<String> col_myStock = new Vector<String>();
+		col_myStock.add("Buy/Sell");
 	    col_myStock.add("Symbol");
 	    col_myStock.add("Current Price");
 	    col_myStock.add("Quantity");
 	    
-	    /*this is testting date, need to be get rid of later, instead using date from DB*/
-	    Vector<String> first_myStock = new Vector<String>();
-	    first_myStock.add("GOO");
-	    first_myStock.add("$2.99");
-	    first_myStock.add("100");
-	    
-	    row_myStock = new Vector<Vector<String>>();
-	    row_myStock.add(first_myStock);
-		this.table_myStock = new JTable(row_listStock, col_myStock);
+		this.table_myStock = new JTable(row_myStock, col_myStock);
 		this.scrollPane_myStock.setViewportView(this.table_myStock);
 		this.Saccount.add(this.panel_myStock);
 		
@@ -355,13 +348,7 @@ public class CustomerView extends JPanel implements IView{
 		Vector<String> col_listStock = new Vector<String>();
 	    col_listStock.add("Symbol");
 	    col_listStock.add("Current Price");
-	    
-	    /*this is testting date, need to be get rid of later, instead using date from DB*/
-	    Vector<String> first_listStock = new Vector<String>();
-	    first_listStock.add("GOO");
-	    first_listStock.add("$2.99");
-	    row_listStock = new Vector<Vector<String>>();
-	    row_listStock.add(first_listStock);
+
 		this.table_listStock = new JTable(row_listStock, col_listStock);
 		this.scrollPane_listStock.setViewportView(this.table_listStock);
 		//-----------------------------end of stock list  (tab) ---------------------------
@@ -429,5 +416,39 @@ public class CustomerView extends JPanel implements IView{
 
 	public void setBalancefield(String text) {
 		balancefield.setText(text);
+	}
+
+	public Vector<Vector<String>> getRow_listStock() {
+		return row_listStock;
+	}
+
+	public void setRow_listStock(Vector<Vector<String>> row_listStock) {
+		this.row_listStock = row_listStock;
+	}
+
+	public Vector<Vector<String>> getRow_myStock() {
+		return row_myStock;
+	}
+
+	public void setRow_myStock(Vector<Vector<String>> row_myStock) {
+		this.row_myStock = row_myStock;
+	}
+
+	public Vector<Vector<String>> getRow_listMovie() {
+		return row_listMovie;
+	}
+
+	public void setRow_listMovie(Vector<Vector<String>> row_listMovie) {
+		this.row_listMovie = row_listMovie;
+	}
+	
+	public void updateView(Customer c){
+		System.out.println("stock size: " + row_myStock.size());
+		for(int i=0; i<row_myStock.size(); i++){
+			System.out.println(row_myStock.get(i).get(0));
+			System.out.println(row_myStock.get(i).get(1));
+			System.out.println(row_myStock.get(i).get(2));
+		}
+		this.setView(c);
 	}
 }
