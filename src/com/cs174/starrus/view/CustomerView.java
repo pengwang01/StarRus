@@ -18,6 +18,7 @@ import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 public class CustomerView extends JPanel implements IView{
 	
@@ -46,7 +47,6 @@ public class CustomerView extends JPanel implements IView{
 	private JButton btnViewTransactions;
 	private JButton btnViewTransactionsS;
 	private JLabel lblUsername;
-	private JEditorPane dtrpnListOfStocks;
 	private final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	private JPanel stockPanel;
 	private JPanel moviePanel;
@@ -72,6 +72,14 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel balancefiled;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
+	Vector<Vector<String>> row_listStock;
+	Vector<Vector<String>> row_myStock;
+	Vector<Vector<String>> row_listMovie;
+	private JScrollPane scrollPane_myStock;
+	private JScrollPane scrollPane_listStock;
+	private JPanel panel_myStock;
+	private JTable table_myStock;
+	private JTable table_listStock;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -301,20 +309,62 @@ public class CustomerView extends JPanel implements IView{
 		this.btnViewTransactionsS.setBounds(268, 334, 155, 29);
 		this.Saccount.add(this.btnViewTransactionsS);
 		
-		this.dtrpnListOfStocks = new JEditorPane();
-		this.dtrpnListOfStocks.setText("List of stocks that I currently have");
-		this.dtrpnListOfStocks.setBounds(30, 34, 505, 288);
-		this.Saccount.add(this.dtrpnListOfStocks);
+		
+		//------------------------my stock list------------------------------------
+		this.panel_myStock = new JPanel();
+		this.panel_myStock.setBounds(30, 34, 505, 288);
+		this.panel_myStock.setLayout(null);
+		this.scrollPane_myStock = new JScrollPane();
+		this.scrollPane_myStock.setBounds(6, 5, 493, 277);
+		this.panel_myStock.add(this.scrollPane_myStock);
+		
+		//making table col and row
+		Vector<String> col_myStock = new Vector<String>();
+	    col_myStock.add("Symbol");
+	    col_myStock.add("Current Price");
+	    col_myStock.add("Quantity");
+	    
+	    /*this is testting date, need to be get rid of later, instead using date from DB*/
+	    Vector<String> first_myStock = new Vector<String>();
+	    first_myStock.add("GOO");
+	    first_myStock.add("$2.99");
+	    first_myStock.add("100");
+	    
+	    row_myStock = new Vector<Vector<String>>();
+	    row_myStock.add(first_myStock);
+		this.table_myStock = new JTable(row_listStock, col_myStock);
+		this.scrollPane_myStock.setViewportView(this.table_myStock);
+		this.Saccount.add(this.panel_myStock);
 		
 		this.lblSAccountId = new JLabel("New label");
 		this.lblSAccountId.setText(Integer.toString(c.getS_account_id()));
 		this.lblSAccountId.setBounds(119, 6, 61, 16);
 		this.Saccount.add(this.lblSAccountId);
+		//------------------------------end my stocks list ----------------------------
 		
-		
+		//----------------------stock list (tab) -----------------------------------
 		this.stockPanel = new JPanel();
 		tabbedPane.addTab("View Stocks", null, this.stockPanel, "View All Available Stocks");
+		this.stockPanel.setLayout(null);
 		
+		this.scrollPane_listStock = new JScrollPane();
+		this.scrollPane_listStock.setBounds(6, 6, 567, 542);
+		this.stockPanel.add(this.scrollPane_listStock);
+		
+		//making table col and row
+		Vector<String> col_listStock = new Vector<String>();
+	    col_listStock.add("Symbol");
+	    col_listStock.add("Current Price");
+	    
+	    /*this is testting date, need to be get rid of later, instead using date from DB*/
+	    Vector<String> first_listStock = new Vector<String>();
+	    first_listStock.add("GOO");
+	    first_listStock.add("$2.99");
+	    row_listStock = new Vector<Vector<String>>();
+	    row_listStock.add(first_listStock);
+		this.table_listStock = new JTable(row_listStock, col_listStock);
+		this.scrollPane_listStock.setViewportView(this.table_listStock);
+		//-----------------------------end of stock list  (tab) ---------------------------
 		
 		this.moviePanel = new JPanel();
 		tabbedPane.addTab("View Movies", null, this.moviePanel, "View All Available Movies");
@@ -380,5 +430,4 @@ public class CustomerView extends JPanel implements IView{
 	public void setBalancefiled(JLabel balancefiled) {
 		this.balancefiled = balancefiled;
 	}
-	
 }

@@ -40,8 +40,7 @@ public class MTransactionView extends JDialog implements IView{
 	    col.add("Type");
 	    col.add("Date");
 	    col.add("Amount");
-	    
-	    
+  
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
 	    Vector<String> first = new Vector<String>();
 	    first.add("1");

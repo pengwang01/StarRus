@@ -43,8 +43,6 @@ public class STransactionView extends JDialog implements IView{
 	    col.add("Date");
 	    col.add("Quantity");
 	    col.add("Price");
-	    
-	    
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
 	    Vector<String> first = new Vector<String>();
 	    first.add("1");
