@@ -1,7 +1,6 @@
 package com.cs174.starrus.model;
 
 import java.lang.String;
-import java.util.Set;
 
 public class StockAcc {
 	private int 	account_id;

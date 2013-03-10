@@ -4,17 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import com.cs174.starrus.controller.WithdrawSubmitController;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class MTransactionView extends JDialog implements IView{
 	/**

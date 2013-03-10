@@ -7,17 +7,9 @@ import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LogoutController;
-import com.cs174.starrus.controller.MTransactionController;
-import com.cs174.starrus.controller.STransactionController;
-import com.cs174.starrus.controller.WithdrawController;
-import com.cs174.starrus.controller.BuyStockController;
-import com.cs174.starrus.controller.SellStockController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ManagerView extends JPanel implements IView{
 	
@@ -53,12 +45,21 @@ public class ManagerView extends JPanel implements IView{
 	private JButton btnLogout;
 	private JLabel lblControlPanel;
 	private JPanel panel;
+	private JButton btnAddInterest;
+	private JButton btnCustomerReport;
+	private JButton btnDeleteTransactions;
+	private JPanel ActiveCustomer_panel;
+	private JPanel monthly_panel;
+	private JLabel lblUsername_2;
+	private JTextField textField;
+	private JButton btnGenerateMonthlyStatement;
+	private JPanel panel_1;
 		
 	private ManagerView(){
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
-		setView(new Customer());
+		//setView(new Customer());
 	}
 	
 	public static ManagerView getView(){
@@ -204,6 +205,45 @@ public class ManagerView extends JPanel implements IView{
 		this.panel.setBounds(16, 35, 551, 476);
 		this.panel.setBackground(new Color(204, 153, 153));
 		this.mainDisp.add(this.panel);
+		this.panel.setLayout(null);
+		
+		this.btnDeleteTransactions = new JButton("Delete Transactions");
+		this.btnDeleteTransactions.setBounds(6, 73, 539, 43);
+		this.panel.add(this.btnDeleteTransactions);
+		
+		this.monthly_panel = new JPanel();
+		this.monthly_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.monthly_panel.setBounds(6, 144, 539, 109);
+		this.monthly_panel.setBackground(new Color(204, 153, 153));
+		this.panel.add(this.monthly_panel);
+		this.monthly_panel.setLayout(null);
+		
+		this.lblUsername_2 = new JLabel("Username:");
+		this.lblUsername_2.setBounds(34, 17, 92, 16);
+		this.monthly_panel.add(this.lblUsername_2);
+		
+		this.textField = new JTextField();
+		this.textField.setBounds(138, 11, 378, 28);
+		this.monthly_panel.add(this.textField);
+		this.textField.setColumns(10);
+		
+		this.btnCustomerReport = new JButton("Generate Customer Report");
+		this.btnCustomerReport.setBounds(6, 51, 255, 42);
+		this.monthly_panel.add(this.btnCustomerReport);
+		
+		this.btnGenerateMonthlyStatement = new JButton("Generate Monthly Statement");
+		this.btnGenerateMonthlyStatement.setBounds(278, 51, 255, 42);
+		this.monthly_panel.add(this.btnGenerateMonthlyStatement);
+		
+		this.btnAddInterest = new JButton("Add Interest");
+		this.btnAddInterest.setBounds(6, 20, 539, 43);
+		this.panel.add(this.btnAddInterest);
+		
+		this.ActiveCustomer_panel = new JPanel();
+		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
+		
+		this.panel_1 = new JPanel();
+		tabbedPane.addTab("DTER", null, this.panel_1, "Drg & tax Evasion Report");
 
 	}
 
