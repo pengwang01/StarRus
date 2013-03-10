@@ -63,6 +63,9 @@ public class AddInterestController implements IController{
 										"(SELECT MAX(TDATE) FROM MONEY_TRANS GROUP BY TDATE) "		+
 										"GROUP BY TDATE,TUSERNAME) GROUP BY TUSERNAME"				
 										);
+				
+			System.out.println(rs.getMetaData());
+
 			while( rs.next() ){
 				user		= rs.getString("TUSERNAME");
 				avgBalance 	= rs.getFloat("BALANCE");
