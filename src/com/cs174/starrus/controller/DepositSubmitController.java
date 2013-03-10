@@ -2,6 +2,7 @@ package com.cs174.starrus.controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,11 +28,15 @@ public class DepositSubmitController implements IController{
 	@Override
 	public void process(String model) {
 		// TODO Auto-generated method stub
-		conn = DBconnector.getConnection();
-		Statement stmt;
+		conn 			= DBconnector.getConnection();
+		Statement 		stmt;
+		ResultSet		rs;
+		float fBalance 	= 0;
 		try {
-			float balance = 0;
-			stmt	= conn.createStatement();
+			float toDeposit	= 0;
+			float balance 	= 0;
+			stmt		= conn.createStatement();
+			toDeposit	= Float.parseFloat(depoV.getTxtDeposit().getText());
 
 
 			// deposit cannot be negative number
@@ -46,6 +51,19 @@ public class DepositSubmitController implements IController{
 				Date today          = new Date();
 				String dateString   = format.format(today);
 			
+				// execute query for deposit
+				stmt.executeQuery("UPDATE Customer set balance = " 	+ balance + 
+									"WHERE username = '" 			+ c.getUsername() + "'");
+
+				// Pull balance from Customer table
+				rs = stmt.executeQuery(	"SELECT BALANCE FROM CUSTOMER WHERE USERNAME = '"	+
+										c.getUsername()	+ "'"
+										);
+					
+				if( rs.next()){
+					fBalance= rs.getFloat("BALANCE");
+				}
+
 				// FOR DEBUGGING PURPOSES
 				if( DEBUG == true ){
 					System.out.println( "Username: "+ c.getUsername()   +" \n" +
@@ -55,22 +73,21 @@ public class DepositSubmitController implements IController{
 					System.out.println("INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
 										+ "'"   + c.getUsername()   + "'"   + ","
 										+ 1                 		+ ","		// 1 for deposit
-										+ c.getBalance()    		+ ")"
+										+ toDeposit			   		+ ","
+										+ fBalance					+ ")"
 									);
 				}
 
-				String mtStr        = "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
+				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
 									+ "'"   + dateString        + "'"   + ","
 									+ "'"   + c.getUsername()   + "'"   + ","
 									+ 1                 		+ ","			// 1 fore deposit
-									+ c.getBalance()    		+ ")";
-				
-				stmt.executeQuery(mtStr);
+									+ toDeposit		    		+ "," 
+									+ fBalance					+ ")"
+								);
 
 
-				// execute query for deposit
-				stmt.executeQuery("UPDATE Customer set balance = " + balance + 
-									"WHERE username = '" + c.getUsername() + "'");
+
 				cView.getBalancefield().setText(Float.toString(balance));
 				depoV.getTxtDeposit().setText(null);
 				depoV.getLblWarning().setText(null);

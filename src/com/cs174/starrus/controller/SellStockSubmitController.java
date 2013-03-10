@@ -14,6 +14,8 @@ import com.cs174.starrus.view.CustomerView;
 import com.cs174.starrus.view.SellStockView;
 import com.cs174.starrus.view.IView;
 
+import java.util.Vector;
+
 public class SellStockSubmitController implements IController{
 	private boolean DEBUG 		= true;
 	private Connection conn 	= null;
@@ -30,9 +32,10 @@ public class SellStockSubmitController implements IController{
 	@Override
 	public void process(String model) {
 		int numStocksAvailable 	= 0;
-		double currentPrice		= 0;
-		double balance			= 0;
-		double sales			= 0;
+		float price				= 0;
+		float balance			= 0;
+		float sales				= 0;
+		int	quantity			= 0;
 		Statement stmt;
 
 		if( DEBUG == true){
@@ -76,8 +79,8 @@ public class SellStockSubmitController implements IController{
 
 			// While the client is trying to sell more shares than he posses, 
 			// The system should loop waiting until he puts in a valid number
-			int numStocksToSell	= Integer.parseInt(ssV.getTxtQuantityField().getText());
-			if( numStocksAvailable < numStocksToSell){
+			quantity	= Integer.parseInt(ssV.getTxtQuantityField().getText());
+			if( numStocksAvailable < quantity){
 				ssV.getLblWarning().setText("You do not have enough shares");
 				
 			}
@@ -85,7 +88,7 @@ public class SellStockSubmitController implements IController{
 				ssV.getLblWarning().setText("");
 				// Update manage to reflect the change in stock
 					stmt.executeQuery( 	"UPDATE MANAGE_STOCK SET TOTAL_SHARE = TOTAL_SHARE - '"	+
-										numStocksToSell	+ "' "								+
+										quantity	+ "' "								+
 										"WHERE MUSERNAME = '"	+ c.getUsername()	+ "'"	+
 										"AND SYMBOL = '"		+ ticker			+ "'"	
 										);
@@ -95,15 +98,15 @@ public class SellStockSubmitController implements IController{
 												ticker	+ "'"
 											);
 					if(rs.next()){
-						currentPrice = rs.getFloat("CUR_PRICE");
+						price = rs.getFloat("CUR_PRICE");
 					}
 
 				if(DEBUG == true){
-					System.out.println("CurrentPrice: " 	+ currentPrice);
-					System.out.println("numStocksToSell: " 	+ numStocksToSell);
+					System.out.println("CurrentPrice: " 	+ price);
+					System.out.println("quantity: " 	+ quantity);
 				} 
 				
-				sales = currentPrice * numStocksToSell;
+				sales = price * quantity;
 
 				if( DEBUG == true){
 					System.out.println("Sales: " + sales);
@@ -125,12 +128,18 @@ public class SellStockSubmitController implements IController{
 									);
 
 				// Update balance in customer view
+				if( DEBUG == true){
+					System.out.println("SELECT * FROM customer where " +
+												"username = '" + c.getUsername() +"'");
+
+				}
 					rs = stmt.executeQuery (	"SELECT * FROM customer where " +
 												"username = '" + c.getUsername() +"'");
 					if( rs.next()){
 							balance = rs.getFloat("BALANCE");
-							System.out.println("Double.toString(balance): " + Double.toString(balance));
-							cV.setBalancefield(Double.toString(balance));
+							System.out.println("Float.toString(balance): " + Float.toString(balance));
+							cV.setBalancefield(Float.toString(balance));
+							c.setBalance(balance);
 					}
 
 				// Update stock_trans table to capture change in stock
@@ -140,14 +149,14 @@ public class SellStockSubmitController implements IController{
 					System.out.println("INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE) "	+
 										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 			+  1		+ ","				+ 
-										numStocksToSell				+ ","		+ currentPrice		+ ")" 
+										quantity				+ ","		+ price		+ ")" 
 										);
 
 					}
 					stmt.executeQuery(	"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE) "	+
 										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 			+  1		+ ","				+ 
-										numStocksToSell				+ ","		+ currentPrice		+ ")" 
+										quantity				+ ","		+ price		+ ")" 
 									);
 
 				// Record transaction into money_trans
@@ -165,6 +174,14 @@ public class SellStockSubmitController implements IController{
 										")"
 								);
 
+				// Update the Stock Account Summary table
+				Vector<String> newRow = new Vector<String>();
+				newRow.add("Sell");
+				newRow.add(ticker);
+				newRow.add(Double.toString(price));
+				newRow.add(Integer.toString(quantity));
+				cV.getRow_myStock().add(newRow);
+				cV.updateView(c);
 			}			
 
 		}	
