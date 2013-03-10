@@ -3,18 +3,10 @@ package com.cs174.starrus.view;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Vector;
-
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import com.cs174.starrus.controller.WithdrawSubmitController;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 public class STransactionView extends JDialog implements IView{
 	/**
@@ -24,6 +16,7 @@ public class STransactionView extends JDialog implements IView{
 	private static STransactionView stsView = null;
 	private JScrollPane scrollPane;
 	private JTable table;
+	Vector<Vector<String>> row;
 	
 	private STransactionView(){
 		this.setLocation(new Point(350, 200));
@@ -45,12 +38,11 @@ public class STransactionView extends JDialog implements IView{
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
+	    col.add("Type");
 	    col.add("Symbo");
 	    col.add("Date");
 	    col.add("Quantity");
 	    col.add("Price");
-	    
-	    
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
 	    Vector<String> first = new Vector<String>();
 	    first.add("1");
@@ -71,9 +63,20 @@ public class STransactionView extends JDialog implements IView{
 	    this.scrollPane.setViewportView(this.table);
 	    //this.setVisible(true);
 	}
+	
+	
+	
+	public Vector<Vector<String>> getRow() {
+		return row;
+	}
+
+	public void setRow(Vector<Vector<String>> row) {
+		this.row = row;
+	}
+
 	@Override
 	public void present(String model) {
 		// TODO Auto-generated method stub
-		
 	}
+	
 }

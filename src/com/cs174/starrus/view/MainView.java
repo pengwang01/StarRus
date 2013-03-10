@@ -63,6 +63,17 @@ public class MainView extends JFrame implements IView{
 		this.displayView();
 	}
 	
+	/*
+	 * load customer view to the main window
+	 */
+	public void loadManagerView(Customer c) {
+		this.frameInit();
+		ManagerView managerView = ManagerView.getView();
+		managerView.setView(c);
+		this.getContentPane().add(managerView);
+		this.displayView();
+	}
+	
 	@Override
 	public void present(String model) {
 		// TODO Auto-generated method stub

@@ -4,17 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import com.cs174.starrus.controller.WithdrawSubmitController;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class MTransactionView extends JDialog implements IView{
 	/**
@@ -45,10 +37,10 @@ public class MTransactionView extends JDialog implements IView{
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
 	    col.add("ID");
+	    col.add("Type");
 	    col.add("Date");
 	    col.add("Amount");
-	    
-	    
+  
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
 	    Vector<String> first = new Vector<String>();
 	    first.add("1");
