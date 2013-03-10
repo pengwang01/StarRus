@@ -51,9 +51,9 @@ public class ManagerView extends JPanel implements IView{
 	private JPanel ActiveCustomer_panel;
 	private JPanel monthly_panel;
 	private JLabel lblUsername_2;
-	private JTextField textField;
+	private JTextField txtInputUsername;
 	private JButton btnGenerateMonthlyStatement;
-	private JPanel panel_1;
+	private JPanel DrugNtax_panel;
 		
 	private ManagerView(){
 		this.setSize(new Dimension(800, 600));
@@ -222,10 +222,10 @@ public class ManagerView extends JPanel implements IView{
 		this.lblUsername_2.setBounds(34, 17, 92, 16);
 		this.monthly_panel.add(this.lblUsername_2);
 		
-		this.textField = new JTextField();
-		this.textField.setBounds(138, 11, 378, 28);
-		this.monthly_panel.add(this.textField);
-		this.textField.setColumns(10);
+		this.txtInputUsername = new JTextField();
+		this.txtInputUsername.setBounds(138, 11, 378, 28);
+		this.monthly_panel.add(this.txtInputUsername);
+		this.txtInputUsername.setColumns(10);
 		
 		this.btnCustomerReport = new JButton("Generate Customer Report");
 		this.btnCustomerReport.setBounds(6, 51, 255, 42);
@@ -242,8 +242,8 @@ public class ManagerView extends JPanel implements IView{
 		this.ActiveCustomer_panel = new JPanel();
 		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
 		
-		this.panel_1 = new JPanel();
-		tabbedPane.addTab("DTER", null, this.panel_1, "Drg & tax Evasion Report");
+		this.DrugNtax_panel = new JPanel();
+		tabbedPane.addTab("DTER", null, this.DrugNtax_panel, "Drg & tax Evasion Report");
 
 	}
 
@@ -299,4 +299,14 @@ public class ManagerView extends JPanel implements IView{
 	public void setLblLevelfield(JLabel lblLevelfield) {
 		this.lblLevelfield = lblLevelfield;
 	}
+
+	public JTextField getTxtInputUsername() {
+		return txtInputUsername;
+	}
+
+	public void setTxtInputUsername(JTextField txtInputUsername) {
+		this.txtInputUsername = txtInputUsername;
+	}
+	
+	
 }

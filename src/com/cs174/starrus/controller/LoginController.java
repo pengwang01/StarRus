@@ -46,7 +46,7 @@ public class LoginController implements IController{
 				customer.setAge(rs.getInt("age"));
 				customer.setBalance(rs.getFloat("balance"));
 				if(customer.getClevel() == 1){
-					view.loadCustomerView(customer);	// load customer view when login is checked
+					view.loadManagerView(customer);	// load customer view when login is checked
 				}
 				else if(customer.getClevel() == 2){
 					view.loadCustomerView(customer);	// load customer view when login is checked
