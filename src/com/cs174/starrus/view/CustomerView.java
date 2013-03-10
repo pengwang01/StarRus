@@ -444,13 +444,6 @@ public class CustomerView extends JPanel implements IView{
 	}
 	
 	public void updateView(Customer c){
-<<<<<<< HEAD
-		System.out.println("stock size: " + row_myStock.size());
-		for(int i=0; i<row_myStock.size(); i++){
-			System.out.println(row_myStock.get(i).get(0));
-			System.out.println(row_myStock.get(i).get(1));
-			System.out.println(row_myStock.get(i).get(2));
-=======
 		if( DEBUG == true){
 			System.out.println("stock size: " + row_myStock.size());
 			for(int i=0; i<row_myStock.size(); i++){
@@ -458,7 +451,6 @@ public class CustomerView extends JPanel implements IView{
 				System.out.println(row_myStock.get(i).get(1));
 				System.out.println(row_myStock.get(i).get(2));
 			}
->>>>>>> dee3e55ea90cfe3713440c02b79ba488239c4197
 		}
 		this.setView(c);
 	}
