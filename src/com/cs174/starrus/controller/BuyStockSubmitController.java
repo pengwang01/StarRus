@@ -167,21 +167,19 @@ public class BuyStockSubmitController implements IController{
 
 
 			}
+			if(DEBUG == true){
+				System.out.println("END");
+			}
+
 			stmt.executeQuery(			"INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES"+
 										"('" 		+ dateString	+ "','"		+ c.getUsername()	+ "',"		+
 										2			+ ","			+ cost		+ ","				+ balance			+ 
 										")"
 							);
 
-			Vector<String> newRow = new Vector<String> ();
-			newRow.add("Buy");
-			newRow.add(ticker);
-			newRow.add(Double.toString(price));
-			newRow.add(Integer.toString(quantity));
-			cV.getRow_myStock().add(newRow);
-			cV.updateView(c);
+
+			}
 			bsV.dispose();
-		}
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

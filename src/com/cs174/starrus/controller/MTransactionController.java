@@ -42,6 +42,10 @@ public class MTransactionController implements IController{
 										c.getUsername()			+ "'"
 										);
 			while( rs.next() ){
+				if(DEBUG == true){
+					System.out.println("Getting Row");
+				}
+
 				Vector<String> newRow = new Vector<String>();
 				String date	= rs.getString("TDATE");
 				int id		= rs.getInt("M_TRANS_ID");
@@ -59,9 +63,6 @@ public class MTransactionController implements IController{
 				newRow.add(Float.toString(amt));
 				
 				mtV.getRow().add(newRow);
-				if(DEBUG == true){
-					System.out.println("Getting Row");
-				}
 
 			}
 			mtV.updateView();

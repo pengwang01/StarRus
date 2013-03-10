@@ -42,6 +42,9 @@ public class STransactionController implements IController{
 										c.getUsername()			+ "'"
 										);
 			while( rs.next() ){
+				if(DEBUG == true){
+					System.out.println("Getting Row");
+				}
 				Vector<String> newRow = new Vector<String>();
 				String date	= rs.getString("TDATE");
 				int id		= rs.getInt("S_TRANS_ID");
@@ -63,9 +66,6 @@ public class STransactionController implements IController{
 				newRow.add(Float.toString(price));
 				
 				stV.getRow().add(newRow);
-				if(DEBUG == true){
-					System.out.println("Getting Row");
-				}
 
 			}
 			stV.updateView();

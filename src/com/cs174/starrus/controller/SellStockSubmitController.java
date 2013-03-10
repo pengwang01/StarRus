@@ -174,14 +174,6 @@ public class SellStockSubmitController implements IController{
 										")"
 								);
 
-				// Update the Stock Account Summary table
-				Vector<String> newRow = new Vector<String>();
-				newRow.add("Sell");
-				newRow.add(ticker);
-				newRow.add(Float.toString(price));
-				newRow.add(Integer.toString(quantity));
-				cV.getRow_myStock().add(newRow);
-				cV.updateView(c);
 			}			
 			ssV.dispose();
 		}	
