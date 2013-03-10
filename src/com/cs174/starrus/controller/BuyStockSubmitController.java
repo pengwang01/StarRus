@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.CustomerView;
@@ -171,14 +172,19 @@ public class BuyStockSubmitController implements IController{
 										")"
 							);
 
-
+			//c.setBalance(balance);
+			CustomerView cV = CustomerView.getView();
+			Vector<String> newRow = new Vector<String> ();
+			newRow.add(ticker);
+			newRow.add(Double.toString(price));
+			newRow.add(Integer.toString(quantity));
+			cV.getRow_myStock().add(newRow);
+			cV.updateView(c);
 		}
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception in BuyStockSubmitController");
 		} // Specify the SQL Query to run
-		
 	}
-
 }
