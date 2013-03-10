@@ -8,6 +8,7 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.LogoutController;
+import com.cs174.starrus.controller.AddInterestController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 
@@ -238,6 +239,9 @@ public class ManagerView extends JPanel implements IView{
 		this.btnAddInterest = new JButton("Add Interest");
 		this.btnAddInterest.setBounds(6, 20, 539, 43);
 		this.panel.add(this.btnAddInterest);
+		listeners.associate(this.btnAddInterest, new AddInterestController());
+
+		// Tabbed Pages
 		
 		this.ActiveCustomer_panel = new JPanel();
 		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
