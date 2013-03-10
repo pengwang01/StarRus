@@ -12,10 +12,11 @@ public class MTransactionView extends JDialog implements IView{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private static MTransactionView mtsView = null;
+	private static final long serialVersionUID 	= 1L;
+	private static MTransactionView mtsView 	= null;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private	Vector<Vector<String>> row			= new Vector<Vector<String>>();
 	
 	private MTransactionView(){
 		this.setLocation(new Point(350, 200));
@@ -39,6 +40,7 @@ public class MTransactionView extends JDialog implements IView{
 	    col.add("ID");
 	    col.add("Date");
 	    col.add("Amount");
+<<<<<<< HEAD
 	    
 	    
 	    /*this is testting date, need to be get rid of later, instead using date from DB*/
@@ -50,6 +52,9 @@ public class MTransactionView extends JDialog implements IView{
 	    row.add(first);
 	    //---------------------------------------------------------------------------------
 	    
+=======
+  
+>>>>>>> dee3e55ea90cfe3713440c02b79ba488239c4197
 	    this.scrollPane = new JScrollPane();
 	    this.scrollPane.setBounds(6, 6, 388, 366);
 	    getContentPane().add(this.scrollPane);
@@ -63,5 +68,13 @@ public class MTransactionView extends JDialog implements IView{
 	public void present(String model) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Vector<Vector<String>> getRow(){
+		return row;
+	}
+
+	public void updateView(){
+		this.setView();
 	}
 }
