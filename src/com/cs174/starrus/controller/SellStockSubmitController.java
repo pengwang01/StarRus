@@ -183,7 +183,7 @@ public class SellStockSubmitController implements IController{
 				cV.getRow_myStock().add(newRow);
 				cV.updateView(c);
 			}			
-
+			ssV.dispose();
 		}	
 		catch (SQLException e) {
 			// TODO Auto-generated catch block

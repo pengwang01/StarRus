@@ -16,7 +16,7 @@ public class STransactionView extends JDialog implements IView{
 	private static STransactionView stsView = null;
 	private JScrollPane scrollPane;
 	private JTable table;
-	Vector<Vector<String>> row;
+	Vector<Vector<String>> row = new Vector<Vector<String>>();;
 	
 	private STransactionView(){
 		this.setLocation(new Point(350, 200));
@@ -37,22 +37,12 @@ public class STransactionView extends JDialog implements IView{
 	}
 	public void setView(){
 	    Vector<String> col = new Vector<String>();
+	    col.add("Date");
 	    col.add("ID");
 	    col.add("Type");
-	    col.add("Symbo");
-	    col.add("Date");
+	    col.add("Symbol");
 	    col.add("Quantity");
 	    col.add("Price");
-	    /*this is testting date, need to be get rid of later, instead using date from DB*/
-	    Vector<String> first = new Vector<String>();
-	    first.add("1");
-	    first.add("GOO");
-	    first.add("2013/03/09");
-	    first.add("100");
-	    first.add("$2.13");
-	    Vector<Vector<String>> row = new Vector<Vector<String>>();
-	    row.add(first);
-	    //---------------------------------------------------------------------------------
 	    
 	    this.scrollPane = new JScrollPane();
 	    this.scrollPane.setBounds(6, 6, 388, 366);
@@ -77,6 +67,10 @@ public class STransactionView extends JDialog implements IView{
 	@Override
 	public void present(String model) {
 		// TODO Auto-generated method stub
+	}
+
+	public void updateView( ){
+		this.setView();
 	}
 	
 }

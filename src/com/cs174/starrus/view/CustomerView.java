@@ -25,6 +25,7 @@ public class CustomerView extends JPanel implements IView{
 	/**
 	 * 
 	 */
+	private boolean DEBUG = true;
 	private static final long serialVersionUID = 1L;
 	//-------------main window components--------------
 	private JPanel left;
@@ -443,11 +444,13 @@ public class CustomerView extends JPanel implements IView{
 	}
 	
 	public void updateView(Customer c){
-		System.out.println("stock size: " + row_myStock.size());
-		for(int i=0; i<row_myStock.size(); i++){
-			System.out.println(row_myStock.get(i).get(0));
-			System.out.println(row_myStock.get(i).get(1));
-			System.out.println(row_myStock.get(i).get(2));
+		if( DEBUG == true){
+			System.out.println("stock size: " + row_myStock.size());
+			for(int i=0; i<row_myStock.size(); i++){
+				System.out.println(row_myStock.get(i).get(0));
+				System.out.println(row_myStock.get(i).get(1));
+				System.out.println(row_myStock.get(i).get(2));
+			}
 		}
 		this.setView(c);
 	}

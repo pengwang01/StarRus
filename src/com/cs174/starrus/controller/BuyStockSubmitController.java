@@ -180,6 +180,7 @@ public class BuyStockSubmitController implements IController{
 			newRow.add(Integer.toString(quantity));
 			cV.getRow_myStock().add(newRow);
 			cV.updateView(c);
+			bsV.dispose();
 		}
 		}
 		catch (SQLException e) {
