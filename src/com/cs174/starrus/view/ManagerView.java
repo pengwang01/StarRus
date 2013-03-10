@@ -7,10 +7,15 @@ import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import com.cs174.starrus.controller.CustomerReportController;
 import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.AddInterestController;
+import com.cs174.starrus.controller.MonthlyStatementController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerView extends JPanel implements IView{
 	
@@ -55,6 +60,12 @@ public class ManagerView extends JPanel implements IView{
 	private JTextField txtInputUsername;
 	private JButton btnGenerateMonthlyStatement;
 	private JPanel DrugNtax_panel;
+	private JButton btnOpenMarket;
+	private JButton btnCloseMarket;
+	private JButton btnSetNewPrice;
+	private JButton btnSetnewdate;
+	private JLabel lblMarketOperation;
+	private JLabel lblAccountOperateion;
 		
 	private ManagerView(){
 		this.setSize(new Dimension(800, 600));
@@ -209,12 +220,12 @@ public class ManagerView extends JPanel implements IView{
 		this.panel.setLayout(null);
 		
 		this.btnDeleteTransactions = new JButton("Delete Transactions");
-		this.btnDeleteTransactions.setBounds(6, 73, 539, 43);
+		this.btnDeleteTransactions.setBounds(173, 126, 208, 29);
 		this.panel.add(this.btnDeleteTransactions);
 		
 		this.monthly_panel = new JPanel();
 		this.monthly_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		this.monthly_panel.setBounds(6, 144, 539, 109);
+		this.monthly_panel.setBounds(6, 214, 539, 109);
 		this.monthly_panel.setBackground(new Color(204, 153, 153));
 		this.panel.add(this.monthly_panel);
 		this.monthly_panel.setLayout(null);
@@ -229,19 +240,46 @@ public class ManagerView extends JPanel implements IView{
 		this.txtInputUsername.setColumns(10);
 		
 		this.btnCustomerReport = new JButton("Generate Customer Report");
-		this.btnCustomerReport.setBounds(6, 51, 255, 42);
+		listeners.associate(this.btnCustomerReport, new CustomerReportController());
+		this.btnCustomerReport.setBounds(6, 51, 255, 28);
 		this.monthly_panel.add(this.btnCustomerReport);
 		
 		this.btnGenerateMonthlyStatement = new JButton("Generate Monthly Statement");
-		this.btnGenerateMonthlyStatement.setBounds(278, 51, 255, 42);
+		listeners.associate(this.btnGenerateMonthlyStatement, new MonthlyStatementController());
+		this.btnGenerateMonthlyStatement.setBounds(278, 51, 255, 28);
 		this.monthly_panel.add(this.btnGenerateMonthlyStatement);
 		
 		this.btnAddInterest = new JButton("Add Interest");
-		this.btnAddInterest.setBounds(6, 20, 539, 43);
+		this.btnAddInterest.setBounds(173, 173, 208, 29);
 		this.panel.add(this.btnAddInterest);
 		listeners.associate(this.btnAddInterest, new AddInterestController());
 
 		// Tabbed Pages
+		
+		this.btnOpenMarket = new JButton("Open Market");
+		this.btnOpenMarket.setBounds(173, 16, 136, 29);
+		this.panel.add(this.btnOpenMarket);
+		
+		this.btnCloseMarket = new JButton("Close Market");
+		this.btnCloseMarket.setBounds(321, 16, 136, 29);
+		this.panel.add(this.btnCloseMarket);
+		
+		this.btnSetNewPrice = new JButton("Set New Price");
+
+		this.btnSetNewPrice.setBounds(173, 57, 136, 29);
+		this.panel.add(this.btnSetNewPrice);
+		
+		this.btnSetnewdate = new JButton("Set New Date");
+		this.btnSetnewdate.setBounds(321, 57, 136, 29);
+		this.panel.add(this.btnSetnewdate);
+		
+		this.lblMarketOperation = new JLabel("Market Operation:");
+		this.lblMarketOperation.setBounds(6, 21, 155, 16);
+		this.panel.add(this.lblMarketOperation);
+		
+		this.lblAccountOperateion = new JLabel("Account Operateion: ");
+		this.lblAccountOperateion.setBounds(6, 131, 155, 16);
+		this.panel.add(this.lblAccountOperateion);
 		
 		this.ActiveCustomer_panel = new JPanel();
 		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
@@ -311,6 +349,4 @@ public class ManagerView extends JPanel implements IView{
 	public void setTxtInputUsername(JTextField txtInputUsername) {
 		this.txtInputUsername = txtInputUsername;
 	}
-	
-	
 }
