@@ -70,7 +70,7 @@ public class WithdrawSubmitController implements IController{
 			stmt.executeQuery("UPDATE Customer set balance = " 	+ balance + 
 								"WHERE username = '" 			+ c.getUsername() + "'");
 
-			cView.getBalancefiled().setText(Float.toString(balance));
+			cView.getBalancefield().setText(Float.toString(balance));
 			wdView.getTxtWithdraw().setText(null);
 			wdView.setVisible(false);
 		} catch (SQLException e) {
