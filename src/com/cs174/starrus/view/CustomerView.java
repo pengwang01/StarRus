@@ -97,7 +97,6 @@ public class CustomerView extends JPanel implements IView{
 	
 	public void setView(Customer c){
 		this.removeAll();
-		System.out.println("in customer's setview: " + c.getCname());
 		//------------------------------left panel-------------------------------
 		this.left = new JPanel();
 		this.left.setBounds(0, 0, 200, 600);
@@ -137,7 +136,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblAge);
 		
 		this.lblAgefield = new JLabel("100");
-		this.lblAgefield.setText(Integer.toString(c.getAge()));
+		this.lblAgefield.setText("");
 		this.lblAgefield.setBounds(87, 107, 107, 16);
 		this.left.add(this.lblAgefield);
 		
@@ -177,7 +176,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblStatefield);
 		
 		this.lblTaxfield = new JLabel("taxfield");
-		this.lblTaxfield.setText(Integer.toString(c.getTax_id()));
+		this.lblTaxfield.setText("");
 		this.lblTaxfield.setBounds(87, 219, 107, 16);
 		this.left.add(this.lblTaxfield);
 		
@@ -191,7 +190,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblUserLevel);
 		
 		this.lblLevelfield = new JLabel("levelfield");
-		this.lblLevelfield.setText(Integer.toString(c.getClevel()));
+		this.lblLevelfield.setText("");
 		this.lblLevelfield.setBounds(87, 303, 107, 16);
 		this.left.add(this.lblLevelfield);
 		
@@ -254,7 +253,7 @@ public class CustomerView extends JPanel implements IView{
 		this.lblAccount.setBounds(20, 6, 87, 16);
 		this.Maccount.add(this.lblAccount);
 		
-		this.lblAccountBalance = new JLabel("Account Balance:");
+		this.lblAccountBalance = new JLabel("Account Balance:  $");
 		this.lblAccountBalance.setBounds(248, 6, 132, 16);
 		this.Maccount.add(this.lblAccountBalance);
 		
@@ -273,9 +272,9 @@ public class CustomerView extends JPanel implements IView{
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
-		this.lblMAccountId = new JLabel("accountIDfield");
+		this.lblMAccountId = new JLabel();
 		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
-		System.out.println(c.getM_account_id());
+		//System.out.println(c.getM_account_id());
 		this.lblMAccountId.setBounds(119, 6, 117, 16);
 		this.Maccount.add(this.lblMAccountId);
 		
@@ -321,18 +320,16 @@ public class CustomerView extends JPanel implements IView{
 		
 		//making table col and row
 		Vector<String> col_myStock = new Vector<String>();
-		col_myStock.add("Buy/Sell");
 	    col_myStock.add("Symbol");
-	    col_myStock.add("Current Price");
-	    col_myStock.add("Quantity");
+	    col_myStock.add("Total Shares");
 	    
 		this.table_myStock = new JTable(row_myStock, col_myStock);
 		this.scrollPane_myStock.setViewportView(this.table_myStock);
 		this.Saccount.add(this.panel_myStock);
 		
-		this.lblSAccountId = new JLabel("New label");
+		this.lblSAccountId = new JLabel();
 		this.lblSAccountId.setText(Integer.toString(c.getS_account_id()));
-		this.lblSAccountId.setBounds(119, 6, 61, 16);
+		this.lblSAccountId.setBounds(119, 6, 137, 16);
 		this.Saccount.add(this.lblSAccountId);
 		//------------------------------end my stocks list ----------------------------
 		
@@ -444,14 +441,7 @@ public class CustomerView extends JPanel implements IView{
 	}
 	
 	public void updateView(Customer c){
-		if( DEBUG == true){
-			System.out.println("stock size: " + row_myStock.size());
-			for(int i=0; i<row_myStock.size(); i++){
-				System.out.println(row_myStock.get(i).get(0));
-				System.out.println(row_myStock.get(i).get(1));
-				System.out.println(row_myStock.get(i).get(2));
-			}
-		}
+
 		this.setView(c);
 	}
 }

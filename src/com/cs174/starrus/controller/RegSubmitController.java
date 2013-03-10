@@ -21,19 +21,23 @@ public class RegSubmitController implements IController{
 	@Override
 	public void process(String model) {
 		conn = DBconnector.getConnection();
-		Statement stmt;
+		
 		try {
 			float balance = 0;
-			stmt = conn.createStatement();
-			String username = rV.getTxtUsername().getText();
-			String cname = rV.getTxtCName().getText();
-			String phone = rV.getTxtPhone().getText();
-			String state = rV.getTxtState().getText();
-			String taxid = rV.getTxtTaxid().getText();
-			String psw = rV.getTxtPassword().getText();
-			String email = rV.getTxtEmail().getText();
-			String age = rV.getTxtAge().getText();
-			
+			int age, taxid;
+			String username, cname, phone, psw, email,state;
+			username = rV.getTxtUsername().getText();
+			psw = rV.getTxtPassword().getText();
+			cname = rV.getTxtCName().getText();	
+			phone = rV.getTxtPhone().getText();
+			state = rV.getTxtState().getText();		
+			email = rV.getTxtEmail().getText();
+			if(rV.getTxtAge().getText().equals(""))
+				age = 0;
+			else
+				age = Integer.parseInt(rV.getTxtAge().getText());
+			taxid = Integer.parseInt(rV.getTxtTaxid().getText());
+
 			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel, age) values ("
 				+ "'" + username + "' ,"
 				+ "'" + cname + "',"
@@ -43,7 +47,8 @@ public class RegSubmitController implements IController{
 				+ "'" + psw + "',"
 				+ "'" + email + "',"
 				+ 2 + ","
-				+ age + ")";	
+				+ age + ")";
+			Statement stmt	= conn.createStatement();
 			stmt.executeQuery(query);
 			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);
@@ -55,6 +60,7 @@ public class RegSubmitController implements IController{
 			rV.getTxtUsername().setText(null);
 			rV.dispose();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			rV.getLblWarning().setText("username, password, taxID empty");
 			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);

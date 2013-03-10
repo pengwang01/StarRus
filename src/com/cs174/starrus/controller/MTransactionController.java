@@ -41,29 +41,28 @@ public class MTransactionController implements IController{
 			rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS WHERE TUSERNAME = '"	+
 										c.getUsername()			+ "'"
 										);
+			mtV.getRow().clear();
 			while( rs.next() ){
 				if(DEBUG == true){
 					System.out.println("Getting Row");
 				}
-
 				Vector<String> newRow = new Vector<String>();
 				String date	= rs.getString("TDATE");
 				int id		= rs.getInt("M_TRANS_ID");
 				int type 	= rs.getInt("TTYPE");
 				float amt	= rs.getFloat("AMOUNT");
-
-				newRow.add(date);
+				float balance = rs.getFloat("BALANCE");
+				
 				newRow.add(Integer.toString(id));
-
-				if( type == 0 ){
+				newRow.add(date);
+				if( type == 2 ){
 					newRow.add("Withdraw");
 				} else if ( type == 1 ){
 					newRow.add("Deposit");
 				}
 				newRow.add(Float.toString(amt));
-				
+				newRow.add(Float.toString(balance));
 				mtV.getRow().add(newRow);
-
 			}
 			mtV.updateView();
 

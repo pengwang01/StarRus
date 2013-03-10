@@ -66,7 +66,7 @@ public class LoginController implements IController{
 										);
 
 				}
-				rs = stmt.executeQuery(	"SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '" 	+
+				rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = '" 	+
 										c.getUsername()	+ "'"
 										);
 				while( rs.next() ){
@@ -74,20 +74,29 @@ public class LoginController implements IController{
 						System.out.println("Inserting into Stock table");
 					}
 					Vector<String> newRow = new Vector<String>();
-					int type 	= rs.getInt("STYPE");
-					int shares	= rs.getInt("SHARES");
-					float price	= rs.getFloat("PRICE");
+					int shares	= rs.getInt("TOTAL_SHARE");
 					String tkr	= rs.getString("SYMBOL");
-					if( type == 0){
-						newRow.add("Buy");
-					}else if( type == 1){
-						newRow.add("Sell");	
-					}
 
 					newRow.add(tkr);
-					newRow.add(Float.toString(price));
 					newRow.add(Integer.toString(shares));
 					cV.getRow_myStock().add(newRow);
+				}
+				cV.updateView(c);
+				
+				
+				//-------------update stock list(tab 2)------------
+				rs = stmt.executeQuery(	"SELECT * FROM STOCK");
+				while( rs.next() ){
+					if(DEBUG == true){
+						System.out.println("Inserting into Stock table");
+					}
+					Vector<String> newRow = new Vector<String>();
+					float price	= rs.getFloat("CUR_PRICE");
+					String tkr	= rs.getString("SYMBOL");
+				
+					newRow.add(tkr);
+					newRow.add(Float.toString(price));
+					cV.getRow_listStock().add(newRow);
 				}
 				cV.updateView(c);
 
@@ -102,6 +111,7 @@ public class LoginController implements IController{
 				loginView.getLblMismatch().setText("Username and password do not match, please try again.");
 			}
 
+				
 			
 		} catch (SQLException e){
 			// TODO Auto-generated catch block

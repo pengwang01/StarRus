@@ -41,10 +41,17 @@ public class DepositSubmitController implements IController{
 
 			// deposit cannot be negative number
 			if(Float.parseFloat(depoV.getTxtDeposit().getText()) >= 0){
-				System.out.println(depoV.getTxtDeposit().getText());
+				
+				// update balance
 				balance = Float.parseFloat(depoV.getTxtDeposit().getText()) + c.getBalance();
 				c.setBalance(balance);
-
+				
+				// if account balance > 1000, then set up stock account
+				if(c.getBalance() >= 1000){
+					stmt.executeQuery("UPDATE customer set s_account_id = " + c.getM_account_id() +
+						"where username = '" + c.getUsername() + "'");
+				}
+				
 				// Insert into Money_trans Table	
 				// execute query for add row to money transaction table
 				DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
@@ -78,7 +85,7 @@ public class DepositSubmitController implements IController{
 									);
 				}
 
-				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
+				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES ("
 									+ "'"   + dateString        + "'"   + ","
 									+ "'"   + c.getUsername()   + "'"   + ","
 									+ 1                 		+ ","			// 1 fore deposit
@@ -99,6 +106,7 @@ public class DepositSubmitController implements IController{
 				depoV.getLblWarning().setText("No input or negative #");
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("Exception in Deposite submit controller");
 		} // Specify the SQL Query to run
