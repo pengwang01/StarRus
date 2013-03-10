@@ -83,7 +83,11 @@ public class SellStockView extends JDialog implements IView{
 		return lblWarning;
 	}
 
-	public void setLblWarning(JLabel lblWarning) {
-		this.lblWarning = lblWarning;
+	public void setLblWarning(String text) {
+		this.lblWarning.setText(text);
+	}
+
+	public JTextField getTxtQuantityField(){
+		return txtQuantityfield;
 	}
 }

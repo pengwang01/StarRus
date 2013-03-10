@@ -71,7 +71,7 @@ public class DepositSubmitController implements IController{
 				// execute query for deposit
 				stmt.executeQuery("UPDATE Customer set balance = " + balance + 
 									"WHERE username = '" + c.getUsername() + "'");
-				cView.getBalancefiled().setText(Float.toString(balance));
+				cView.getBalancefield().setText(Float.toString(balance));
 				depoV.getTxtDeposit().setText(null);
 				depoV.getLblWarning().setText(null);
 				depoV.setVisible(false);
