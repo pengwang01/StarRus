@@ -178,7 +178,7 @@ public class SellStockSubmitController implements IController{
 				Vector<String> newRow = new Vector<String>();
 				newRow.add("Sell");
 				newRow.add(ticker);
-				newRow.add(Double.toString(price));
+				newRow.add(Float.toString(price));
 				newRow.add(Integer.toString(quantity));
 				cV.getRow_myStock().add(newRow);
 				cV.updateView(c);
