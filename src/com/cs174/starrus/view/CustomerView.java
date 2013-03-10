@@ -62,14 +62,14 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel lblTaxId;
 	private JLabel lblEmail;
 	private JLabel lblPsdfield;
-	private JLabel lblPhonefield;
+	private JLabel lblPhonefiled;
 	private JLabel lblStatefield;
 	private JLabel lblTaxfield;
 	private JLabel lblEmailfield;
 	private JLabel lblUserLevel;
 	private JLabel lblLevelfield;
 	private JLabel lblMAccountId;
-	private JLabel balancefield;
+	private JLabel balancefiled;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
 	Vector<Vector<String>> row_listStock;
@@ -165,10 +165,10 @@ public class CustomerView extends JPanel implements IView{
 		this.lblPsdfield.setBounds(87, 135, 107, 16);
 		this.left.add(this.lblPsdfield);
 		
-		this.lblPhonefield = new JLabel("phonefield");
-		this.lblPhonefield.setText(c.getPhone_num());
-		this.lblPhonefield.setBounds(87, 163, 107, 16);
-		this.left.add(this.lblPhonefield);
+		this.lblPhonefiled = new JLabel("phonefiled");
+		this.lblPhonefiled.setText(c.getPhone_num());
+		this.lblPhonefiled.setBounds(87, 163, 107, 16);
+		this.left.add(this.lblPhonefiled);
 		
 		this.lblStatefield = new JLabel("statefield");
 		this.lblStatefield.setText(c.getState());
@@ -272,17 +272,17 @@ public class CustomerView extends JPanel implements IView{
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
-		this.lblMAccountId = new JLabel("accountIDfield");
+		this.lblMAccountId = new JLabel("accountIDfiled");
 		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
 		System.out.println(c.getM_account_id());
 		this.lblMAccountId.setBounds(119, 6, 117, 16);
 		this.Maccount.add(this.lblMAccountId);
 		
-		this.balancefield = new JLabel("New label");
-		this.balancefield.setText(Float.toString(c.getBalance()));
+		this.balancefiled = new JLabel("New label");
+		this.balancefiled.setText(Float.toString(c.getBalance()));
 		System.out.println(c.getBalance());
-		this.balancefield.setBounds(392, 6, 132, 16);
-		this.Maccount.add(this.balancefield);
+		this.balancefiled.setBounds(392, 6, 132, 16);
+		this.Maccount.add(this.balancefiled);
 		
 		this.Saccount = new JPanel();
 		this.Saccount.setLayout(null);
@@ -391,12 +391,12 @@ public class CustomerView extends JPanel implements IView{
 		this.lblPsdfield = lblPsdfield;
 	}
 
-	public JLabel getLblPhonefield() {
-		return lblPhonefield;
+	public JLabel getLblPhonefiled() {
+		return lblPhonefiled;
 	}
 
-	public void setLblPhonefield(JLabel lblPhonefield) {
-		this.lblPhonefield = lblPhonefield;
+	public void setLblPhonefiled(JLabel lblPhonefiled) {
+		this.lblPhonefiled = lblPhonefiled;
 	}
 
 	public JLabel getLblStatefield() {
@@ -423,11 +423,11 @@ public class CustomerView extends JPanel implements IView{
 		this.lblLevelfield = lblLevelfield;
 	}
 
-	public JLabel getBalancefield() {
-		return balancefield;
+	public JLabel getBalancefiled() {
+		return balancefiled;
 	}
 
-	public void setBalancefield(String text) {
-		balancefield.setText(text);
+	public void setBalancefiled(JLabel balancefiled) {
+		this.balancefiled = balancefiled;
 	}
 }
