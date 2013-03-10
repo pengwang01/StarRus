@@ -323,7 +323,11 @@ public class CustomerView extends JPanel implements IView{
 	    col_myStock.add("Symbol");
 	    col_myStock.add("Total Shares");
 	    
-		this.table_myStock = new JTable(row_myStock, col_myStock);
+		this.table_myStock = new JTable(row_myStock, col_myStock){
+			public boolean isCellEditable(int rowIndex, int colIndex){
+				return false;
+			}
+		};
 		this.scrollPane_myStock.setViewportView(this.table_myStock);
 		this.Saccount.add(this.panel_myStock);
 		
@@ -347,7 +351,11 @@ public class CustomerView extends JPanel implements IView{
 	    col_listStock.add("Symbol");
 	    col_listStock.add("Current Price");
 
-		this.table_listStock = new JTable(row_listStock, col_listStock);
+		this.table_listStock = new JTable(row_listStock, col_listStock){
+            public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
 		this.scrollPane_listStock.setViewportView(this.table_listStock);
 		//-----------------------------end of stock list  (tab) ---------------------------
 		
