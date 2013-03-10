@@ -40,21 +40,7 @@ public class MTransactionView extends JDialog implements IView{
 	    col.add("ID");
 	    col.add("Date");
 	    col.add("Amount");
-<<<<<<< HEAD
-	    
-	    
-	    /*this is testting date, need to be get rid of later, instead using date from DB*/
-	    Vector<String> first = new Vector<String>();
-	    first.add("1");
-	    first.add("2013/03/09");
-	    first.add("$100");
-	    Vector<Vector<String>> row = new Vector<Vector<String>>();
-	    row.add(first);
-	    //---------------------------------------------------------------------------------
-	    
-=======
-  
->>>>>>> dee3e55ea90cfe3713440c02b79ba488239c4197
+
 	    this.scrollPane = new JScrollPane();
 	    this.scrollPane.setBounds(6, 6, 388, 366);
 	    getContentPane().add(this.scrollPane);
