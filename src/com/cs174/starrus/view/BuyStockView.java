@@ -19,7 +19,7 @@ public class BuyStockView extends JDialog implements IView{
 	private static BuyStockView bsView = null;
 	private JLabel lblWarning;
 	private JLabel lblQuantity;
-	private JTextField textField;
+	private JTextField txtQuantity;
 	
 	private BuyStockView(){
 		this.setLocation(new Point(350, 200));
@@ -59,10 +59,10 @@ public class BuyStockView extends JDialog implements IView{
 	    this.lblQuantity.setBounds(21, 40, 92, 16);
 	    getContentPane().add(this.lblQuantity);
 	    
-	    this.textField = new JTextField();
-	    this.textField.setBounds(118, 34, 140, 28);
-	    getContentPane().add(this.textField);
-	    this.textField.setColumns(10);
+	    this.txtQuantity = new JTextField();
+	    this.txtQuantity.setBounds(118, 34, 140, 28);
+	    getContentPane().add(this.txtQuantity);
+	    this.txtQuantity.setColumns(10);
 	    //this.setVisible(true);
 	}
 	@Override
@@ -83,8 +83,13 @@ public class BuyStockView extends JDialog implements IView{
 		return lblWarning;
 	}
 
-	public void setLblWarning(JLabel lblWarning) {
-		this.lblWarning = lblWarning;
+	public void setLblWarning(String text) {
+		lblWarning.setText(text);
 	}
+
+	public JTextField getTxtQuantity(){
+		return txtQuantity;
+	}
+
 	
 }
