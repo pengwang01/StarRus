@@ -16,7 +16,7 @@ public class STransactionView extends JDialog implements IView{
 	private static STransactionView stsView = null;
 	private JScrollPane scrollPane;
 	private JTable table;
-	Vector<Vector<String>> row = new Vector<Vector<String>>();;
+	Vector<Vector<String>> row = new Vector<Vector<String>>();
 	
 	private STransactionView(){
 		this.setLocation(new Point(350, 200));
