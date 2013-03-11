@@ -129,6 +129,8 @@ public class LoginController implements IController{
 
 
 				if(c.getClevel() == 1){
+
+//=========================ACTIVE CALCULATIONS===============================
 					if( DEBUG == true ){
 						System.out.println("SELECT SUSERNAME FROM " +
 								"( SELECT SUSERNAME, SUM(SHARES) AS MYSUM " +
@@ -161,7 +163,7 @@ public class LoginController implements IController{
 					Vector<String>	state	= new Vector<String>();
 
 					Vector<Double>	profit	= new Vector<Double>();
-
+					mV.getRow_Dter().clear();
 					// Calculate the list of users
 						if( DEBUG == true ){
 							System.out.println("SELECT * FROM CUSTOMER");
@@ -169,13 +171,14 @@ public class LoginController implements IController{
 
 						rs		= stmt.executeQuery("SELECT * FROM CUSTOMER");
 						while(rs.next()){
-							userList.add(rs.getString("USERNAME"));
+/*							userList.add(rs.getString("USERNAME"));
 							name.add(rs.getString("CNAME"));
 							state.add(rs.getString("STATE"));
+*/
 
 							if( DEBUG == true){
 								System.out.println("USERNAME: "	+ rs.getString("USERNAME"));
-								System.out.println("CANEM: 	" 	+ rs.getString("CNAME"));
+								System.out.println("CNAME: 	" 	+ rs.getString("CNAME"));
 								System.out.println("STATE: " 	+ rs.getString("STATE"));
 							}
 							String user = rs.getString("USERNAME");

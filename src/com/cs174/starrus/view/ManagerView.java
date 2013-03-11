@@ -296,7 +296,12 @@ public class ManagerView extends JPanel implements IView{
 		Vector<String> col_active = new Vector<String>();
 		col_active.add("Username");
 		this.ActiveCustomer_panel.add(this.scrollPane_active);
-		this.table_active = new JTable(row_active, col_active);
+		this.table_active = new JTable(row_active, col_active){
+		    public boolean isCellEditable(int row, int col){
+				return false;
+			}
+
+		};
 		this.scrollPane_active.setViewportView(this.table_active);
 		this.table_active.setPreferredSize(new Dimension(800, 500));
 		
@@ -311,7 +316,12 @@ public class ManagerView extends JPanel implements IView{
 		col_dter.add("Name");
 		col_dter.add("State");
 		this.DrugNtax_panel.add(this.scrollPane_dter);
-		this.table_dter = new JTable(row_dter, col_dter);
+		this.table_dter = new JTable(row_dter, col_dter){
+		    public boolean isCellEditable(int row, int col){
+				return false;
+			}
+
+		};
 		this.scrollPane_dter.setViewportView(this.table_dter);
 		this.table_dter.setPreferredSize(new Dimension(800, 500));
 	}
@@ -383,6 +393,10 @@ public class ManagerView extends JPanel implements IView{
 
 	public void setRow_active(Vector<Vector<String>> row_active) {
 		this.row_active = row_active;
+	}
+
+	public Vector<Vector<String>> getRow_Dter() {
+		return this.row_dter;
 	}
 
 }
