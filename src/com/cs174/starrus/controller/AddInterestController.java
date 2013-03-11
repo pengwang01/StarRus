@@ -1,6 +1,5 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
-import com.cs174.starrus.view.ManagerView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,10 +26,8 @@ public class AddInterestController implements IController{
 
 	@Override
 	public void process(String model) {
-		ManagerView mV 			= ManagerView.getView();
 		Statement 	stmt;
 		ResultSet	rs;
-		double		avgBalance 	= 0;
 		double		balance		= 0;
 		double		interest	= .0025;	// Assume simple interest
 											// .00246 if effective interest

@@ -3,20 +3,14 @@ package com.cs174.starrus.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.ScrollPane;
-
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import com.cs174.starrus.controller.CustomerReportController;
 import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.AddInterestController;
 import com.cs174.starrus.controller.MonthlyStatementController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.util.Vector;
 
 public class ManagerView extends JPanel implements IView{
