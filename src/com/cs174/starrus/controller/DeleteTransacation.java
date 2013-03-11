@@ -18,7 +18,7 @@ import java.util.Vector;
 
 
 
-public class DeleteTransaction implements IController{
+public class DeleteTransacation implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
 	@Override
