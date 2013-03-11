@@ -23,7 +23,6 @@ public class WithdrawSubmitController implements IController{
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

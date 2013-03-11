@@ -59,7 +59,8 @@ public class MTransactionController implements IController{
 					newRow.add("Withdraw");
 				} else if ( type == 1 ){
 					newRow.add("Deposit");
-				}
+				} else if(type == 3)
+					newRow.add("Interest");
 				newRow.add(Float.toString(amt));
 				newRow.add(Float.toString(balance));
 				mtV.getRow().add(newRow);

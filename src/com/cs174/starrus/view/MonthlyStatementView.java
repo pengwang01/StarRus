@@ -42,6 +42,18 @@ public class MonthlyStatementView extends JDialog implements IView{
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 400));
 	    getContentPane().setLayout(null);
+	    setView();
+	}
+
+	public static MonthlyStatementView getView() {
+		if(msView  == null){
+			msView  = new MonthlyStatementView();
+			msView .setView();
+		}
+		return msView;
+	}
+	public void setView(){
+		
 	    
 	    this.lblUsername = new JLabel("Username:");
 	    this.lblUsername.setBounds(6, 6, 89, 16);
@@ -129,20 +141,6 @@ public class MonthlyStatementView extends JDialog implements IView{
 	    this.lblStockTransactions = new JLabel("Stock Transactions:");
 	    this.lblStockTransactions.setBounds(405, 103, 156, 16);
 	    getContentPane().add(this.lblStockTransactions);
-	    
-	   
-	    setView();
-	}
-
-	public static MonthlyStatementView getView() {
-		if(msView  == null){
-			msView  = new MonthlyStatementView();
-			msView .setView();
-		}
-		return msView;
-	}
-	public void setView(){
-	   
 	}
 	@Override
 	public void present(String model) {

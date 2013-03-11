@@ -25,8 +25,6 @@ public class CustomerReportController implements IController{
 	@Override
 	public void process(String model) {
 		String username = mV.getTxtInputUsername().getText();
-		
-		
 		try{
 			conn			= DBconnector.getConnection();
 			Statement stmt	= conn.createStatement();
