@@ -14,6 +14,7 @@ import java.util.Date;
 import java.text.DecimalFormat;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 
 
@@ -31,14 +32,55 @@ public class DTERController implements IController{
 		Statement 	stmt;
 		ResultSet	rs;
 
+		Vector<String>	userList	= new Vector<String>();
+		Vector<float>	sTransProf	= new Vector<float>();
+		Vector<float>	intProf		= new Vector<float>();
+		Vector<float>	sGrowProf	= new Vector<float>();
+
 		try{
 			conn 	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
 			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
 			Date today          = new Date();
 			String dateString   = format.format(today);
+		
+		// Calculate stock transaction profit
+			if( DEBUG == true ){
+				System.out.println(	"SELECT SUSERNAME,SUM(PRICE)AS PRICE "	+
+									"FROM STOCK_TRANS "						+
+									"GROUP BY SUSERNAME "					+
+									"ORDER BY SUSERNAME ASC"
+								);
+			}
+			rs 		= stmt.executeQuery("SELECT SUSERNAME,SUM(PRICE)AS PRICE "	+
+										"FROM STOCK_TRANS "						+
+										"GROUP BY SUSERNAME "					+
+										"ORDER BY SUSERNAME ASC"
+										);
 
+			while( rs.next() ){
+				userList.add(rs.getString("SUSERNAME"));
+				sTransProf.addd(rs.getString("PRICE"));
+			}
+		// Calculate interest profit
+			if( DEBUG ==  true){
+				System.out.println(	"SELECT * FROM MONEY_TRANS "			+
+									"WHERE TTYPE = 3 "						+
+									"ORDER BY TUSERNAME ASC"
+									);
+			}
+			rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS "			+
+										"WHERE TTYPE = 3 "						+
+										"ORDER BY TUSERNAME ASC"
+										);
 
+			while( rs.next() ){
+				intProf.add(rs.getFloat("AMOUNT"));		
+			}
+
+		// Calculate growth of stock
+		// ASSUME LIFO
+		rs		= stmt.executeQuery("
 
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
