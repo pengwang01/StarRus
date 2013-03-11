@@ -63,6 +63,8 @@ public class LoginController implements IController{
 				c.setAge(rs.getInt("age"));
 				c.setBalance(rs.getFloat("balance"));
 
+
+//=========================STOCK TABLE CALCULATIONS===============================
 				if( DEBUG == true ){
 					System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '" 	+
 										c.getUsername()	+ "'"
@@ -72,6 +74,7 @@ public class LoginController implements IController{
 				rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = '" 	+
 										c.getUsername()	+ "'"
 										);
+				cV.getRow_myStock().clear();
 				while( rs.next() ){
 					if(DEBUG == true){
 						System.out.println("Inserting into Stock table");
@@ -87,7 +90,7 @@ public class LoginController implements IController{
 //				cV.updateView(c);
 				
 				
-				//-------------update stock list(tab 2)------------
+//=========================STOCK LIST TAB ( TAB 2)===============================
 				rs = stmt.executeQuery(	"SELECT * FROM STOCK");
 				while( rs.next() ){
 					if(DEBUG == true){
@@ -103,7 +106,7 @@ public class LoginController implements IController{
 				}
 				cV.updateView(c);		
 
-				//-------------update Movie list(tab 3)------------
+//=========================MOVIE LIST TAB ( TAB 3)===============================
 				rs = stmt.executeQuery(	"SELECT * FROM MOVIES");
 				while( rs.next() ){
 					Vector<String> newRow 	= new Vector<String>();
@@ -157,11 +160,9 @@ public class LoginController implements IController{
 					}
 
 //=========================DTER CALCULATIONS===============================
-					Vector<String>	input	= new Vector<String>();
 					Vector<String>	userList= new Vector<String>();
 					Vector<String>	name	= new Vector<String>();
 					Vector<String>	state	= new Vector<String>();
-					Vector<Double>	profit	= new Vector<Double>();
 					mV.getRow_Dter().clear();
 					// Calculate the list of users
 						if( DEBUG == true ){
@@ -170,35 +171,16 @@ public class LoginController implements IController{
 
 						rs		= stmt.executeQuery("SELECT * FROM CUSTOMER");
 						while(rs.next()){
-/*							userList.add(rs.getString("USERNAME"));
+							userList.add(rs.getString("USERNAME"));
 							name.add(rs.getString("CNAME"));
 							state.add(rs.getString("STATE"));
-*/
 
-							if( DEBUG == true){
-								System.out.println("USERNAME: "	+ rs.getString("USERNAME"));
-								System.out.println("CNAME: 	" 	+ rs.getString("CNAME"));
-								System.out.println("STATE: " 	+ rs.getString("STATE"));
-							}
-							String user = rs.getString("USERNAME");
-							String cname =rs.getString("CNAME");
-							String cstate = rs.getString("STATE");
-						
-							input.add(user);
-							input.add(cname);
-							input.add(cstate);
-							mV.getRow_Dter().add(input);
-
-						}
-					// Initialize the profit for all users to 0
-						for( int i = 0; i < userList.size(); i++){
-							profit.add(0.0);
 						}
 					
 					// Calculate stock transaction profit
-						int stockTransProfit	= 0;
-/*
 						for( int i = 0 ; i < userList.size(); i++){
+							double profit			= 0;
+							Vector<String> input	= new Vector<String>();
 							if( DEBUG == true ){
 								System.out.println(	"SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
 													userList.get(i)	+ "'"			
@@ -209,7 +191,7 @@ public class LoginController implements IController{
 														);
 							// TODO:May not be logically correct
 							while( rs.next() ){
-								profit.set(i,profit.get(i)+rs.getFloat("PROFIT"));
+								profit += rs.getFloat("PROFIT");
 							}
 						// Calculate interest profit
 							if( DEBUG ==  true){
@@ -226,7 +208,7 @@ public class LoginController implements IController{
 														);
 
 							while( rs.next() ){
-								profit.set(i,profit.get(i)+rs.getFloat("AMOUNT"));
+								profit += rs.getFloat("AMOUNT");
 							}
 						// Calculate growth of stock
 						// ASSUMING LIFO
@@ -248,16 +230,17 @@ public class LoginController implements IController{
 								System.out.println("USERNAME: " + userList.get(i));
 								System.out.println("NAME: " + name.get(i));
 								System.out.println("STATE: " + state.get(i));
+								System.out.println("PROFIT: " + profit);
 							}
-
-							input.add(userList.get(i));
-							input.add(name.get(i));
-							input.add(state.get(i));
-							mV.getRow_Dter().add(input);
+							if( profit > 10000.0){
+								input.add(userList.get(i));
+								input.add(name.get(i));
+								input.add(state.get(i));
+								mV.getRow_Dter().add(input);
+							}
 
 							
 					}
-*/
 
 					Customer customer = Customer.getCustomer();
 					mV.setView(customer);

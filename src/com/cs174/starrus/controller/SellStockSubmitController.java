@@ -145,7 +145,6 @@ public class SellStockSubmitController implements IController{
 				// Update stock_trans table to capture change in stock
 				// STYPE: 	0 for buy
 				//			1 for sell
-					sales = -sales;
 					if(DEBUG == true){
 					System.out.println("INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
