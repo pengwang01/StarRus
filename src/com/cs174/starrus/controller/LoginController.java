@@ -103,18 +103,22 @@ public class LoginController implements IController{
 				}
 				cV.updateView(c);		
 
-				//-------------update stock list(tab 3)------------
+				//-------------update Movie list(tab 3)------------
 				rs = stmt.executeQuery(	"SELECT * FROM MOVIES");
 				while( rs.next() ){
-					if(DEBUG == true){
-						System.out.println("Inserting into Movies table");
-					}
 					Vector<String> newRow 	= new Vector<String>();
 					String 	title			= rs.getString("TITLE");
 					int		production		= rs.getInt("PRODUCTION");
 					String 	organization	= rs.getString("ORGANIZATION");
 					String	rating			= Float.toString(rs.getFloat("RATING"));
-				
+					if(DEBUG == true){
+						System.out.println("Inserting into Movies table");
+						System.out.println("Title: " + title);		
+						System.out.println("Production: " + production);
+						System.out.println("Organization: " + organization);
+						System.out.println("Rating: " + rating);
+					}
+			
 					newRow.add(title);
 					newRow.add(Integer.toString(production));
 					newRow.add(organization);
