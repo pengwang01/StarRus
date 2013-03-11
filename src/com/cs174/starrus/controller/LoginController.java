@@ -113,10 +113,12 @@ public class LoginController implements IController{
 					String 	title			= rs.getString("TITLE");
 					int		production		= rs.getInt("PRODUCTION");
 					String 	organization	= rs.getString("ORGANIZATION");
+					String	rating			= Float.toString(rs.getFloat("RATING"));
 				
 					newRow.add(title);
 					newRow.add(Integer.toString(production));
 					newRow.add(organization);
+					newRow.add(rating);
 					cV.getRow_listMovie().add(newRow);
 				}
 				cV.updateView(c);
