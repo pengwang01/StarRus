@@ -100,12 +100,7 @@ public class DTERController implements IController{
 											);
 				while( rs.next() ){
 				}
-<<<<<<< HEAD
 			// 
-				
-=======
-								
->>>>>>> 4f01973d90c93be2437203536b3e1e26e12f411a
 				
 			}
 
