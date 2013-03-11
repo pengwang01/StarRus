@@ -159,8 +159,8 @@ public class LoginController implements IController{
 					Vector<String>	userList= new Vector<String>();
 					Vector<String>	name	= new Vector<String>();
 					Vector<String>	state	= new Vector<String>();
-					Vector<Decima>	profit	= new Vector<Decimal>();
 
+					Vector<Double>	profit	= new Vector<Double>();
 
 					// Calculate the list of users
 						if( DEBUG == true ){
@@ -170,13 +170,32 @@ public class LoginController implements IController{
 						rs		= stmt.executeQuery("SELECT * FROM CUSTOMER");
 						while(rs.next()){
 							userList.add(rs.getString("USERNAME"));
-							name.add(rs.getString("CNAME");
-							state.add(rs.getString("ST");
-				
+							name.add(rs.getString("CNAME"));
+							state.add(rs.getString("STATE"));
+
+							if( DEBUG == true){
+								System.out.println("USERNAME: "	+ rs.getString("USERNAME"));
+								System.out.println("CANEM: 	" 	+ rs.getString("CNAME"));
+								System.out.println("STATE: " 	+ rs.getString("STATE"));
+							}
+							String user = rs.getString("USERNAME");
+							String cname =rs.getString("CNAME");
+							String cstate = rs.getString("STATE");
+						
+							input.add(user);
+							input.add(cname);
+							input.add(cstate);
+							mV.getRow_Dter().add(input);
+
+						}
+					// Initialize the profit for all users to 0
+						for( int i = 0; i < userList.size(); i++){
+							profit.add(0.0);
 						}
 					
 					// Calculate stock transaction profit
 						int stockTransProfit	= 0;
+/*
 						for( int i = 0 ; i < userList.size(); i++){
 							if( DEBUG == true ){
 								System.out.println(	"SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
@@ -211,24 +230,32 @@ public class LoginController implements IController{
 						// ASSUMING LIFO
 							if( DEBUG == true){
 								System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-														userList.get(i)									+
+														userList.get(i)	+ "' AND "					+
 														"STYPE = 0"
 													);
 
 							}
 							rs		= stmt.executeQuery("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-														userList.get(i)									+
+														userList.get(i)	+ "' AND "						+
 														"STYPE = 0"
 														);
 							while( rs.next() ){
 							}
-	
-										
-						
+
+							if( DEBUG == true){
+								System.out.println("USERNAME: " + userList.get(i));
+								System.out.println("NAME: " + name.get(i));
+								System.out.println("STATE: " + state.get(i));
+							}
+
+							input.add(userList.get(i));
+							input.add(name.get(i));
+							input.add(state.get(i));
+							mV.getRow_Dter().add(input);
+
+							
 					}
-					Vector<Vector<String>> entry	= mV.getRow_Dter();
-					entry.add(
-					
+*/
 
 					Customer customer = Customer.getCustomer();
 					mV.setView(customer);
