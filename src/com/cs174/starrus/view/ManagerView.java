@@ -63,8 +63,11 @@ public class ManagerView extends JPanel implements IView{
 	private JLabel lblMarketOperation;
 	private JLabel lblAccountOperateion;
 	private JScrollPane scrollPane_active;
+	private JScrollPane scrollPane_dter;
 	Vector<Vector<String>> row_active = new Vector<Vector<String>>();
-	private JTable table;
+	Vector<Vector<String>> row_dter = new Vector<Vector<String>>();
+	private JTable table_active;
+	private JTable table_dter;
 	
 	private ManagerView(){
 		this.setSize(new Dimension(800, 600));
@@ -291,12 +294,24 @@ public class ManagerView extends JPanel implements IView{
 		Vector<String> col_active = new Vector<String>();
 		col_active.add("Username");
 		this.ActiveCustomer_panel.add(this.scrollPane_active);
-		this.table = new JTable(row_active, col_active);
-		this.scrollPane_active.setViewportView(this.table);
-		this.table.setPreferredSize(new Dimension(800, 500));
+		this.table_active = new JTable(row_active, col_active);
+		this.scrollPane_active.setViewportView(this.table_active);
+		this.table_active.setPreferredSize(new Dimension(800, 500));
 		
+		//-----------------DTER ---------------------------------------------
 		this.DrugNtax_panel = new JPanel();
+		this.scrollPane_dter = new JScrollPane();
 		tabbedPane.addTab("DTER", null, this.DrugNtax_panel, "Drg & tax Evasion Report");
+		this.DrugNtax_panel.setLayout(null);
+		this.scrollPane_dter.setBounds(6, 6, 567, 542);
+		Vector<String> col_dter = new Vector<String>();
+		col_dter.add("Username");
+		col_dter.add("Name");
+		col_dter.add("State");
+		this.DrugNtax_panel.add(this.scrollPane_dter);
+		this.table_dter = new JTable(row_dter, col_dter);
+		this.scrollPane_dter.setViewportView(this.table_dter);
+		this.table_dter.setPreferredSize(new Dimension(800, 500));
 	}
 
 	@Override
