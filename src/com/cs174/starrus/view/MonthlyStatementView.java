@@ -15,7 +15,6 @@ public class MonthlyStatementView extends JDialog implements IView{
 	 */
 	private static final long serialVersionUID 	= 1L;
 	private static MonthlyStatementView msView 	= null;
-	private ManagerView mV = ManagerView.getView();
 
 	private	Vector<Vector<String>> row_mAccount			= new Vector<Vector<String>>();
 	private	Vector<Vector<String>> row_sAccount			= new Vector<Vector<String>>();

@@ -15,8 +15,6 @@ public class CustomerReportView extends JDialog implements IView{
 	 */
 	private static final long serialVersionUID 	= 1L;
 	private static CustomerReportView crView 	= null;
-	private ManagerView mV = ManagerView.getView();
-
 	private	Vector<Vector<String>> row_mAccount			= new Vector<Vector<String>>();
 	private	Vector<Vector<String>> row_sAccount			= new Vector<Vector<String>>();
 	private JLabel lblUsername;

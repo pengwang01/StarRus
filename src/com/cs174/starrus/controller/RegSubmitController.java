@@ -3,14 +3,11 @@ package com.cs174.starrus.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.RegView;
 
 public class RegSubmitController implements IController{
 	private Connection conn;
-	private Customer c = Customer.getCustomer();
 	private RegView rV = RegView.getView();
 	@Override
 	public void setView(IView view) {
@@ -23,7 +20,6 @@ public class RegSubmitController implements IController{
 		conn = DBconnector.getConnection();
 		
 		try {
-			float balance = 0;
 			int age, taxid;
 			String username, cname, phone, psw, email,state;
 			username = rV.getTxtUsername().getText();

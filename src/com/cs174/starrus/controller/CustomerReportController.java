@@ -1,9 +1,7 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.CustomerReportView;
 import com.cs174.starrus.view.IView;
-import com.cs174.starrus.view.MTransactionView;
 import com.cs174.starrus.view.ManagerView;
-import com.cs174.starrus.model.Customer;
 
 import java.util.Vector;
 import java.sql.Connection;
