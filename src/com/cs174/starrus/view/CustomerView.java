@@ -149,7 +149,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblAge);
 		
 		this.lblAgefield = new JLabel("100");
-		this.lblAgefield.setText("");
+		this.lblAgefield.setText(Integer.toString(c.getAge()));
 		this.lblAgefield.setBounds(87, 107, 107, 16);
 		this.left.add(this.lblAgefield);
 		
@@ -189,7 +189,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblStatefield);
 		
 		this.lblTaxfield = new JLabel("taxfield");
-		this.lblTaxfield.setText("");
+		this.lblTaxfield.setText(Integer.toString(c.getTax_id()));
 		this.lblTaxfield.setBounds(87, 219, 107, 16);
 		this.left.add(this.lblTaxfield);
 		
@@ -203,7 +203,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblUserLevel);
 		
 		this.lblLevelfield = new JLabel("levelfield");
-		this.lblLevelfield.setText("");
+		this.lblLevelfield.setText(Integer.toString(c.getClevel()));
 		this.lblLevelfield.setBounds(87, 303, 107, 16);
 		this.left.add(this.lblLevelfield);
 		
