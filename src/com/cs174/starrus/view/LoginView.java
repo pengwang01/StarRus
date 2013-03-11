@@ -77,11 +77,13 @@ public class LoginView extends JPanel implements IView{
 		this.panel.add(this.lblPassword);
 		
 		this.txtEnterUsername = new JTextField();
+		this.txtEnterUsername.setText("bryan");
 		this.txtEnterUsername.setBounds(201, 90, 145, 28);
 		this.panel.add(this.txtEnterUsername);
 		this.txtEnterUsername.setColumns(10);
 		
 		this.txtEnterPassword = new JTextField();
+		this.txtEnterPassword.setText("bryan");
 		this.txtEnterPassword.setBounds(201, 154, 145, 28);
 		this.panel.add(this.txtEnterPassword);
 		this.txtEnterPassword.setColumns(10);
