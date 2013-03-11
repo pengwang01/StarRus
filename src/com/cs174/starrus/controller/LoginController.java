@@ -159,7 +159,7 @@ public class LoginController implements IController{
 					Vector<String>	userList= new Vector<String>();
 					Vector<String>	name	= new Vector<String>();
 					Vector<String>	state	= new Vector<String>();
-					Vector<Decima>>	profit	= new Vector<Decimal>();
+					Vector<Decima>	profit	= new Vector<Decimal>();
 
 
 					// Calculate the list of users
