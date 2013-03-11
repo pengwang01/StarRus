@@ -26,25 +26,15 @@ public class MonthlyStatementController implements IController{
 	}
 	@Override
 	public void process(String model) {
+		// gets the username from input field
 		String username = mV.getTxtInputUsername().getText();
-		//int sid, mid;
 		String email;
 		float finalBalance = 0;
 		float initialBalance = 0;
 		
 		try{
 			conn			= DBconnector.getConnection();
-			Statement stmt	= conn.createStatement();
-			
-			
-			rs = stmt.executeQuery("SELECT BALANCE FROM MONEY_TRANS WHERE " + 
-							" M_TRANS_ID = ( SELECT MIN(M_TRANS_ID) FROM MONEY_TRANS)");
-			if(rs.next()){
-				initialBalance = rs.getFloat("BALANCE");
-			}
-			
-			msV.getLblInitialbalancefield().setText(Float.toString(initialBalance));
-			
+			Statement stmt	= conn.createStatement();			
 			// ------------------------customer name and final balance---------------------
 			if(DEBUG == true){
 				System.out.println("SELECT * FROM CUTOMER WHERE USERNAME = '"	+
@@ -55,51 +45,45 @@ public class MonthlyStatementController implements IController{
 			rs 		= stmt.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME = '"	+
 										username			+ "'"
 										);
-			
 			if( rs.next() ){
 				if(DEBUG == true){
 					System.out.println("Getting Row");
 				}
 				Vector<String> newRow = new Vector<String>();
-				//mid	= rs.getInt("M_ACCOUNT_ID");
-				//sid = rs.getInt("S_ACCOUNT_ID");
-				email = rs.getString("EMAIL");
-				finalBalance = rs.getFloat("BALANCE");
+				email = rs.getString("EMAIL");			// getting email
+				finalBalance = rs.getFloat("BALANCE");	// getting final balance
 				msV.getLblUsernameField().setText(username);
 				msV.getLblFinalbalancefield().setText(Float.toString(finalBalance));
-				msV.getLblEmailfield().setText(email);
-				
+				msV.getLblEmailfield().setText(email);	
 			}
 			
 			
-			rs = stmt.executeQuery("SELECT Symbol, total_share " +
-									"FROM manage_stock " +
-									"WHERE MUSERNAME = '" + username + "'");
-			
-			Vector<String> symbols = new Vector<String>();
-			Vector<Integer> share = new Vector<Integer>();
-			float cur_price =0;
-			float totalStockValue = 0;
-			while(rs.next()){
-				symbols.add(rs.getString("SYMBOL"));
-				share.add(rs.getInt("TOTAL_SHARE"));
+			// -----------------------get initial balance-------------------------------
+			rs = stmt.executeQuery("SELECT BALANCE FROM MONEY_TRANS WHERE " + 
+					" M_TRANS_ID = ( SELECT MIN(M_TRANS_ID) FROM MONEY_TRANS)");
+			if(rs.next()){
+				initialBalance = rs.getFloat("BALANCE");
 			}
+			msV.getLblInitialbalancefield().setText(Float.toString(initialBalance));
+			
+			
+			//----------------------- calculate gain/loss from stock------------------------
+			if(DEBUG == true){
+				System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+										username			+ "'"
+									);
 
-			for(int i=0; i<symbols.size(); i++){
-				
-				rs1 = stmt.executeQuery("SELECT CUR_PRICE FROM STOCK "+
-									"WHERE SYMBOL = '" + symbols.get(i) + "'");
-				if(rs1.next())
-					cur_price = rs1.getFloat("CUR_PRICE");
-				System.out.println("curr price: " + cur_price);
-				totalStockValue += cur_price * share.get(i); 
-				System.out.println("total value: " + totalStockValue);
 			}
-			float gainLoss = finalBalance - initialBalance + totalStockValue;
+			rs 		= stmt.executeQuery("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+										username			+ "'"
+										);
+			float total_profit = 0;
+			while(rs.next()){
+				float profit = rs.getFloat("PROFIT");
+				total_profit += profit;
+			}
 			
-			msV.getLblGainlossfield().setText(Float.toString(gainLoss));
-			
-			// --------------------------money trans table --------------------------
+			//--------------------- add interest ----------------------------------------
 			if(DEBUG == true){
 				System.out.println("SELECT * FROM MONEY_TRANS WHERE TUSERNAME = '"	+
 										username			+ "'"
@@ -107,9 +91,25 @@ public class MonthlyStatementController implements IController{
 
 			}
 			rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS WHERE TUSERNAME = '"	+
-										username			+ "'"
+										username			+ "' AND TTYPE = 3"
 										);
 			
+			while(rs.next()){
+				float interest = rs.getFloat("AMOUNT");
+				total_profit += interest;
+			}
+			msV.getLblGainlossfield().setText(Float.toString(total_profit));
+			
+			
+			// --------------------------money trans table --------------------------
+			if(DEBUG == true){
+				System.out.println("SELECT * FROM MONEY_TRANS WHERE TUSERNAME = '"	+
+										username			+ "'"
+									);
+			}
+			rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS WHERE TUSERNAME = '"	+
+										username			+ "'"
+										);
 			msV.getRow_mAccount().clear();
 			while( rs.next() ){
 				if(DEBUG == true){
@@ -129,6 +129,8 @@ public class MonthlyStatementController implements IController{
 					newRow.add("Deposit");
 				else if(type == 2)
 					newRow.add("Withdraw");
+				else if(type == 3)
+					newRow.add("Interest");
 				newRow.add(Float.toString(amount));
 				newRow.add(Float.toString(balance));
 				msV.getRow_mAccount().add(newRow);
