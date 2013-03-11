@@ -39,6 +39,7 @@ public class DTERController implements IController{
 			String dateString   = format.format(today);
 
 
+
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
 			e.printStackTrace();

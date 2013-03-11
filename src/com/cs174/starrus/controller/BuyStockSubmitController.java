@@ -34,7 +34,7 @@ public class BuyStockSubmitController implements IController{
 		int quantity	= 0;
 		float balance	= 0;
 		float price		= 0;
-		float cost		= 0;
+		float sales		= 0;
 		int total_share = 0;
 
 		try {
@@ -83,11 +83,11 @@ public class BuyStockSubmitController implements IController{
 
 
 		// Checking if client has enough money
-			cost = price * quantity;
+			sales = price * quantity;
 			if(DEBUG == true){
-				System.out.println("COST: " + cost);
+				System.out.println("COST: " + sales);
 			}
-			if( balance < cost){
+			if( balance < sales){
 				bsV.getLblWarning().setText("You do not have enough money to complete this transaction");
 			}
 			else{	
@@ -142,14 +142,14 @@ public class BuyStockSubmitController implements IController{
 			// Update Customer's balance
 				if(DEBUG == true){
 					System.out.println(		"UPDATE CUSTOMER SET BALANCE = BALANCE - "			+
-											cost												+
+											sales												+
 											"WHERE USERNAME = '"								+
 											c.getUsername()										+
 											"'"
 										);
 				}
 				stmt.executeQuery(			"UPDATE CUSTOMER SET BALANCE = BALANCE - "			+
-											cost												+
+											sales												+
 											"WHERE USERNAME = '"								+
 											c.getUsername()										+
 											"'"
@@ -170,19 +170,22 @@ public class BuyStockSubmitController implements IController{
 			// Record transaction into stock_trans
 			// STYPE:	0 for Buy
 			// 			1 for Sell
+			sales = -sales;
 			if( DEBUG == true){
-				System.out.println(		"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE) "	+
+				System.out.println(		"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '" + dateString 	+ "','" 	+ c.getUsername()	+ "','"		+
 										ticker		+ "',"			+ 0			+ ","				+	
-										quantity	+ ","			+ price		+ ")"
+										quantity	+ ","			+ price		+ ","				+ sales		+
+										")"
 							);
 
 			}
 
-			stmt.executeQuery(			"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE) "	+
+			stmt.executeQuery(			"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '" + dateString 	+ "','" 	+ c.getUsername()	+ "','"		+
 										ticker		+ "',"			+ 0			+ ","				+	
-										quantity	+ ","			+ price		+ ")"
+										quantity	+ ","			+ price		+ ","				+ sales		+
+										")"
 							);
 
 			// Record the monetary transaction into money_trans
@@ -191,7 +194,7 @@ public class BuyStockSubmitController implements IController{
 			if( DEBUG == true ){
 				System.out.println(		"INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES"+
 										"('" 		+ dateString	+ "','"		+ c.getUsername()	+ "',"		+
-										2			+ ","			+ cost		+ ","				+ balance			+ 
+										2			+ ","			+ sales		+ ","				+ balance			+ 
 										")"
 							);
 
@@ -203,7 +206,7 @@ public class BuyStockSubmitController implements IController{
 
 			stmt.executeQuery(			"INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES"+
 										"('" 		+ dateString	+ "','"		+ c.getUsername()	+ "',"		+
-										2			+ ","			+ cost		+ ","				+ balance			+ 
+										2			+ ","			+ sales		+ ","				+ balance			+ 
 										")"
 							);
 

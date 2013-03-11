@@ -111,16 +111,16 @@ public class AddInterestController implements IController{
 
 				// Reflect increase in money_trans table
 					if(DEBUG == true){
-						System.out.println("INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES "+
-											"('" 		+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 1	+ ","		+
-											accruedStr	+ ","			+ newBalStr		+ ")"
-											);
+						System.out.println("INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE)VALUES "+
+										"('" 	+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
+										","		+ accruedStr	+ ","	+ newBalStr			+ ")"
+									);
 
 					}
 
-					stmt.executeQuery(	"INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES "+
-										"('" 		+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 1	+ ","		+
-										accruedStr	+ ","			+ newBalStr		+ ")"
+					stmt.executeQuery(	"INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES "	+
+										"('" 	+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
+										","		+ accruedStr	+ ","	+ newBalStr			+ ")"
 									);
 
 
