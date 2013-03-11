@@ -8,6 +8,7 @@ import java.sql.Statement;
 import com.cs174.starrus.model.Customer;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.LoginView;
+import com.cs174.starrus.view.ManagerView;
 
 import com.cs174.starrus.view.CustomerView;
 
@@ -18,7 +19,7 @@ public class LoginController implements IController{
 	private Connection conn 	= null;
 	private LoginView loginView = LoginView.getView();
 	private CustomerView cV		= CustomerView.getView();
-	
+	private ManagerView mV      = ManagerView.getView();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -99,8 +100,37 @@ public class LoginController implements IController{
 					cV.getRow_listStock().add(newRow);
 				}
 				cV.updateView(c);
+				
+				
+					
 
 				if(c.getClevel() == 1){
+					if( DEBUG == true ){
+						System.out.println("SELECT SUSERNAME FROM " +
+								"( SELECT SUSERNAME, SUM(SHARES) AS MYSUM " +
+								"FROM STOCK_TRANS " +
+								"GROUP BY SUSERNAME ) " +
+								"WHERE MYSUM >= 1000" );
+
+					}
+					rs 		= stmt.executeQuery("SELECT SUSERNAME FROM " +
+							"( SELECT SUSERNAME, SUM(SHARES) AS MYSUM " +
+							"FROM STOCK_TRANS " +
+							"GROUP BY SUSERNAME) " +
+							"WHERE MYSUM >= 1000" );
+					mV.getRow_active().clear();
+					while( rs.next() ){
+						
+						if(DEBUG == true){
+							System.out.println("Getting Row");
+						}
+						Vector<String> newRow = new Vector<String>();
+						String n	= rs.getString("SUSERNAME");
+						newRow.add(n);
+						mV.getRow_active().add(newRow);
+					}
+					Customer customer = Customer.getCustomer();
+					mV.setView(customer);
 					view.loadManagerView(c);	// load c view when login is checked
 				}
 				else if(c.getClevel() == 2){
@@ -115,7 +145,7 @@ public class LoginController implements IController{
 			
 		} catch (SQLException e){
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			e.printStackTrace();
 			System.out.println("SQL exception in LoginController");
 		}
 	}
