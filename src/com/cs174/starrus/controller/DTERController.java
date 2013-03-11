@@ -32,9 +32,9 @@ public class DTERController implements IController{
 		Statement 	stmt;
 		ResultSet	rs;
 		Vector<String>	userList	= new Vector<String>();
-		Vector<double>	profit		= new Vector<double>();
-		Vector<double>	intProf		= new Vector<double>();
-		Vector<double>	sGrowProf	= new Vector<double>();
+		Vector<Double>	profit		= new Vector<Double>();
+		Vector<Double>	intProf		= new Vector<Double>();
+		Vector<Double>	sGrowProf	= new Vector<Double>();
 
 		try{
 			conn 	= DBconnector.getConnection();
@@ -62,7 +62,7 @@ public class DTERController implements IController{
 									);
 				}
 				rs 		= stmt.executeQuery("SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-											userList.get(i)	+ '""
+											userList.get(i)	+ "'"
 											);
 				// TODO:May not be logically correct
 				while( rs.next() ){
@@ -73,13 +73,13 @@ public class DTERController implements IController{
 					System.out.println(	"SELECT * FROM MONEY_TRANS "			+
 										"WHERE TTYPE = 3 "						+
 										"AND TUSERNAME = '"						+
-										userList.get(i)	+ "'"					+
+										userList.get(i)	+ "'"					
 										);
 				}
 				rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS "		+
 											"WHERE TTYPE = 3 "					+
 											"AND TUSERNAME = '"					+
-											userList.get(i)	+ "'"				+
+											userList.get(i)	+ "'"				
 											);
 
 				while( rs.next() ){
@@ -100,7 +100,7 @@ public class DTERController implements IController{
 											);
 				while( rs.next() ){
 				}
-				
+								
 				
 			}
 
@@ -108,7 +108,6 @@ public class DTERController implements IController{
 			System.out.println("SQLException in DTERController ");
 			e.printStackTrace();
 		}
-*/	
 	}
 }
 

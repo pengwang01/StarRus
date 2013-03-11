@@ -153,6 +153,83 @@ public class LoginController implements IController{
 						newRow.add(n);
 						mV.getRow_active().add(newRow);
 					}
+
+//=========================DTER CALCULATIONS===============================
+					Vector<String>	input	= new Vector<String>();
+					Vector<String>	userList= new Vector<String>();
+					Vector<String>	name	= new Vector<String>();
+					Vector<String>	state	= new Vector<String>();
+					Vector<Decima>>	profit	= new Vector<Decimal>();
+
+
+					// Calculate the list of users
+						if( DEBUG == true ){
+							System.out.println("SELECT * FROM CUSTOMER");
+						}
+
+						rs		= stmt.executeQuery("SELECT * FROM CUSTOMER");
+						while(rs.next()){
+							userList.add(rs.getString("USERNAME"));
+							name.add(rs.getString("CNAME");
+							state.add(rs.getString("ST");
+				
+						}
+					
+					// Calculate stock transaction profit
+						int stockTransProfit	= 0;
+						for( int i = 0 ; i < userList.size(); i++){
+							if( DEBUG == true ){
+								System.out.println(	"SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+													userList.get(i)	+ "'"			
+												);
+							}
+							rs 		= stmt.executeQuery("SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+														userList.get(i)	+ "'"
+														);
+							// TODO:May not be logically correct
+							while( rs.next() ){
+								profit.set(i,profit.get(i)+rs.getFloat("PROFIT"));
+							}
+						// Calculate interest profit
+							if( DEBUG ==  true){
+								System.out.println(	"SELECT * FROM MONEY_TRANS "			+
+													"WHERE TTYPE = 3 "						+
+													"AND TUSERNAME = '"						+
+													userList.get(i)	+ "'"					
+													);
+							}
+							rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS "		+
+														"WHERE TTYPE = 3 "					+
+														"AND TUSERNAME = '"					+
+														userList.get(i)	+ "'"				
+														);
+
+							while( rs.next() ){
+								profit.set(i,profit.get(i)+rs.getFloat("AMOUNT"));
+							}
+						// Calculate growth of stock
+						// ASSUMING LIFO
+							if( DEBUG == true){
+								System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+														userList.get(i)									+
+														"STYPE = 0"
+													);
+
+							}
+							rs		= stmt.executeQuery("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+														userList.get(i)									+
+														"STYPE = 0"
+														);
+							while( rs.next() ){
+							}
+	
+										
+						
+					}
+					Vector<Vector<String>> entry	= mV.getRow_Dter();
+					entry.add(
+					
+
 					Customer customer = Customer.getCustomer();
 					mV.setView(customer);
 					view.loadManagerView(c);	// load c view when login is checked
