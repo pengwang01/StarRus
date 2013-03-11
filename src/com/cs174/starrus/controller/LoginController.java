@@ -99,10 +99,7 @@ public class LoginController implements IController{
 					newRow.add(Float.toString(price));
 					cV.getRow_listStock().add(newRow);
 				}
-				cV.updateView(c);
-				
-				
-					
+				cV.updateView(c);		
 
 				if(c.getClevel() == 1){
 					if( DEBUG == true ){
