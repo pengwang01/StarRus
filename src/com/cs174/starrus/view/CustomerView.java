@@ -21,6 +21,8 @@ import java.awt.ComponentOrientation;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerView extends JPanel implements IView{
 	
@@ -75,7 +77,6 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel balancefield;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
-	private JButton btnTopMovie;
 	Vector<Vector<String>> row_listStock = new Vector<Vector<String>>();
 	Vector<Vector<String>> row_myStock = new Vector<Vector<String>>();
 	Vector<Vector<String>> row_listMovie = new Vector<Vector<String>>();
@@ -86,6 +87,12 @@ public class CustomerView extends JPanel implements IView{
 	private JTable table_myStock;
 	private JTable table_listStock;
 	private JTable table_listMovie;
+	private JLabel lblFrom;
+	private JTextField txtFromfield;
+	private JLabel lblTo;
+	private JTextField txtTofield;
+	private JButton btnTopMovies;
+	private JPanel panel;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -367,9 +374,10 @@ public class CustomerView extends JPanel implements IView{
 		this.moviePanel = new JPanel();
 		tabbedPane.addTab("View Movies", null, this.moviePanel, "View All Available Movies");
 		this.stockPanel.setLayout(null);
+		this.moviePanel.setLayout(null);
 		
 		this.scrollPane_listMovie = new JScrollPane();
-		this.scrollPane_listMovie.setBounds(6, 6, 567, 542);
+		this.scrollPane_listMovie.setBounds(6, 5, 567, 404);
 		this.moviePanel.add(this.scrollPane_listMovie);
 		
 		//making table col and row
@@ -392,11 +400,35 @@ public class CustomerView extends JPanel implements IView{
 			}
 		});
 
-		this.btnTopMovie = new JButton("Top Movies");
-		listeners.associate(this.btnTopMovie, new TopMovieController());
-		this.moviePanel.add(this.btnTopMovie);
-
 		this.scrollPane_listMovie.setViewportView(this.table_listMovie);
+		
+		this.panel = new JPanel();
+		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		this.panel.setBounds(6, 421, 567, 111);
+		this.moviePanel.add(this.panel);
+		this.panel.setLayout(null);
+		
+		this.txtFromfield = new JTextField();
+		this.txtFromfield.setBounds(118, 17, 134, 28);
+		this.panel.add(this.txtFromfield);
+		this.txtFromfield.setColumns(10);
+		
+		this.lblFrom = new JLabel("From:");
+		this.lblFrom.setBounds(42, 23, 64, 16);
+		this.panel.add(this.lblFrom);
+		
+		this.lblTo = new JLabel("To: ");
+		this.lblTo.setBounds(42, 62, 61, 16);
+		this.panel.add(this.lblTo);
+		
+		this.txtTofield = new JTextField();
+		this.txtTofield.setBounds(118, 56, 134, 28);
+		this.panel.add(this.txtTofield);
+		this.txtTofield.setColumns(10);
+		
+		this.btnTopMovies = new JButton("Top Movies");
+		this.btnTopMovies.setBounds(340, 18, 165, 66);
+		this.panel.add(this.btnTopMovies);
 
 	}
 
