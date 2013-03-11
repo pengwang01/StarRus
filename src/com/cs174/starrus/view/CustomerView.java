@@ -6,6 +6,7 @@ import java.awt.Font;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LoginController;
@@ -370,7 +371,9 @@ public class CustomerView extends JPanel implements IView{
 		};
 		this.scrollPane_listStock.setViewportView(this.table_listStock);
 		//-----------------------------end of stock list  (tab) ---------------------------
-		
+
+
+		//-----------------------------BEGIN of MOVIE list  (tab) ---------------------------
 		this.moviePanel = new JPanel();
 		tabbedPane.addTab("View Movies", null, this.moviePanel, "View All Available Movies");
 		this.stockPanel.setLayout(null);
@@ -385,6 +388,7 @@ public class CustomerView extends JPanel implements IView{
 	    col_listMovie.add("Movie");
 	    col_listMovie.add("Production");
 	    col_listMovie.add("Organization");
+	    col_listMovie.add("Rating");
 
 		this.table_listMovie = new JTable(row_listMovie, col_listMovie){
             public boolean isCellEditable(int row, int col){
@@ -408,11 +412,7 @@ public class CustomerView extends JPanel implements IView{
 		this.moviePanel.add(this.panel);
 		this.panel.setLayout(null);
 		
-		this.txtFromfield = new JTextField();
-		this.txtFromfield.setBounds(118, 17, 134, 28);
-		this.panel.add(this.txtFromfield);
-		this.txtFromfield.setColumns(10);
-		
+			
 		this.lblFrom = new JLabel("From:");
 		this.lblFrom.setBounds(42, 23, 64, 16);
 		this.panel.add(this.lblFrom);
@@ -421,6 +421,11 @@ public class CustomerView extends JPanel implements IView{
 		this.lblTo.setBounds(42, 62, 61, 16);
 		this.panel.add(this.lblTo);
 		
+		this.txtFromfield = new JTextField();
+		this.txtFromfield.setBounds(118, 17, 134, 28);
+		this.panel.add(this.txtFromfield);
+		this.txtFromfield.setColumns(10);
+
 		this.txtTofield = new JTextField();
 		this.txtTofield.setBounds(118, 56, 134, 28);
 		this.panel.add(this.txtTofield);
@@ -428,6 +433,7 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.btnTopMovies = new JButton("Top Movies");
 		this.btnTopMovies.setBounds(340, 18, 165, 66);
+		listeners.associate(this.btnTopMovies, new TopMovieController());
 		this.panel.add(this.btnTopMovies);
 
 	}
@@ -520,5 +526,26 @@ public class CustomerView extends JPanel implements IView{
 	public void updateView(Customer c){
 
 		this.setView(c);
+	}
+
+	public String getTextToFieldString(){
+		return this.txtTofield.getText();
+	}
+
+	public String getTextFromFieldString(){
+		return this.txtFromfield.getText();
+	}
+	public void updateTable_listMovie(){
+		this.table_listMovie.revalidate();
+		this.table_listMovie.repaint();
+		this.moviePanel.revalidate();
+		this.moviePanel.repaint();
+		this.scrollPane_listMovie.revalidate();
+		this.scrollPane_listMovie.repaint();
+		
+	}
+
+	public JTable getTable_listMovie(){
+		return this.table_listMovie;
 	}
 }
