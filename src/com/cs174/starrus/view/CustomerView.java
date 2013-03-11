@@ -8,12 +8,14 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.DepositController;
+import com.cs174.starrus.controller.LoginController;
 import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.MTransactionController;
 import com.cs174.starrus.controller.STransactionController;
 import com.cs174.starrus.controller.WithdrawController;
 import com.cs174.starrus.controller.BuyStockController;
 import com.cs174.starrus.controller.SellStockController;
+import com.cs174.starrus.controller.TopMovieController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.text.SimpleDateFormat;
@@ -73,14 +75,17 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel balancefield;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
+	private JButton btnTopMovie;
 	Vector<Vector<String>> row_listStock = new Vector<Vector<String>>();
 	Vector<Vector<String>> row_myStock = new Vector<Vector<String>>();
 	Vector<Vector<String>> row_listMovie = new Vector<Vector<String>>();
 	private JScrollPane scrollPane_myStock;
 	private JScrollPane scrollPane_listStock;
+	private JScrollPane scrollPane_listMovie;
 	private JPanel panel_myStock;
 	private JTable table_myStock;
 	private JTable table_listStock;
+	private JTable table_listMovie;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -361,6 +366,38 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.moviePanel = new JPanel();
 		tabbedPane.addTab("View Movies", null, this.moviePanel, "View All Available Movies");
+		this.stockPanel.setLayout(null);
+		
+		this.scrollPane_listMovie = new JScrollPane();
+		this.scrollPane_listMovie.setBounds(6, 6, 567, 542);
+		this.moviePanel.add(this.scrollPane_listMovie);
+		
+		//making table col and row
+		Vector<String> col_listMovie = new Vector<String>();
+	    col_listMovie.add("Movie");
+	    col_listMovie.add("Production");
+	    col_listMovie.add("Organization");
+
+		this.table_listMovie = new JTable(row_listMovie, col_listMovie){
+            public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
+		this.table_listMovie.addMouseListener(
+			new java.awt.event.MouseAdapter(){
+				public void mouseClicked(java.awt.event.MouseEvent e){
+					int row = table_listMovie.rowAtPoint(e.getPoint());
+					String movie = table_listMovie.getValueAt(row,0).toString();
+					LoginController.showReviews(movie);
+			}
+		});
+
+		this.btnTopMovie = new JButton("Top Movies");
+		listeners.associate(this.btnTopMovie, new TopMovieController());
+		this.moviePanel.add(this.btnTopMovie);
+
+		this.scrollPane_listMovie.setViewportView(this.table_listMovie);
+
 	}
 
 	@Override

@@ -283,7 +283,8 @@ public class ManagerView extends JPanel implements IView{
 		
 		this.ActiveCustomer_panel = new JPanel();
 		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
-		
+	
+	//
 		this.DrugNtax_panel = new JPanel();
 		tabbedPane.addTab("DTER", null, this.DrugNtax_panel, "Drg & tax Evasion Report");
 

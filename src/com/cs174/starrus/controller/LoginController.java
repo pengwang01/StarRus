@@ -13,6 +13,8 @@ import com.cs174.starrus.view.CustomerView;
 
 import java.util.Vector;
 
+import javax.swing.*;
+
 public class LoginController implements IController{
 	private boolean DEBUG		= true;
 	private Connection conn 	= null;
@@ -81,7 +83,7 @@ public class LoginController implements IController{
 					newRow.add(Integer.toString(shares));
 					cV.getRow_myStock().add(newRow);
 				}
-				cV.updateView(c);
+//				cV.updateView(c);
 				
 				
 				//-------------update stock list(tab 2)------------
@@ -99,6 +101,25 @@ public class LoginController implements IController{
 					cV.getRow_listStock().add(newRow);
 				}
 				cV.updateView(c);
+
+				//-------------update stock list(tab 3)------------
+				rs = stmt.executeQuery(	"SELECT * FROM MOVIES");
+				while( rs.next() ){
+					if(DEBUG == true){
+						System.out.println("Inserting into Movies table");
+					}
+					Vector<String> newRow 	= new Vector<String>();
+					String 	title			= rs.getString("TITLE");
+					int		production		= rs.getInt("PRODUCTION");
+					String 	organization	= rs.getString("ORGANIZATION");
+				
+					newRow.add(title);
+					newRow.add(Integer.toString(production));
+					newRow.add(organization);
+					cV.getRow_listMovie().add(newRow);
+				}
+				cV.updateView(c);
+
 
 				if(c.getClevel() == 1){
 					view.loadManagerView(c);	// load c view when login is checked
@@ -119,4 +140,37 @@ public class LoginController implements IController{
 			System.out.println("SQL exception in LoginController");
 		}
 	}
+
+	public static void showReviews(String title){
+		try{
+			boolean DEBUG = true;
+			Connection	con = DBconnector.getConnection();
+			Statement 	stmt = con.createStatement(); // Specify the SQL Query to run
+
+			if( DEBUG == true ){
+				System.out.println(	"SELECT * FROM REVIEWS WHERE MOVIE = '"	+
+									title	+ "'"
+								);
+
+			}
+
+			ResultSet rs = stmt.executeQuery(	"SELECT * FROM REVIEWS WHERE MOVIE = '"	+
+												title 	+ "'"
+											);
+			String toDisplay = "";
+			while(rs.next()){
+				String author	= rs.getString("AUTHOR").trim();
+				String comment 	= rs.getString("MESSAGE");
+				toDisplay = toDisplay + "####################" + author + "####################\n";
+				toDisplay = toDisplay +  "Commment:\t"	+ comment +"\n";
+				toDisplay = toDisplay + "########################################\n\n";
+			}
+			JOptionPane.showMessageDialog(null,toDisplay);
+		}
+		catch ( SQLException e){
+			System.out.println("SQL Exception in LoginController.ShowReview");
+		}
+	}
 }
+
+
