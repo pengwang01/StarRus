@@ -3,6 +3,7 @@ package com.cs174.starrus.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.ScrollPane;
 
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 public class ManagerView extends JPanel implements IView{
 	
@@ -66,7 +68,10 @@ public class ManagerView extends JPanel implements IView{
 	private JButton btnSetnewdate;
 	private JLabel lblMarketOperation;
 	private JLabel lblAccountOperateion;
-		
+	private JScrollPane scrollPane_active;
+	Vector<Vector<String>> row_active = new Vector<Vector<String>>();
+	private JTable table;
+	
 	private ManagerView(){
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 600));
@@ -282,11 +287,22 @@ public class ManagerView extends JPanel implements IView{
 		this.panel.add(this.lblAccountOperateion);
 		
 		this.ActiveCustomer_panel = new JPanel();
+		this.scrollPane_active = new JScrollPane();
 		tabbedPane.addTab("Active Customers", null, this.ActiveCustomer_panel, "List of Active Customers");
+		this.ActiveCustomer_panel.setLayout(null);
+		this.scrollPane_active.setBounds(6, 6, 567, 542);
+		
+		
+		//making table col and row
+		Vector<String> col_active = new Vector<String>();
+		col_active.add("Username");
+		this.ActiveCustomer_panel.add(this.scrollPane_active);
+		this.table = new JTable(row_active, col_active);
+		this.scrollPane_active.setViewportView(this.table);
+		this.table.setPreferredSize(new Dimension(800, 500));
 		
 		this.DrugNtax_panel = new JPanel();
 		tabbedPane.addTab("DTER", null, this.DrugNtax_panel, "Drg & tax Evasion Report");
-
 	}
 
 	@Override
@@ -349,4 +365,13 @@ public class ManagerView extends JPanel implements IView{
 	public void setTxtInputUsername(JTextField txtInputUsername) {
 		this.txtInputUsername = txtInputUsername;
 	}
+
+	public Vector<Vector<String>> getRow_active() {
+		return row_active;
+	}
+
+	public void setRow_active(Vector<Vector<String>> row_active) {
+		this.row_active = row_active;
+	}
+
 }
