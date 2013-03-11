@@ -94,7 +94,7 @@ public class DepositSubmitController implements IController{
 								);
 
 
-
+				cView.getLblSAccountId().setText(Integer.toString(c.getS_account_id()));
 				cView.getBalancefield().setText(Float.toString(balance));
 				depoV.getTxtDeposit().setText(null);
 				depoV.getLblWarning().setText(null);

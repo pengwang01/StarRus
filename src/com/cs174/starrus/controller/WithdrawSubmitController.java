@@ -40,8 +40,10 @@ public class WithdrawSubmitController implements IController{
 
 			toWithdraw = Float.parseFloat(wdView.getTxtWithdraw().getText());
 			
-			if(c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText()) < 0)
+			if(c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText()) < 0){
 				wdView.getLblWarning().setText("not enough money");
+				throw new SQLException();
+			}
 			
 			balance = c.getBalance() - Float.parseFloat(wdView.getTxtWithdraw().getText());  
 			c.setBalance(balance);

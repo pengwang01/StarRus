@@ -285,14 +285,13 @@ public class CustomerView extends JPanel implements IView{
 		this.Maccount.add(this.btnViewTransactions);
 		
 		this.lblMAccountId = new JLabel();
-		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
 		//System.out.println(c.getM_account_id());
+		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
 		this.lblMAccountId.setBounds(119, 6, 117, 16);
 		this.Maccount.add(this.lblMAccountId);
 		
 		this.balancefield = new JLabel("New label");
 		this.balancefield.setText(Float.toString(c.getBalance()));
-		System.out.println(c.getBalance());
 		this.balancefield.setBounds(392, 6, 132, 16);
 		this.Maccount.add(this.balancefield);
 		
@@ -517,8 +516,17 @@ public class CustomerView extends JPanel implements IView{
 		this.row_listMovie = row_listMovie;
 	}
 	
+	public JLabel getLblSAccountId() {
+		return lblSAccountId;
+	}
+
+	public void setLblSAccountId(JLabel lblSAccountId) {
+		this.lblSAccountId = lblSAccountId;
+	}
+
 	public void updateView(Customer c){
 
 		this.setView(c);
 	}
+	
 }

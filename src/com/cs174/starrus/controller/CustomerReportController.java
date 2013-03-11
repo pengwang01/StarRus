@@ -37,11 +37,13 @@ public class CustomerReportController implements IController{
 									);
 
 			}
+			
+			// get final balance and account ids
 			rs 		= stmt.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME = '"	+
 										username			+ "'"
 										);
-			crV.getRow_mAccount().clear();
 			
+			crV.getRow_mAccount().clear();
 			while( rs.next() ){
 				if(DEBUG == true){
 					System.out.println("Getting Row");

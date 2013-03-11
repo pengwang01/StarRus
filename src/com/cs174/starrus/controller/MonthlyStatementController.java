@@ -2,6 +2,8 @@ package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.ManagerView;
 import com.cs174.starrus.view.MonthlyStatementView;
+import com.cs174.starrus.model.Customer;
+
 import java.util.Vector;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,6 +17,7 @@ public class MonthlyStatementController implements IController{
 	private Connection conn = null;
 	boolean DEBUG = true;
 	private ResultSet	rs			= null;
+	private ResultSet   rs1			= null;
 	
 	
 	@Override
@@ -57,6 +60,7 @@ public class MonthlyStatementController implements IController{
 				if(DEBUG == true){
 					System.out.println("Getting Row");
 				}
+				Vector<String> newRow = new Vector<String>();
 				//mid	= rs.getInt("M_ACCOUNT_ID");
 				//sid = rs.getInt("S_ACCOUNT_ID");
 				email = rs.getString("EMAIL");
@@ -67,7 +71,32 @@ public class MonthlyStatementController implements IController{
 				
 			}
 			
-			float gainLoss = finalBalance - initialBalance;
+			
+			rs = stmt.executeQuery("SELECT Symbol, total_share " +
+									"FROM manage_stock " +
+									"WHERE MUSERNAME = '" + username + "'");
+			
+			Vector<String> symbols = new Vector<String>();
+			Vector<Integer> share = new Vector<Integer>();
+			float cur_price =0;
+			float totalStockValue = 0;
+			while(rs.next()){
+				symbols.add(rs.getString("SYMBOL"));
+				share.add(rs.getInt("TOTAL_SHARE"));
+			}
+
+			for(int i=0; i<symbols.size(); i++){
+				
+				rs1 = stmt.executeQuery("SELECT CUR_PRICE FROM STOCK "+
+									"WHERE SYMBOL = '" + symbols.get(i) + "'");
+				if(rs1.next())
+					cur_price = rs1.getFloat("CUR_PRICE");
+				System.out.println("curr price: " + cur_price);
+				totalStockValue += cur_price * share.get(i); 
+				System.out.println("total value: " + totalStockValue);
+			}
+			float gainLoss = finalBalance - initialBalance + totalStockValue;
+			
 			msV.getLblGainlossfield().setText(Float.toString(gainLoss));
 			
 			// --------------------------money trans table --------------------------

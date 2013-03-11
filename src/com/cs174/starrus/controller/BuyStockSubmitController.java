@@ -48,6 +48,10 @@ public class BuyStockSubmitController implements IController{
 			quantity = Integer.parseInt(bsV.getTxtQuantity().getText());
 			ticker   = bsV.getTxtTicker().getText().toUpperCase();
 	
+			if(c.getS_account_id()==0){
+				bsV.getLblWarning().setText("You don't have an account, please deposit 1000");
+				throw new SQLException();
+			}
 		// Grabbing balance from customer table to check if the user has enough to buy money to buy the shares
 			if (DEBUG == true){
 					System.out.println("SELECT BALANCE FROM CUSTOMER WHERE USERNAME = '"	+
