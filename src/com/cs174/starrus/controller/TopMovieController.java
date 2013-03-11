@@ -55,6 +55,8 @@ public class TopMovieController implements IController{
 
 			Vector<Vector<String>> 	newTable = new Vector<Vector<String>>();
 			Vector<String> 			newEntry = new Vector<String>();
+			
+			cV.getRow_listMovie().clear();
 			while( rs.next()){
 
 				if( DEBUG == true ){
@@ -64,18 +66,15 @@ public class TopMovieController implements IController{
 					System.out.println(Float.toString(rs.getFloat("RATING")));
 		
 				}
-
 				newEntry.add(rs.getString("TITLE"));
 				newEntry.add(Integer.toString(rs.getInt("PRODUCTION")));
 				newEntry.add(rs.getString("ORGANIZATION"));
 				newEntry.add(Float.toString(rs.getFloat("RATING")));
-				newTable.add(newEntry);
+				cV.getRow_listMovie().add(newEntry);
 			}
-
-			cV.setRow_listMovie(newTable);
-			cV.updateTable_listMovie();
-			cV.updateView(c);
-
+			
+			cV.getTable_listMovie().revalidate();
+			cV.getTable_listMovie().repaint();
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
 			e.printStackTrace();
