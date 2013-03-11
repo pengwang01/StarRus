@@ -15,7 +15,5 @@ public class RegController implements IController{
 		RegView reg = RegView.getView();
 		reg.setView();
 	    reg.setVisible(true);
-		
-		
 	}
 }
