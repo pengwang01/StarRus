@@ -38,6 +38,17 @@ public class TopMovieController implements IController{
 			Date today          = new Date();
 			String dateString   = format.format(today);
 
+			if( DEBUG == true ){
+				System.out.println("SELECT * FROM MOVIES WHERE RATING = 5 AND PRODUCTION BETWEEN "	+
+									1970 	+ "AND" + 1990
+									);
+
+			}
+			
+			rs 		= stmt.executeQuery("SELECT * FROM MOVIES WHERE RATING = 5 AND PRODUCTION BETWEEN "	+
+										1970 	+ "AND" + 1990
+										);
+
 
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
