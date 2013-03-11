@@ -9,6 +9,7 @@ import com.cs174.starrus.controller.CustomerReportController;
 import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.AddInterestController;
 import com.cs174.starrus.controller.MonthlyStatementController;
+import com.cs174.starrus.controller.DeleteTransactionController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.util.Vector;
@@ -224,6 +225,7 @@ public class ManagerView extends JPanel implements IView{
 		this.btnDeleteTransactions = new JButton("Delete Transactions");
 		this.btnDeleteTransactions.setBounds(173, 126, 208, 29);
 		this.panel.add(this.btnDeleteTransactions);
+		listeners.associate(this.btnDeleteTransactions, new DeleteTransactionController());
 		
 		this.monthly_panel = new JPanel();
 		this.monthly_panel.setBorder(new LineBorder(new Color(0, 0, 0)));

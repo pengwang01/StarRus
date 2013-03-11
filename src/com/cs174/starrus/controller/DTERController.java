@@ -31,11 +31,11 @@ public class DTERController implements IController{
 		ManagerView mV 			= ManagerView.getView();
 		Statement 	stmt;
 		ResultSet	rs;
-
+/*
 		Vector<String>	userList	= new Vector<String>();
-		Vector<float>	sTransProf	= new Vector<float>();
-		Vector<float>	intProf		= new Vector<float>();
-		Vector<float>	sGrowProf	= new Vector<float>();
+		Vector<double>	sTransProf	= new Vector<double>();
+		Vector<double>	intProf		= new Vector<double>();
+		Vector<double>	sGrowProf	= new Vector<double>();
 
 		try{
 			conn 	= DBconnector.getConnection();
@@ -80,13 +80,12 @@ public class DTERController implements IController{
 
 		// Calculate growth of stock
 		// ASSUME LIFO
-		rs		= stmt.executeQuery("
 
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
 			e.printStackTrace();
 		}
-		
+*/	
 	}
 }
 
