@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.Calendar;
 
 
 
@@ -24,8 +25,17 @@ public class OpenMarketController implements IController{
 	@Override
 	public void process(String model) {
 		try{
-			Date newDate	= sD.getSysDate().getDateObject().plusDays(1);
-			sD.setDateStr(newDate);
+			Calendar c = Calendar.getInstance();
+			c.setTime(sD.getSysDate().getDateObject());
+			c.add(Calendar.DATE,1);
+			Date newDate	= c.getTime();
+			if(DEBUG == true){
+				SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yy");
+				System.out.println("OPENNING NEW MARKET");
+				System.out.println("TODAY IS: " + format.format(newDate));
+				
+			}
+			sD.setDate(newDate);
 									
 		}catch (Exception e){
 			System.out.println("SQLException in OpenMarketController");

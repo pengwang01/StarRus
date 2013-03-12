@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SysDate{
-	private static SysDate	SysDate = null;
-	private 		Date	today	= null;
-	private 		String 	dateStr = "";
-	private			DateFormat format = null;
+	private static	SysDate	SysDate = null;
+	private static	Date	today	= null;
+	private static	String 	dateStr = "";
+	private	static	SimpleDateFormat format = null;
 
 	public SysDate(String date){
 		this.dateStr=date;
@@ -23,7 +23,8 @@ public class SysDate{
 		this.dateStr	= date;
 	}
 
-	public void setDateStr(Date date){
+	public void setDate(Date date){
+		this.today		= date;
 		this.dateStr	= format.format(date);
 	}
 
