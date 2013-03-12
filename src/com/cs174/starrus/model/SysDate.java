@@ -1,7 +1,6 @@
 package com.cs174.starrus.model;
 
 import java.lang.String;
-<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,27 +34,4 @@ public class SysDate{
 	public static void setSysDate(SysDate date){
 		SysDate	= date;
 	}
-
-=======
-
-public class SysDate{
-	public String Date	= "";
-	private static SysDate sysDate = null;
-	
-	private SysDate(){}
-
-	public static SysDate getSysDate(){
-		if(sysDate == null) 
-			sysDate = new SysDate();
-		return sysDate;
-	}
-
-	public String getDateStr(){
-		return this.Date;
-	}
-
-	public void setDateStr(String date){
-		this.Date=date;
-	}
->>>>>>> origin/master
 }
