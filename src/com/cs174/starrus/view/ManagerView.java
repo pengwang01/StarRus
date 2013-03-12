@@ -10,6 +10,8 @@ import com.cs174.starrus.controller.LogoutController;
 import com.cs174.starrus.controller.AddInterestController;
 import com.cs174.starrus.controller.MonthlyStatementController;
 import com.cs174.starrus.controller.DeleteTransactionController;
+import com.cs174.starrus.controller.SetNewDateController;
+import com.cs174.starrus.controller.SetNewPriceController;
 import com.cs174.starrus.model.Customer;
 import java.awt.ComponentOrientation;
 import java.util.Vector;
@@ -269,12 +271,13 @@ public class ManagerView extends JPanel implements IView{
 		this.panel.add(this.btnCloseMarket);
 		
 		this.btnSetNewPrice = new JButton("Set New Price");
-
 		this.btnSetNewPrice.setBounds(173, 57, 136, 29);
+		listeners.associate(this.btnSetNewPrice, new SetNewPriceController());
 		this.panel.add(this.btnSetNewPrice);
 		
 		this.btnSetnewdate = new JButton("Set New Date");
 		this.btnSetnewdate.setBounds(321, 57, 136, 29);
+		listeners.associate(this.btnSetnewdate, new SetNewDateController());
 		this.panel.add(this.btnSetnewdate);
 		
 		this.lblMarketOperation = new JLabel("Market Operation:");
