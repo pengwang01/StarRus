@@ -3,10 +3,6 @@ import com.cs174.starrus.view.IView;
 import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.SetNewDateView;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
@@ -21,7 +17,6 @@ import java.util.Vector;
 
 public class SetNewDateSubmitController implements IController{
 	private boolean 	DEBUG		= true;
-	private Connection 	conn		= null;
 	private SysDate		sD			= SysDate.getSysDate();
 	private SetNewDateView	sndV	= SetNewDateView.getView();
 	@Override
@@ -31,22 +26,30 @@ public class SetNewDateSubmitController implements IController{
 	@Override
 	public void process(String model) {
 		SetNewDateView snpV	= SetNewDateView.getView();
-		Statement 	stmt;
-		ResultSet	rs;
 
 		try{
-			conn 	= DBconnector.getConnection();
-			stmt	= conn.createStatement();
+			String pattern 	= "\\d\\d-(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)-\\d\\d";
 			
-			if( DEBUG == true){
-				System.out.println("SETTING DATE TO: " + sndV.getTxtDate().getText());
+			if(DEBUG == true){
+				System.out.println(sndV.getTxtDate().getText().toUpperCase());
+				System.out.println(sndV.getTxtDate().getText().toUpperCase().matches(pattern));
+
 			}
 			
-			SysDate.setSysDate(new SysDate( sndV.getTxtDate().getText()));
+			if(sndV.getTxtDate().getText().toUpperCase().matches(pattern)){
+				if( DEBUG == true){
+					System.out.println("SETTING DATE TO: " + sndV.getTxtDate().getText());
+				}
+
+				SysDate.setSysDate(new SysDate( sndV.getTxtDate().getText()));
+			}else{
+				sndV.setLblWarning("Please enter a valid date: \n The correct format is DD-MMM-YY");	
+			}
+			
 			
 
 									
-		}catch (SQLException e){
+		}catch (Exception e){
 			System.out.println("SQLException in SetPriceController");
 			e.printStackTrace();
 		}
