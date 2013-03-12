@@ -46,7 +46,8 @@ public class SellStockSubmitController implements IController{
 			conn	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
 
-			String ticker	= ssV.getTxtTicker().getText().toUpperCase();
+			String 	ticker	= ssV.getTxtTicker().getText().toUpperCase();
+			float	buyPrice= Float.parseFloat(ssV.getTxtBuyPriceField().getText());
 
 
 			// Query is case sensitive
@@ -101,10 +102,12 @@ public class SellStockSubmitController implements IController{
 					System.out.println("CurrentPrice: " 	+ price);
 					System.out.println("quantity: " 	+ quantity);
 				} 
-				
-				sales = (price * quantity ) - 20;
+								
+
+				sales = ((price - buyPrice)* quantity ) - 20;
 
 				if( DEBUG == true){
+					System.out.println("BuyPrice: " + buyPrice);
 					System.out.println("Sales: " + sales);
 				}
 				// Update users balance to reflect the sales
@@ -144,16 +147,16 @@ public class SellStockSubmitController implements IController{
 					if(DEBUG == true){
 					System.out.println("INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
-										ticker		+ "'," 			+  1		+ ","				+ 
-										quantity	+ ","			+ price		+ ","				+ 
+										ticker		+ "'," 				+  1		+ ","				+ 
+										quantity	+ ","				+ price		+ ","				+ 
 										sales		+ ")" 
 										);
 
 					}
 					stmt.executeQuery(	"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
-										ticker		+ "'," 			+  1		+ ","				+ 
-										quantity	+ ","			+ price		+ ","				+
+										ticker		+ "'," 				+  1		+ ","				+ 
+										quantity	+ ","				+ price		+ ","				+
 										sales		+ ")" 
 									);
 
@@ -161,14 +164,14 @@ public class SellStockSubmitController implements IController{
 				if( DEBUG == true){
 					System.out.println(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 											"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-											1			+ ","			+ sales	+ ","				+ balance			+ 
+											1			+ ","				+ sales	+ ","				+ balance			+ 
 											")"
 									);
 
 				}
 				stmt.executeQuery(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 										"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-										1			+ ","			+ sales	+ ","				+ balance	+	
+										1			+ ","				+ sales	+ ","				+ balance	+	
 										")"
 								);
 				
