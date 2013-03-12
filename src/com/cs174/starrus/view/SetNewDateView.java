@@ -6,7 +6,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import com.cs174.starrus.controller.BuyStockSubmitController;
+import com.cs174.starrus.controller.SetNewDateSubmitController;
 
 public class SetNewDateView extends JDialog implements IView{
 	/**
@@ -18,7 +18,6 @@ public class SetNewDateView extends JDialog implements IView{
 	private JButton btnSetDate;
 	private static SetNewDateView sndView = null;
 	private JLabel lblWarning;
-	private JTextField txtPrice;
 	
 	private SetNewDateView(){
 		this.setLocation(new Point(350, 200));
@@ -47,7 +46,7 @@ public class SetNewDateView extends JDialog implements IView{
 	    
 	    this.btnSetDate = new JButton("Set New Date");
 	    this.btnSetDate.setBounds(75, 99, 117, 29);
-	    listeners.associate(this.btnSetDate, new BuyStockSubmitController());
+	    listeners.associate(this.btnSetDate, new SetNewDateSubmitController());
 	    getContentPane().add(this.btnSetDate);
 	    
 	    this.lblWarning = new JLabel("");
@@ -61,11 +60,11 @@ public class SetNewDateView extends JDialog implements IView{
 		
 	}
 
-	public JTextField getTxtTicker() {
+	public JTextField getTxtDate() {
 		return txtDate;
 	}
 
-	public void setTxtTicker(JTextField txtDate) {
+	public void setTxtDate(JTextField txtDate) {
 		this.txtDate = txtDate;
 	}
 
@@ -76,10 +75,5 @@ public class SetNewDateView extends JDialog implements IView{
 	public void setLblWarning(String text) {
 		lblWarning.setText(text);
 	}
-
-	public JTextField getTxtDate(){
-		return txtDate;
-	}
-
 	
 }
