@@ -79,7 +79,7 @@ public class BuyStockSubmitController implements IController{
 
 
 		// Checking if client has enough money
-			sales = price * quantity;
+			sales =  ( price * quantity ) - 20;
 			if(DEBUG == true){
 				System.out.println("COST: " + sales);
 			}

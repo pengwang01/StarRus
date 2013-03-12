@@ -102,7 +102,7 @@ public class SellStockSubmitController implements IController{
 					System.out.println("quantity: " 	+ quantity);
 				} 
 				
-				sales = price * quantity;
+				sales = (price * quantity ) - 20;
 
 				if( DEBUG == true){
 					System.out.println("Sales: " + sales);

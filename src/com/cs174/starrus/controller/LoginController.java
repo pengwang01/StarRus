@@ -94,6 +94,7 @@ public class LoginController implements IController{
 				
 //=========================STOCK LIST TAB ( TAB 2)===============================
 				rs = stmt.executeQuery(	"SELECT * FROM STOCK");
+				cV.getRow_listStock().clear();
 				while( rs.next() ){
 					if(DEBUG == true){
 						System.out.println("Inserting into Stock table");
@@ -110,6 +111,7 @@ public class LoginController implements IController{
 
 //=========================MOVIE LIST TAB ( TAB 3)===============================
 				rs = stmt.executeQuery(	"SELECT * FROM MOVIES");
+				cV.getRow_listMovie().clear();
 				while( rs.next() ){
 					Vector<String> newRow 	= new Vector<String>();
 					String 	title			= rs.getString("TITLE");

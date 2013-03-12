@@ -73,13 +73,14 @@ public class DepositSubmitController implements IController{
 										"Date: "    + sD.getDateStr()        +" \n" +
 										"Balance: " + c.getBalance()
 									);
-					System.out.println("INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
+					System.out.println(	"INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES ("
+										+ "'"   + sD.getDateStr()        + "'"   + ","
 										+ "'"   + c.getUsername()   + "'"   + ","
-										+ 1                 		+ ","		// 1 for deposit
-										+ toDeposit			   		+ ","
+										+ 1                 		+ ","			// 1 fore deposit
+										+ toDeposit		    		+ "," 
 										+ fBalance					+ ")"
 									);
-				}
+					}
 
 				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES ("
 									+ "'"   + sD.getDateStr()        + "'"   + ","
