@@ -34,16 +34,17 @@ public class RegSubmitController implements IController{
 				age = Integer.parseInt(rV.getTxtAge().getText());
 			taxid = Integer.parseInt(rV.getTxtTaxid().getText());
 
-			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel, age) values ("
-				+ "'" + username + "' ,"
-				+ "'" + cname + "',"
-				+ "'" + phone + "',"
-				+ "'" + state + "'," 
+			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel, age, balance) values ("
+				+ "'" 	+ username + "' ,"
+				+ "'" 	+ cname + "',"
+				+ "'" 	+ phone + "',"
+				+ "'" 	+ state + "'," 
 				+ taxid + ","
-				+ "'" + psw + "',"
-				+ "'" + email + "',"
-				+ 2 + ","
-				+ age + ")";
+				+ "'" 	+ psw + "',"
+				+ "'" 	+ email + "',"
+				+ 2 	+ ","	
+				+ age 	+ ","	
+				+ 10000	+")";
 			Statement stmt	= conn.createStatement();
 			stmt.executeQuery(query);
 			rV.getTxtAge().setText(null);

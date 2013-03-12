@@ -82,11 +82,13 @@ public class LoginController implements IController{
 						System.out.println("Inserting into Stock table");
 					}
 					Vector<String> newRow = new Vector<String>();
-					int shares	= rs.getInt("TOTAL_SHARE");
-					String tkr	= rs.getString("SYMBOL");
+					int 	shares	= rs.getInt("TOTAL_SHARE");
+					String 	tkr		= rs.getString("SYMBOL");
+					Float	price	= rs.getFloat("PRICE");
 
 					newRow.add(tkr);
 					newRow.add(Integer.toString(shares));
+					newRow.add(Float.toString(price));
 					cV.getRow_myStock().add(newRow);
 				}
 //				cV.updateView(c);

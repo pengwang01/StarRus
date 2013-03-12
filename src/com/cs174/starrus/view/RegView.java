@@ -59,6 +59,7 @@ public class RegView extends JDialog implements IView{
 	    //this.txtUsername.setText("username");
 	    this.getContentPane().add(this.txtUsername);
 	    this.txtUsername.setColumns(10);
+	    this.txtUsername = new JTextField();
 	    
 	    this.lblPassword = new JLabel("Password:");
 	    this.lblPassword.setBounds(22, 34, 89, 16);

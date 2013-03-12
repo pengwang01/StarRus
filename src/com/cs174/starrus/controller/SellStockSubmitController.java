@@ -33,6 +33,7 @@ public class SellStockSubmitController implements IController{
 		int numStocksAvailable 	= 0;
 		float price				= 0;
 		float balance			= 0;
+		float profit			= 0;
 		float sales				= 0;
 		int	quantity			= 0;
 		Statement stmt;
@@ -52,18 +53,20 @@ public class SellStockSubmitController implements IController{
 
 			// Query is case sensitive
 			if ( DEBUG == true ){
-	            System.out.println( "SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	+ 
-				                   	"'" + c.getUsername() + "'"					+
-									" AND SYMBOL = "							+
-									"'"	+ ticker	+ "'"			
-									);
+	            System.out.println( "SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	
+			                                    + "'" + c.getUsername() + "'"					   
+												+ " AND SYMBOL = "							
+												+ "'"	+ ticker	+	"'"	
+												+ " AND PRICE = "	+ buyPrice
+											);    
 			}
 			
 			// Check how many shares this person has of the stock
-			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	+
-			                                    "'" + c.getUsername() + "'"					+   
-												" AND SYMBOL = "							+
-												"'"	+ ticker	+	"'"			
+			ResultSet rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = "	
+			                                    + "'" + c.getUsername() + "'"					   
+												+ " AND SYMBOL = "							
+												+ "'"	+ ticker	+	"'"	
+												+ " AND PRICE = "	+ buyPrice
 											);    
 			
 
@@ -73,6 +76,8 @@ public class SellStockSubmitController implements IController{
 					System.out.println("NumStocks Available:\t" + numStocksAvailable);
 				}
 			}
+			
+			// Checking if there is any stock at the stated price	
 
 			// While the client is trying to sell more shares than he posses, 
 			// The system should loop waiting until he puts in a valid number
@@ -104,13 +109,15 @@ public class SellStockSubmitController implements IController{
 				} 
 								
 
-				sales = ((price - buyPrice)* quantity ) - 20;
+				profit 	= ((price - buyPrice)* quantity ) - 20;
+				sales	= (price * quantity ) - 20;
 
 				if( DEBUG == true){
 					System.out.println("BuyPrice: " + buyPrice);
-					System.out.println("Sales: " + sales);
+					System.out.println("Profit: " 	+ profit);
+					System.out.println("Sales: " 	+ sales);
 				}
-				// Update users balance to reflect the sales
+				// Update users balance to reflect the profit
 					if(DEBUG == true){
 						System.out.println("UPDATE CUSTOMER SET BALANCE = BALANCE + "	+
 											sales										+
@@ -149,7 +156,7 @@ public class SellStockSubmitController implements IController{
 										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 				+  1		+ ","				+ 
 										quantity	+ ","				+ price		+ ","				+ 
-										sales		+ ")" 
+										profit		+ ")" 
 										);
 
 					}
@@ -157,21 +164,21 @@ public class SellStockSubmitController implements IController{
 										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 				+  1		+ ","				+ 
 										quantity	+ ","				+ price		+ ","				+
-										sales		+ ")" 
+										profit		+ ")" 
 									);
 
 				// Record transaction into money_trans
 				if( DEBUG == true){
 					System.out.println(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 											"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-											1			+ ","				+ sales	+ ","				+ balance			+ 
+											1			+ ","				+ profit	+ ","				+ balance			+ 
 											")"
 									);
 
 				}
 				stmt.executeQuery(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 										"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-										1			+ ","				+ sales	+ ","				+ balance	+	
+										1			+ ","				+ profit	+ ","				+ balance	+	
 										")"
 								);
 				

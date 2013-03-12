@@ -334,6 +334,7 @@ public class CustomerView extends JPanel implements IView{
 		Vector<String> col_myStock = new Vector<String>();
 	    col_myStock.add("Symbol");
 	    col_myStock.add("Total Shares");
+	    col_myStock.add("Price");
 	    
 		this.table_myStock = new JTable(row_myStock, col_myStock){
 			public boolean isCellEditable(int rowIndex, int colIndex){
