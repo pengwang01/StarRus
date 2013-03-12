@@ -18,7 +18,7 @@ import java.util.Vector;
 
 
 
-public class DTERController implements IController{
+public class SetPriceController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
 	@Override
@@ -31,10 +31,6 @@ public class DTERController implements IController{
 		ManagerView mV 			= ManagerView.getView();
 		Statement 	stmt;
 		ResultSet	rs;
-		Vector<String>	userList	= new Vector<String>();
-		Vector<Double>	profit		= new Vector<Double>();
-		Vector<Double>	intProf		= new Vector<Double>();
-		Vector<Double>	sGrowProf	= new Vector<Double>();
 
 		try{
 			conn 	= DBconnector.getConnection();
@@ -43,66 +39,19 @@ public class DTERController implements IController{
 			Date today          = new Date();
 			String dateString   = format.format(today);
 
-		// Calculate the list of users
-			if( DEBUG == true ){
-				System.out.println("SELECT USERNAME FROM CUSTOMER");
+			if( DEBUG == true){
+				System.out.println(	"SELECT * FROM STOCK " 	+
+									"WHERE SYM = '"			+
+									"GOO"	+ "'"			
+									);	// TODO CHANGE STOCK NAME TO FIELD VARIABLE
+
 			}
 
-			rs		= stmt.executeQuery("SELECT USERNAME FROM CUSTOMER");
-			while(rs.next()){
-				userList.add(rs.getString("USERNAME"));
-			}
-		
-		// Calculate stock transaction profit
-			int stockTransProfit	= 0;
-			for( int i = 0 ; i < userList.size(); i++){
-				if( DEBUG == true ){
-					System.out.println(	"SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-										userList.get(i)	+ "'"			
-									);
-				}
-				rs 		= stmt.executeQuery("SELECT SUM(PROFIT) AS PROFIT FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-											userList.get(i)	+ "'"
-											);
-				// TODO:May not be logically correct
-				while( rs.next() ){
-					profit.set(i,profit.get(i)+rs.getFloat("PROFIT"));
-				}
-			// Calculate interest profit
-				if( DEBUG ==  true){
-					System.out.println(	"SELECT * FROM MONEY_TRANS "			+
-										"WHERE TTYPE = 3 "						+
-										"AND TUSERNAME = '"						+
-										userList.get(i)	+ "'"					
-										);
-				}
-				rs 		= stmt.executeQuery("SELECT * FROM MONEY_TRANS "		+
-											"WHERE TTYPE = 3 "					+
-											"AND TUSERNAME = '"					+
-											userList.get(i)	+ "'"				
-											);
+			rs		= stmt.execute(	"SELECT * FROM STOCK " 	+
+									"WHERE SYM = '"			+
+									"GOO"	+ "'"			
+									);	// TODO CHANGE STOCK NAME TO FIELD VARIABLE
 
-				while( rs.next() ){
-					profit.set(i,profit.get(i)+rs.getFloat("AMOUNT"));
-				}
-			// Calculate growth of stock
-			// ASSUMING LIFO
-				if( DEBUG == true){
-					System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-											userList.get(i)									+
-											"STYPE = 0"
-										);
-
-				}
-				rs		= stmt.executeQuery("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
-											userList.get(i)									+
-											"STYPE = 0"
-											);
-				while( rs.next() ){
-				}
-			// 
-				
-			}
 
 		}catch (SQLException e){
 			System.out.println("SQLException in DTERController ");
