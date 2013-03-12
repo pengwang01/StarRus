@@ -7,7 +7,7 @@ public class SetNewPriceController implements IController{
 
 	@Override
 	public void setView(IView view) {
-		// TODO Auto-generated method stub
+	// TODO Auto-generated method stub
 	}
 	@Override
 	public void process(String model) {
@@ -17,4 +17,3 @@ public class SetNewPriceController implements IController{
 		snpV.setVisible(true);
 	}
 }
-

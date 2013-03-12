@@ -40,15 +40,16 @@ public class SetPriceController implements IController{
 			if( DEBUG == true){
 				System.out.println(	"SELECT * FROM STOCK " 			+
 									"WHERE SYMBOL = '"				+
-									snpV.getTxtTicker().getText()	+ "'"			
+									snpV.getTxtTicker().getText().toUpperCase()	+ "'"			
 									);	
 
 			}
 
 			rs		= stmt.executeQuery(	"SELECT * FROM STOCK " 			+
 											"WHERE SYMBOL = '"				+
-											snpV.getTxtTicker().getText()	+ "'"			
+											snpV.getTxtTicker().getText().toUpperCase()	+ "'"			
 											);	
+/*
 			if(rs.next()){
 				// STORE CURRENT PRICE INTO THE PRICES TABLE FOR FUTURE LOOKUP
 				if(DEBUG == true){
@@ -65,6 +66,7 @@ public class SetPriceController implements IController{
 									rs.getString("SYMBOL")		+ "')"
 									);
 			}
+*/
 
 			// UPDATE THE PRICE IN THE STOCK TABLE
 			if(DEBUG == true){
