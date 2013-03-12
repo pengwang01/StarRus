@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
+import com.cs174.starrus.model.SysDate;
 
 import java.text.DecimalFormat;
 
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 public class AddInterestController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
+	private SysDate		sD			= SysDate.getSysDate();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -41,10 +40,7 @@ public class AddInterestController implements IController{
 		try{
 			conn 	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
-			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
-			Date today          = new Date();
-			String dateString   = format.format(today);
-
+			
 			if(DEBUG == true){
 				System.out.println(		"SELECT TUSERNAME, AVG(BALANCE) AS BALANCE FROM MONEY_TRANS WHERE "	+
 										"(M_TRANS_ID,TUSERNAME) IN "								+
@@ -112,14 +108,14 @@ public class AddInterestController implements IController{
 				// Reflect increase in money_trans table
 					if(DEBUG == true){
 						System.out.println("INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE)VALUES "+
-										"('" 	+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
+										"('" 	+ sD.getDateStr()	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
 										","		+ accruedStr	+ ","	+ newBalStr			+ ")"
 									);
 
 					}
 
 					stmt.executeQuery(	"INSERT INTO MONEY_TRANS(TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES "	+
-										"('" 	+ dateString	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
+										"('" 	+ sD.getDateStr()	+ "','"	+ userList.get(i)	+ "',"	+ 3		+ 
 										","		+ accruedStr	+ ","	+ newBalStr			+ ")"
 									);
 

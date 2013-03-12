@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.cs174.starrus.model.Customer;
+import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.CustomerView;
 import com.cs174.starrus.view.DepositView;
 import com.cs174.starrus.view.IView;
@@ -19,6 +17,7 @@ public class DepositSubmitController implements IController{
 	private Customer c = Customer.getCustomer();
 	private DepositView depoV = DepositView.getView();
 	private CustomerView cView = CustomerView.getView();
+	private SysDate		sD = SysDate.getSysDate();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -54,9 +53,6 @@ public class DepositSubmitController implements IController{
 				
 				// Insert into Money_trans Table	
 				// execute query for add row to money transaction table
-				DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
-				Date today          = new Date();
-				String dateString   = format.format(today);
 			
 				// execute query for deposit
 				stmt.executeQuery("UPDATE Customer set balance = " 	+ balance + 
@@ -74,7 +70,7 @@ public class DepositSubmitController implements IController{
 				// FOR DEBUGGING PURPOSES
 				if( DEBUG == true ){
 					System.out.println( "Username: "+ c.getUsername()   +" \n" +
-										"Date: "    + dateString        +" \n" +
+										"Date: "    + sD.getDateStr()        +" \n" +
 										"Balance: " + c.getBalance()
 									);
 					System.out.println("INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
@@ -86,7 +82,7 @@ public class DepositSubmitController implements IController{
 				}
 
 				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES ("
-									+ "'"   + dateString        + "'"   + ","
+									+ "'"   + sD.getDateStr()        + "'"   + ","
 									+ "'"   + c.getUsername()   + "'"   + ","
 									+ 1                 		+ ","			// 1 fore deposit
 									+ toDeposit		    		+ "," 

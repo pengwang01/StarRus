@@ -6,20 +6,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.cs174.starrus.model.Customer;
+import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.CustomerView;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.WithdrawView;
 
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class WithdrawSubmitController implements IController{
 	private boolean DEBUG = true;
 	private Connection conn = null;
 	private Customer c = Customer.getCustomer();
 	private WithdrawView wdView = WithdrawView.getView();
-	private CustomerView cView = CustomerView.getView();
+	private CustomerView cView 	= CustomerView.getView();
+	private SysDate		 sD		= SysDate.getSysDate();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -48,10 +47,6 @@ public class WithdrawSubmitController implements IController{
 			c.setBalance(balance);
 				
 			// Insert into transacation table
-				DateFormat format 	= new SimpleDateFormat("dd-MMM-yy");
-				Date today 			= new Date();
-				String dateString	= format.format(today);
-
 				stmt.executeQuery("UPDATE Customer set balance = " 	+ balance + 
 									"WHERE username = '" 			+ c.getUsername() + "'");
 
@@ -68,11 +63,11 @@ public class WithdrawSubmitController implements IController{
 			//			2 for withdrawals
 				if( DEBUG == true ){
 					System.out.println( "Username: "+ c.getUsername()   +" \n" +
-										"Date: "    + dateString        +" \n" +
+										"Date: "    + sD.getDateStr()        +" \n" +
 										"Balance: " + c.getBalance()
 										);
 					System.out.println("INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT) VALUES ("
-										+ "'"	+ dateString        + "'"	+ ","
+										+ "'"	+ sD.getDateStr()        + "'"	+ ","
 										+ "'" 	+ c.getUsername()   + "'"	+ ","
 										+ 2                 + ","
 										+ toWithdraw		+ ","
@@ -81,7 +76,7 @@ public class WithdrawSubmitController implements IController{
 				}
 
 				stmt.executeQuery( "INSERT INTO MONEY_TRANS (TDATE,TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES (" 
-									+ "'"	+ dateString        + "',"	
+									+ "'"	+ sD.getDateStr()        + "',"	
 									+"'" 	+ c.getUsername()   + "',"
 									+ 2							+ "," 
 									+ toWithdraw				+ ","

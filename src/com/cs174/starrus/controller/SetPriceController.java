@@ -1,6 +1,7 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
-import com.cs174.starrus.view.ManagerView;
+import com.cs174.starrus.model.SysDate;
+import com.cs174.starrus.view.SetNewPriceView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,40 +22,69 @@ import java.util.Vector;
 public class SetPriceController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
+	private SysDate		sD			= SysDate.getSysDate();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
 	}
-
 	@Override
 	public void process(String model) {
-		ManagerView mV 			= ManagerView.getView();
+		SetNewPriceView snpV	= SetNewPriceView.getView();
 		Statement 	stmt;
 		ResultSet	rs;
 
 		try{
 			conn 	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
-			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
-			Date today          = new Date();
-			String dateString   = format.format(today);
 
 			if( DEBUG == true){
-				System.out.println(	"SELECT * FROM STOCK " 	+
-									"WHERE SYM = '"			+
-									"GOO"	+ "'"			
-									);	// TODO CHANGE STOCK NAME TO FIELD VARIABLE
+				System.out.println(	"SELECT * FROM STOCK " 			+
+									"WHERE SYMBOL = '"				+
+									snpV.getTxtTicker().getText()	+ "'"			
+									);	
 
 			}
 
-			rs		= stmt.execute(	"SELECT * FROM STOCK " 	+
-									"WHERE SYM = '"			+
-									"GOO"	+ "'"			
-									);	// TODO CHANGE STOCK NAME TO FIELD VARIABLE
+			rs		= stmt.executeQuery(	"SELECT * FROM STOCK " 			+
+											"WHERE SYMBOL = '"				+
+											snpV.getTxtTicker().getText()	+ "'"			
+											);	
+			if(rs.next()){
+				// STORE CURRENT PRICE INTO THE PRICES TABLE FOR FUTURE LOOKUP
+				if(DEBUG == true){
+				System.out.println(	"INSERT INTO PRICES VALUES ('"			+
+									sD.getDateStr()	+ "',"					+
+									rs.getString("CUR_PRICE")	+ ",'"		+
+									rs.getString("SYMBOL")		+ "')"
+									);
+				}
 
+				stmt.executeQuery(	"INSERT INTO PRICES VALUES ('"			+
+									sD.getDateStr()	+ "',"					+
+									rs.getString("CUR_PRICE")	+ ",'"		+
+									rs.getString("SYMBOL")		+ "')"
+									);
+			}
 
+			// UPDATE THE PRICE IN THE STOCK TABLE
+			if(DEBUG == true){
+			System.out.println(		"UPDATE STOCK SET CUR_PRICE = "			+
+									snpV.getTxtPrice().getText()	+" "	+
+									"WHERE SYMBOL = '"						+
+									snpV.getTxtTicker().getText().toUpperCase()	+"'"	
+								);
+			}
+			stmt.executeQuery(		"UPDATE STOCK SET CUR_PRICE = "			+
+									snpV.getTxtPrice().getText()	+" "	+
+									"WHERE SYMBOL = '"						+
+									snpV.getTxtTicker().getText().toUpperCase()	+ "'"	
+								);
+			//TODO May need to increment the date 
+			// MOST LIKELY NOT
+
+									
 		}catch (SQLException e){
-			System.out.println("SQLException in DTERController ");
+			System.out.println("SQLException in SetPriceController");
 			e.printStackTrace();
 		}
 	}

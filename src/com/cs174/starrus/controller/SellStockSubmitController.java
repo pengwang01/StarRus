@@ -4,12 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.lang.Integer;
 
 import com.cs174.starrus.model.Customer;
+import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.CustomerView;
 import com.cs174.starrus.view.SellStockView;
 import com.cs174.starrus.view.IView;
@@ -22,6 +20,7 @@ public class SellStockSubmitController implements IController{
 	private Customer c 			= Customer.getCustomer();
 	private SellStockView ssV	= SellStockView.getView();
 	private CustomerView  cV	= CustomerView.getView();
+	private SysDate		  sD	= SysDate.getSysDate();
 
 	@Override
 	public void setView(IView view) {
@@ -48,9 +47,6 @@ public class SellStockSubmitController implements IController{
 			stmt	= conn.createStatement();
 
 			String ticker	= ssV.getTxtTicker().getText().toUpperCase();
-			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
-			Date today          = new Date();
-			String dateString   = format.format(today);
 
 
 			// Query is case sensitive
@@ -147,7 +143,7 @@ public class SellStockSubmitController implements IController{
 				//			1 for sell
 					if(DEBUG == true){
 					System.out.println("INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
-										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
+										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 			+  1		+ ","				+ 
 										quantity	+ ","			+ price		+ ","				+ 
 										sales		+ ")" 
@@ -155,7 +151,7 @@ public class SellStockSubmitController implements IController{
 
 					}
 					stmt.executeQuery(	"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME,SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
-										"VALUES( '"	+ dateString	+ "','"		+ c.getUsername()	+ "','"		+ 
+										"VALUES( '"	+ sD.getDateStr()	+ "','"		+ c.getUsername()	+ "','"		+ 
 										ticker		+ "'," 			+  1		+ ","				+ 
 										quantity	+ ","			+ price		+ ","				+
 										sales		+ ")" 
@@ -164,14 +160,14 @@ public class SellStockSubmitController implements IController{
 				// Record transaction into money_trans
 				if( DEBUG == true){
 					System.out.println(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
-											"('"		+ dateString	+ "','"	+ c.getUsername()	+ "',"	+
+											"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
 											1			+ ","			+ sales	+ ","				+ balance			+ 
 											")"
 									);
 
 				}
 				stmt.executeQuery(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
-										"('"		+ dateString	+ "','"	+ c.getUsername()	+ "',"	+
+										"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
 										1			+ ","			+ sales	+ ","				+ balance	+	
 										")"
 								);

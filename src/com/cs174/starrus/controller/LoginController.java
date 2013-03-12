@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.cs174.starrus.model.Customer;
+import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.LoginView;
 import com.cs174.starrus.view.ManagerView;
@@ -22,6 +23,7 @@ public class LoginController implements IController{
 	private LoginView loginView = LoginView.getView();
 	private CustomerView cV		= CustomerView.getView();
 	private ManagerView mV      = ManagerView.getView();
+
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub

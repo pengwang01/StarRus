@@ -6,7 +6,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import com.cs174.starrus.controller.BuyStockSubmitController;
+import com.cs174.starrus.controller.SetPriceController;
 
 public class SetNewPriceView extends JDialog implements IView{
 	/**
@@ -48,7 +48,7 @@ public class SetNewPriceView extends JDialog implements IView{
 	    
 	    this.btnTicker = new JButton("Set New Price");
 	    this.btnTicker.setBounds(75, 99, 117, 29);
-	    listeners.associate(this.btnTicker, new BuyStockSubmitController());
+	    listeners.associate(this.btnTicker, new SetPriceController());
 	    getContentPane().add(this.btnTicker);
 	    
 	    this.lblWarning = new JLabel("");
@@ -87,7 +87,7 @@ public class SetNewPriceView extends JDialog implements IView{
 		lblWarning.setText(text);
 	}
 
-	public JTextField getTxtQuantity(){
+	public JTextField getTxtPrice(){
 		return txtPrice;
 	}
 

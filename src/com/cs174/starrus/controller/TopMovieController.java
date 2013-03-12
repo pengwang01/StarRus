@@ -8,10 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
-
 import java.text.DecimalFormat;
 
 import java.util.ArrayList;
@@ -38,9 +34,6 @@ public class TopMovieController implements IController{
 		try{
 			conn 	= DBconnector.getConnection();
 			stmt	= conn.createStatement();
-			DateFormat format   = new SimpleDateFormat("dd-MMM-yy");
-			Date today          = new Date();
-			String dateString   = format.format(today);
 
 			if( DEBUG == true ){
 				System.out.println("SELECT * FROM MOVIES WHERE RATING = 5.0 AND PRODUCTION BETWEEN "	+
