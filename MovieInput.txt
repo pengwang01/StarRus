@@ -2,16 +2,23 @@ create table movies(title char(20), production number(4), rating number(2), orga
 
 create table reviews(movie char(40),author char(10), message char(10), primary key ( movie, author ), foreign key ( movie) references movies(title));
 
-insert into Movies values ( 'CHICAGO',2003,'HOLLYWOOD');
-insert into Movies values ('HEAD OF STATE', 2003,'HOLLWOOD');
-insert into Movies values ('PERFECT MURDER',1996,'HOLLYWOOD');
-insert into Movies values ('L.A. CONFIDENTIAL',1997,'HOLLYWOOD');
-insert into Movies values ('JERRY MAGUIRE',1996,'HOLLYWOOD');
-insert into Movies values ('RED FLAG',2012,'HOLLYWOOD');
-insert into Movies values ('THE SHAWSHANK REDEMPTION',1994,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ( 'CHICAGO',2003,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ('HEAD OF STATE', 2003,'HOLLWOOD');
+insert into Movies(title,production,organization) values ('PERFECT MURDER',1996,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ('L.A. CONFIDENTIAL',1997,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ('JERRY MAGUIRE',1996,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ('RED FLAG',2012,'HOLLYWOOD');
+insert into Movies(title,production,organization) values ('THE SHAWSHANK REDEMPTION',1994,'HOLLYWOOD');
 
-insert into REVIEWS values ('CHICAGO','CLINTON','Very Good');g
+update movies set rating = 5.0 where title = 'CHICAGO';
+update movies set rating = 4.0 where title = 'HEAD OF STATE';
+update movies set rating = 3.7 where title ='L.A. CONFIDENTIAL';
+update movies set rating = 2.9 where title = 'PERFECT MURDER';
+update movies set rating =4.1 where title = 'JERRY MAGUIRE';
+update movies set rating=2.1 where title = 'RED FLAG';
+update movies set rating=4.9 where title = 'THE SHAWSHANK REDEMPTION';
 
+insert into REVIEWS values ('CHICAGO','CLINTON','Very Good');
 insert into REVIEWS values ('CHICAGO','BUSH','Good');
 insert into REVIEWS values ('L.A. CONFIDENTIAL','BILL','GOOD');
 insert into REVIEWS values ('L.A. CONFIDENTIAL','DAY','OK');
@@ -23,11 +30,4 @@ insert into REVIEWS values ('RED FLAG','OCEAN','POOR');
 insert into REVIEWS values ('RED FLAG','MARK','LIKE IT');
 insert into REVIEWS values ('THE SHAWSHANK REDEMPTION','OCEAN','GOOD');
 
-update movies set rating = 5.0 where title = 'CHICAGO';
-update movies set rating = 4.0 where title = 'HEAD OF STATE';
-update movies set rating = 3.7 where title ='L.A. CONFIDENTIAL';
-update movies set rating = 2.9 where title = 'PERFECT MURDER';
-update movies set rating =4.1 where title = 'JERRY MAGUIRE';
-update movies set rating=2.1 where title = 'RED FLAG';
-update movies set rating=4.9 where title = 'THE SHAWSHANK REDEMPTION';
 

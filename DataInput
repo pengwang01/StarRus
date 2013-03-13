@@ -5,7 +5,7 @@ insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,bala
 insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('Billy Clinton','billy','cl','CA','(805)5629999','billy@yahoo.com','3045',1,100000);
 
 
-insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('Cindy Laugher',cindy','la','CA','(805)6930011','cindy@hotmail.com','2034',1,50000);
+insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('Cindy Laugher','cindy','la','CA','(805)6930011','cindy@hotmail.com','2034',1,50000);
 
 insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('David Copperfill','david','co','CA','(805)8240011','david@yahoo.com','4093',1,45000);
 
@@ -22,4 +22,51 @@ insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,bala
 insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('Olive Stoner','olive','st','CA','(805)2574499','olive@yahoo.com','1123',1,35000);
 
 insert into customer(cname,username,psd,state,phone_num,email,tax_id,clevel,balance) values ('Frank Olson','frank','ol','CA','(805)3456789','frank@gmail.com','3306',1,30500);
+
+
+update customer set m_account_id = 1 where username='alfred';
+update customer set m_account_id = 2 where username='billy';
+update customer set m_account_id = 3 where username='cindy';
+update customer set m_account_id = 4 where username='david';
+update customer set m_account_id = 5 where username='sailor';
+update customer set m_account_id = 6 where username='brush';
+update customer set m_account_id = 7 where username='ivan';
+update customer set m_account_id = 8 where username='joe';
+update customer set m_account_id = 9 where username='magic';
+update customer set m_account_id = 10 where username='olive';
+update customer set m_account_id = 11 where username='frank';
+
+insert into actor(actor_id,symbol,name,birthday,title,role,year,total_value) values(1,'SKB','Kim Basinger','8-DEC-1958','L.A. Confidential','Actor',1997,5000000);
+insert into actor(actor_id,symbol,name,birthday,title,role,year,total_value) values(2,'SMD','Michael Douglas','25-SEP-1944','A Perfect Murder','Actor',1998,10000000);
+insert into actor(actor_id,symbol,name,birthday,title,role,year,total_value) values(3,'STC','Tom Cruise','3-JUL-1962','Jerry Maguire','Actor',1996,5000000);
+
+insert into manage_stock(musername,total_share,symbol,price) values('alfred',200,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('alfred',100,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('billy',500,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('billy',100,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('cindy',250,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('david',100,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('david',500,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('david',50,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('sailor',1000,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('brush',100,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('ivan',300,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('joe',500,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('joe',100,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('joe',200,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('magic',1000,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('olive',100,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('olive',100,'SMD');
+insert into manage_stock(musername,total_share,symbol,price) values('olive',100,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('frank',100,'SKB');
+insert into manage_stock(musername,total_share,symbol,price) values('frank'200,'STC');
+insert into manage_stock(musername,total_share,symbol,price) values('frank',100,'SMD');
+
+insert into stock(symbol,cur_price,actor_id) values('SKB',40,1);
+insert into stock(symbol,cur_price,actor_id) values('SMD',71,2);
+insert into stock(symbol,cur_price,actor_id) values('STC',32.50,3);
+
+insert into prices(pdate,closing_price,symbol) values('16-MAR-13',40,'SKB');
+insert into prices(pdate,closing_price,symbol) values('16-MAR-13',71,'SMD');
+insert into prices(pdate,closing_price,symbol) values('16-MAR-13',32.50,'STC');
 
