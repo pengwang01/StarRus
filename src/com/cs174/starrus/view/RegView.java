@@ -15,7 +15,6 @@ public class RegView extends JDialog implements IView{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel lblUsername;
-	private JTextField txtUsername;
 	private JLabel lblPassword;
 	private JTextField txtPassword;
 	private JLabel lblCName;
@@ -33,6 +32,7 @@ public class RegView extends JDialog implements IView{
 	private JLabel lblAge;
 	private JTextField txtAge;
 	private JLabel lblWarning;
+	private JTextField txtUsername;
 	
 	private RegView(){
 		//setView();
@@ -53,12 +53,6 @@ public class RegView extends JDialog implements IView{
 	    this.lblUsername = new JLabel("Username:");
 	    this.lblUsername.setBounds(22, 6, 89, 16);
 	    this.getContentPane().add(this.lblUsername);
-	    
-	    this.txtUsername = new JTextField();
-	    this.txtUsername.setBounds(123, 0, 134, 28);
-	    //this.txtUsername.setText("username");
-	    this.getContentPane().add(this.txtUsername);
-	    this.txtUsername.setColumns(10);
 	    this.txtUsername = new JTextField();
 	    
 	    this.lblPassword = new JLabel("Password:");
@@ -138,6 +132,12 @@ public class RegView extends JDialog implements IView{
 	    this.lblWarning = new JLabel("");
 	    this.lblWarning.setBounds(22, 236, 235, 16);
 	    getContentPane().add(this.lblWarning);
+	    
+	    this.txtUsername = new JTextField();
+	    this.txtUsername.setText("");
+	    this.txtUsername.setBounds(123, 0, 134, 28);
+	    getContentPane().add(this.txtUsername);
+	    this.txtUsername.setColumns(10);
 	    this.setVisible(true);
 	}
 	@Override
@@ -216,5 +216,4 @@ public class RegView extends JDialog implements IView{
 	public void setLblWarning(JLabel lblWarning) {
 		this.lblWarning = lblWarning;
 	}
-	
 }
