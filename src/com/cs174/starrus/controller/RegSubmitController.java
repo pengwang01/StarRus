@@ -28,13 +28,9 @@ public class RegSubmitController implements IController{
 			phone = rV.getTxtPhone().getText();
 			state = rV.getTxtState().getText();		
 			email = rV.getTxtEmail().getText();
-			if(rV.getTxtAge().getText().equals(""))
-				age = 0;
-			else
-				age = Integer.parseInt(rV.getTxtAge().getText());
 			taxid = Integer.parseInt(rV.getTxtTaxid().getText());
 
-			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel, age, balance) values ("
+			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel ) values ("
 				+ "'" 	+ username + "' ,"
 				+ "'" 	+ cname + "',"
 				+ "'" 	+ phone + "',"
@@ -43,11 +39,9 @@ public class RegSubmitController implements IController{
 				+ "'" 	+ psw + "',"
 				+ "'" 	+ email + "',"
 				+ 2 	+ ","	
-				+ age 	+ ","	
-				+ 10000	+")";
+				+ ")";
 			Statement stmt	= conn.createStatement();
 			stmt.executeQuery(query);
-			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);
 			rV.getTxtCName().setText(null);
 			rV.getTxtPassword().setText(null);
@@ -59,7 +53,6 @@ public class RegSubmitController implements IController{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			rV.getLblWarning().setText("username, password, taxID empty");
-			rV.getTxtAge().setText(null);
 			rV.getTxtEmail().setText(null);
 			rV.getTxtCName().setText(null);
 			rV.getTxtPassword().setText(null);
