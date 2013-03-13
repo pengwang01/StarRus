@@ -128,11 +128,6 @@ public class ManagerView extends JPanel implements IView{
 		this.lblAge.setBounds(6, 107, 84, 16);
 		this.left.add(this.lblAge);
 		
-		this.lblAgefield = new JLabel("100");
-		this.lblAgefield.setText(Integer.toString(c.getAge()));
-		this.lblAgefield.setBounds(87, 107, 107, 16);
-		this.left.add(this.lblAgefield);
-		
 		this.lblPassword = new JLabel("Password:");
 		this.lblPassword.setBounds(6, 135, 84, 16);
 		this.left.add(this.lblPassword);
@@ -169,7 +164,7 @@ public class ManagerView extends JPanel implements IView{
 		this.left.add(this.lblStatefield);
 		
 		this.lblTaxfield = new JLabel("taxfield");
-		this.lblTaxfield.setText(Integer.toString(c.getTax_id()));
+		this.lblTaxfield.setText(c.getTax_id());
 		this.lblTaxfield.setBounds(87, 219, 107, 16);
 		this.left.add(this.lblTaxfield);
 		

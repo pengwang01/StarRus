@@ -53,17 +53,16 @@ public class LoginController implements IController{
 			if(rs.next()){
 				c = Customer.getCustomer();
 				c.setUsername(username);
-				c.setPsd(password);
 				c.setCname(rs.getString("cname"));
 				c.setPhone_num(rs.getString("phone_num"));
 				c.setState(rs.getString("state"));
-				c.setTax_id(rs.getInt("tax_id"));
+				c.setTax_id(rs.getString("tax_id"));
+				c.setPsd(password);
 				c.setEmail(rs.getString("email"));
-				c.setM_account_id(rs.getInt("m_account_id"));
-				c.setS_account_id(rs.getInt("s_account_id"));
 				c.setClevel(rs.getInt("clevel"));
-				c.setAge(rs.getInt("age"));
 				c.setBalance(rs.getFloat("balance"));
+				c.setAddress(rs.getString("ADDRESS"));
+				c.setSSN(rs.getString("SSN"));
 
 
 //=========================STOCK TABLE CALCULATIONS===============================

@@ -149,15 +149,6 @@ public class CustomerView extends JPanel implements IView{
 		this.lblMyAccountInfo.setBounds(6, 51, 178, 16);
 		this.left.add(this.lblMyAccountInfo);
 		
-		this.lblAge = new JLabel("Age:");
-		this.lblAge.setBounds(6, 107, 84, 16);
-		this.left.add(this.lblAge);
-		
-		this.lblAgefield = new JLabel("100");
-		this.lblAgefield.setText(Integer.toString(c.getAge()));
-		this.lblAgefield.setBounds(87, 107, 107, 16);
-		this.left.add(this.lblAgefield);
-		
 		this.lblPassword = new JLabel("Password:");
 		this.lblPassword.setBounds(6, 135, 84, 16);
 		this.left.add(this.lblPassword);
@@ -194,7 +185,7 @@ public class CustomerView extends JPanel implements IView{
 		this.left.add(this.lblStatefield);
 		
 		this.lblTaxfield = new JLabel("taxfield");
-		this.lblTaxfield.setText(Integer.toString(c.getTax_id()));
+		this.lblTaxfield.setText(c.getTax_id());
 		this.lblTaxfield.setBounds(87, 219, 107, 16);
 		this.left.add(this.lblTaxfield);
 		
@@ -290,12 +281,6 @@ public class CustomerView extends JPanel implements IView{
 		this.btnViewTransactions.setBounds(268, 34, 155, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
-		this.lblMAccountId = new JLabel();
-		//System.out.println(c.getM_account_id());
-		this.lblMAccountId.setText(Integer.toString(c.getM_account_id()));
-		this.lblMAccountId.setBounds(119, 6, 117, 16);
-		this.Maccount.add(this.lblMAccountId);
-		
 		this.balancefield = new JLabel("New label");
 		this.balancefield.setText(Float.toString(c.getBalance()));
 		this.balancefield.setBounds(392, 6, 132, 16);
@@ -348,11 +333,12 @@ public class CustomerView extends JPanel implements IView{
 		};
 		this.scrollPane_myStock.setViewportView(this.table_myStock);
 		this.Saccount.add(this.panel_myStock);
-		
+	/*	
 		this.lblSAccountId = new JLabel();
-		this.lblSAccountId.setText(Integer.toString(c.getS_account_id()));
+		this.lblSAccountId.setText(c.getS_account_id());
 		this.lblSAccountId.setBounds(119, 6, 137, 16);
 		this.Saccount.add(this.lblSAccountId);
+	*/
 		//------------------------------end my stocks list ----------------------------
 		
 		//----------------------stock list (tab) -----------------------------------

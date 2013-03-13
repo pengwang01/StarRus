@@ -2,17 +2,16 @@ package com.cs174.starrus.model;
 
 public class Customer {
 	private String 	username;
-	private String 	psd;
 	private String 	cname;
-	private int 	age;
 	private String 	phone_num;
 	private String 	state;
-	private int 	tax_id;
+	private String	tax_id;
+	private String 	psd;
 	private String 	email;
-	private int 	m_account_id;
-	private int 	s_account_id;
 	private int 	clevel;
 	private float 	balance;
+	private String	address;
+	private String	ssn;
 	private MarketAcc m_account;
 	private StockAcc s_account;
 	private static Customer c = null;
@@ -70,11 +69,11 @@ public class Customer {
 		this.state = state;
 	}
 
-	public int getTax_id() {
+	public String getTax_id() {
 		return tax_id;
 	}
 
-	public void setTax_id(int tax_id) {
+	public void setTax_id(String tax_id) {
 		this.tax_id = tax_id;
 	}
 
@@ -85,7 +84,7 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+/*
 	public int getM_account_id() {
 		return m_account_id;
 	}
@@ -93,7 +92,7 @@ public class Customer {
 	public void setM_account_id(int m_account_id) {
 		this.m_account_id = m_account_id;
 	}
-
+*
 	public int getS_account_id() {
 		return s_account_id;
 	}
@@ -101,7 +100,7 @@ public class Customer {
 	public void setS_account_id(int s_account_id) {
 		this.s_account_id = s_account_id;
 	}
-
+*/
 	public MarketAcc getM_account() {
 		return m_account;
 	}
@@ -126,14 +125,7 @@ public class Customer {
 		this.clevel = clevel;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
+/*
 	@Override
 	public String toString() {
 		return "Customer [username=" + username + ", psd=" + psd + ", cname="
@@ -143,6 +135,7 @@ public class Customer {
 				+ s_account_id + ", clevel=" + clevel + ", m_account="
 				+ m_account + ", s_account=" + s_account + "]";
 	}
+*/
 
 	public float getBalance() {
 		return balance;
@@ -152,4 +145,20 @@ public class Customer {
 		this.balance = balance;
 	}
 	
+	public String getSSN() {
+		return ssn;
+	}
+
+	public void setSSN(String ssn) {
+		this.ssn= ssn;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address){
+		this.address= address;
+	}
+
 }
