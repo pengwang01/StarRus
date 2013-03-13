@@ -65,10 +65,9 @@ public class LoginController implements IController{
 
 //=========================STOCK TABLE CALCULATIONS===============================
 				if( DEBUG == true ){
-					System.out.println("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '" 	+
+					System.out.println("SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = '" 	+
 										c.getUsername()	+ "'"
 										);
-
 				}
 				rs = stmt.executeQuery(	"SELECT * FROM MANAGE_STOCK WHERE MUSERNAME = '" 	+
 										c.getUsername()	+ "'"
@@ -92,6 +91,9 @@ public class LoginController implements IController{
 				
 				
 //=========================STOCK LIST TAB ( TAB 2)===============================
+				if( DEBUG == true ){
+					System.out.println("SELECT * FROM STOCK");
+				}
 				rs = stmt.executeQuery(	"SELECT * FROM STOCK");
 				cV.getRow_listStock().clear();
 				while( rs.next() ){
@@ -143,28 +145,27 @@ public class LoginController implements IController{
 					String 	symbol	= rs.getString("SYMBOL");
 					String 	year	= Integer.toString(rs.getInt("YEAR"));
 					String 	birthday	= rs.getString("BIRTHDAY");
-					String 	contract	= rs.getString("CONTRACT");
-					String 	totalvalue	= Float.toString(rs.getFloat("TOTALVALUE"));
-					String 	movie_title	= rs.getString("MOVIE_TITLE");
+					String 	totalvalue	= Float.toString(rs.getFloat("TOTAL_VALUE"));
+					String 	title	= rs.getString("TITLE");
 					if(DEBUG == true){
 						System.out.println("Inserting into Actors table");
 					System.out.println("Name: "		+ name);
 					System.out.println("Role: " 	+ role);
 					System.out.println("Year: "		+ year);
 					System.out.println("Birthday: "	+ birthday);
-					System.out.println("Contract: "	+ contract);
 					System.out.println("Totalvalue: "	+ totalvalue);
-					System.out.println("Movie_title: "	+ movie_title);
+					System.out.println("Movie_title: "	+ title);
 					}
 			
 					newRow.add(name);
+					newRow.add(symbol);
 					newRow.add(birthday);
-					newRow.add(movie_title);
+					newRow.add(totalvalue);
+					newRow.add(title);
 					newRow.add(role);
 					newRow.add(year);
-					newRow.add(totalvalue);
-					newRow.add(contract);
-					newRow.add(symbol);
+					
+					
 					cV.getRow_Actor().add(newRow);
 				}
 				cV.updateView(c);

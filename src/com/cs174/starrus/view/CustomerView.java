@@ -414,7 +414,6 @@ public class CustomerView extends JPanel implements IView{
 	    col_actor.add("Movie TItle");
 	    col_actor.add("Role");
 	    col_actor.add("Year");
-	    col_actor.add("Total Value");
 
 		this.table_actor = new JTable(row_actor, col_actor){
             public boolean isCellEditable(int row, int col){
