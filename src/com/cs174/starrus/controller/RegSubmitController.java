@@ -29,7 +29,14 @@ public class RegSubmitController implements IController{
 			state = rV.getTxtState().getText();		
 			email = rV.getTxtEmail().getText();
 			taxid = Integer.parseInt(rV.getTxtTaxid().getText());
-
+			System.out.println(username);
+			System.out.println(psw);
+			System.out.println(cname);
+			System.out.println(phone);
+			System.out.println(state);
+			System.out.println(email);
+			System.out.println(taxid);
+			
 			String query = "insert into customer(username, cname, phone_num, state, tax_id, psd, email, clevel ) values ("
 				+ "'" 	+ username + "' ,"
 				+ "'" 	+ cname + "',"
@@ -38,7 +45,7 @@ public class RegSubmitController implements IController{
 				+ taxid + ","
 				+ "'" 	+ psw + "',"
 				+ "'" 	+ email + "',"
-				+ 2 	+ ","	
+				+ 2 	
 				+ ")";
 			Statement stmt	= conn.createStatement();
 			stmt.executeQuery(query);
