@@ -1,0 +1,23 @@
+create table movies(title char(20), production number(4), organization char(20), primary key(title));
+
+create table reviews(movie char(40),author char(10), message char(10), primary key ( movie, author ), foreign key ( movie) references movies(title));
+
+insert into Movies values ( 'CHICAGO',2003,'HOLLYWOOD');
+insert into Movies values ('HEAD OF STATE', 2003,'HOLLWOOD');
+insert into Movies values ('PERFECT MURDER',1996,'HOLLYWOOD');
+insert into Movies values ('L.A. CONFIDENTIAL',1997,'HOLLYWOOD');
+insert into Movies values ('JERRY MAGUIRE',1996,'HOLLYWOOD');
+insert into Movies values ('RED FLAG',2012,'HOLLYWOOD');
+insert into Movies values ('THE SHAWSHANK REDEMPTION',1994,'HOLLYWOOD');
+
+insert into REVIEWS values ('CHICAGO','CLINTON','Very Good');
+insert into REVIEWS values ('CHICAGO','BUSH','Good');
+insert into REVIEWS values ('L.A. CONFIDENTIAL','BILL','GOOD');
+insert into REVIEWS values ('L.A. CONFIDENTIAL','DAY','OK');
+insert into REVIEWS values ('PERFECT MURDER','JILL','POOR');
+insert into REVIEWS values ('PERFECT MURDER','DANNY','OK');
+insert into REVIEWS values ('PERFECT MURDER','MARK','AWESOME');
+insert into REVIEWS values ('JERRY MAGUIRE','VIM','GOOD');
+insert into REVIEWS values ('RED FLAG','OCEAN','POOR');
+insert into REVIEWS values ('RED FLAG','MARK','LIKE IT');
+insert into REVIEWS values ('THE SHAWSHANK REDEMPTION','OCEAN','GOOD');
