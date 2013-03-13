@@ -10,8 +10,8 @@ public class Customer {
 	private String 	email;
 	private int 	clevel;
 	private float 	balance;
-	private String	address;
-	private String	ssn;
+	private String	m_account_id;
+	private String	s_account_id;
 	private MarketAcc m_account;
 	private StockAcc s_account;
 	private static Customer c = null;
@@ -84,7 +84,7 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-/*
+
 	public int getM_account_id() {
 		return m_account_id;
 	}
@@ -92,7 +92,7 @@ public class Customer {
 	public void setM_account_id(int m_account_id) {
 		this.m_account_id = m_account_id;
 	}
-*
+
 	public int getS_account_id() {
 		return s_account_id;
 	}
@@ -100,7 +100,7 @@ public class Customer {
 	public void setS_account_id(int s_account_id) {
 		this.s_account_id = s_account_id;
 	}
-*/
+
 	public MarketAcc getM_account() {
 		return m_account;
 	}
@@ -144,7 +144,7 @@ public class Customer {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
-	
+/*	
 	public String getSSN() {
 		return ssn;
 	}
@@ -160,5 +160,5 @@ public class Customer {
 	public void setAddress(String address){
 		this.address= address;
 	}
-
+*/
 }
