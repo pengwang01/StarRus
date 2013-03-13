@@ -25,8 +25,8 @@ public class SellStockView extends JDialog implements IView{
 	
 	private SellStockView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 170));
-		this.setPreferredSize(new Dimension(280, 170));
+		this.setSize(new Dimension(280, 250));
+		this.setPreferredSize(new Dimension(280, 250));
 	    getContentPane().setLayout(null);
 		//setView();
 	}
@@ -54,7 +54,7 @@ public class SellStockView extends JDialog implements IView{
 	    getContentPane().add(this.btnTicker);
 	    
 	    this.lblWarning = new JLabel("");
-	    this.lblWarning.setBounds(6, 74, 268, 16);
+	    this.lblWarning.setBounds(6, 150, 268, 16);
 	    getContentPane().add(this.lblWarning);
 	    
 	    this.lblQuantity = new JLabel("Quantity:");

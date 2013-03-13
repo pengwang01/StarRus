@@ -56,6 +56,7 @@ public class CustomerView extends JPanel implements IView{
 	private final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	private JPanel stockPanel;
 	private JPanel moviePanel;
+	private JPanel actorPanel;
 	private JLabel lblUsername_1;
 	private JLabel lblUsfield;
 	private JLabel lblMyAccountInfo;
@@ -78,16 +79,20 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel balancefield;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
-	Vector<Vector<String>> row_listStock = new Vector<Vector<String>>();
-	Vector<Vector<String>> row_myStock = new Vector<Vector<String>>();
-	Vector<Vector<String>> row_listMovie = new Vector<Vector<String>>();
+	Vector<Vector<String>> row_listStock 	= new Vector<Vector<String>>();
+	Vector<Vector<String>> row_myStock 		= new Vector<Vector<String>>();
+	Vector<Vector<String>> row_listMovie 	= new Vector<Vector<String>>();
+	Vector<Vector<String>> row_actor		= new Vector<Vector<String>>();
 	private JScrollPane scrollPane_myStock;
 	private JScrollPane scrollPane_listStock;
 	private JScrollPane scrollPane_listMovie;
+	private JScrollPane scrollPane_actor;
 	private JPanel panel_myStock;
+	private JPanel panel_actor;
 	private JTable table_myStock;
 	private JTable table_listStock;
 	private JTable table_listMovie;
+	private JTable table_actor;
 	private JLabel lblFrom;
 	private JTextField txtFromfield;
 	private JLabel lblTo;
@@ -405,6 +410,34 @@ public class CustomerView extends JPanel implements IView{
 		});
 
 		this.scrollPane_listMovie.setViewportView(this.table_listMovie);
+		//----------------------actor list (tab) -----------------------------------
+		this.actorPanel = new JPanel();
+		tabbedPane.addTab("View Actors", null, this.actorPanel, "View All Available Actors");
+		this.actorPanel.setLayout(null);
+		
+		this.scrollPane_actor = new JScrollPane();
+		this.scrollPane_actor.setBounds(6, 6, 567, 542);
+		this.actorPanel.add(this.scrollPane_actor);
+		
+		//making table col and row
+		Vector<String> col_actor = new Vector<String>();
+	    col_actor.add("Actor Name");
+	    col_actor.add("Symbol");
+	    col_actor.add("DOB");
+	    col_actor.add("Contract");
+	    col_actor.add("Movie TItle");
+	    col_actor.add("Role");
+	    col_actor.add("Year");
+	    col_actor.add("Total Value");
+
+		this.table_actor = new JTable(row_actor, col_actor){
+            public boolean isCellEditable(int row, int col){
+				return false;
+			}
+		};
+		this.scrollPane_actor.setViewportView(this.table_actor);
+		//-----------------------------end of actor list  (tab) ---------------------------
+
 		
 		this.panel = new JPanel();
 		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -557,5 +590,10 @@ public class CustomerView extends JPanel implements IView{
 	public JTable getTable_listMovie(){
 		return this.table_listMovie;
 	}
+
+	public Vector<Vector<String>> getRow_Actor() {
+		return row_actor;
+	}
+
 
 }

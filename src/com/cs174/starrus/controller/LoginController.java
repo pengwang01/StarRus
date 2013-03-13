@@ -136,6 +136,42 @@ public class LoginController implements IController{
 				}
 				cV.updateView(c);
 
+//=========================ACTOR LIST TAB ( TAB 3)===============================
+				rs = stmt.executeQuery(	"SELECT * FROM ACTOR");
+				cV.getRow_Actor().clear();
+				while( rs.next() ){
+					Vector<String> newRow 	= new Vector<String>();
+					String 	name	= rs.getString("NAME");
+					String 	role	= rs.getString("ROLE");
+					String 	symbol	= rs.getString("SYMBOL");
+					String 	year	= Integer.toString(rs.getInt("YEAR"));
+					String 	birthday	= rs.getString("BIRTHDAY");
+					String 	contract	= rs.getString("CONTRACT");
+					String 	totalvalue	= Float.toString(rs.getFloat("TOTALVALUE"));
+					String 	movie_title	= rs.getString("MOVIE_TITLE");
+					if(DEBUG == true){
+						System.out.println("Inserting into Actors table");
+					System.out.println("Name: "		+ name);
+					System.out.println("Role: " 	+ role);
+					System.out.println("Year: "		+ year);
+					System.out.println("Birthday: "	+ birthday);
+					System.out.println("Contract: "	+ contract);
+					System.out.println("Totalvalue: "	+ totalvalue);
+					System.out.println("Movie_title: "	+ movie_title);
+					}
+			
+					newRow.add(name);
+					newRow.add(birthday);
+					newRow.add(movie_title);
+					newRow.add(role);
+					newRow.add(year);
+					newRow.add(totalvalue);
+					newRow.add(contract);
+					newRow.add(symbol);
+					cV.getRow_Actor().add(newRow);
+				}
+				cV.updateView(c);
+
 
 				if(c.getClevel() == 1){
 
