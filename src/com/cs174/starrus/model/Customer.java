@@ -10,8 +10,8 @@ public class Customer {
 	private String 	email;
 	private int 	clevel;
 	private float 	balance;
-	private String	m_account_id;
-	private String	s_account_id;
+	private int	m_account_id;
+	private int	s_account_id;
 	private MarketAcc m_account;
 	private StockAcc s_account;
 	private static Customer c = null;
@@ -125,18 +125,6 @@ public class Customer {
 		this.clevel = clevel;
 	}
 
-/*
-	@Override
-	public String toString() {
-		return "Customer [username=" + username + ", psd=" + psd + ", cname="
-				+ cname + ", age=" + age + ", phone_num=" + phone_num
-				+ ", state=" + state + ", tax_id=" + tax_id + ", email="
-				+ email + ", m_account_id=" + m_account_id + ", s_account_id="
-				+ s_account_id + ", clevel=" + clevel + ", m_account="
-				+ m_account + ", s_account=" + s_account + "]";
-	}
-*/
-
 	public float getBalance() {
 		return balance;
 	}
@@ -144,21 +132,4 @@ public class Customer {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
-/*	
-	public String getSSN() {
-		return ssn;
-	}
-
-	public void setSSN(String ssn) {
-		this.ssn= ssn;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address){
-		this.address= address;
-	}
-*/
 }

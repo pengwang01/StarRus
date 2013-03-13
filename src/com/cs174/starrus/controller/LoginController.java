@@ -61,8 +61,6 @@ public class LoginController implements IController{
 				c.setEmail(rs.getString("email"));
 				c.setClevel(rs.getInt("clevel"));
 				c.setBalance(rs.getFloat("balance"));
-				c.setAddress(rs.getString("ADDRESS"));
-				c.setSSN(rs.getString("SSN"));
 
 
 //=========================STOCK TABLE CALCULATIONS===============================
