@@ -60,8 +60,8 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel lblUsername_1;
 	private JLabel lblUsfield;
 	private JLabel lblMyAccountInfo;
-	private JLabel lblAge;
-	private JLabel lblAgefield;
+//	private JLabel lblAge;
+//	private JLabel lblAgefield;
 	private JLabel lblPassword;
 	private static CustomerView cView = null;	
 	private JLabel lblPhone;
@@ -461,7 +461,7 @@ public class CustomerView extends JPanel implements IView{
 	public void present(String model) {
 		// TODO Auto-generated method stub
 	}
-
+/*
 	public JLabel getLblAgefield() {
 		return lblAgefield;
 	}
@@ -469,6 +469,7 @@ public class CustomerView extends JPanel implements IView{
 	public void setLblAgefield(JLabel lblAgefield) {
 		this.lblAgefield = lblAgefield;
 	}
+*/
 
 	public JLabel getLblPsdfield() {
 		return lblPsdfield;
