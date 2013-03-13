@@ -29,8 +29,8 @@ public class RegView extends JDialog implements IView{
 	private JTextField txtEmail;
 	private JButton btnSubmit;
 	private static RegView regView = null;
-	private JLabel lblAge;
-	private JTextField txtAge;
+//	private JLabel lblAge;
+//	private JTextField txtAge;
 	private JLabel lblWarning;
 	private JTextField txtUsername;
 	
@@ -120,7 +120,7 @@ public class RegView extends JDialog implements IView{
 	    listeners.associate(this.btnSubmit, new RegSubmitController());
 	    getContentPane().add(this.btnSubmit);
 	    
-	    this.lblAge = new JLabel("Age:");
+/*	    this.lblAge = new JLabel("Age:");
 	    this.lblAge.setBounds(22, 202, 61, 16);
 	    getContentPane().add(this.lblAge);
 	    
@@ -128,6 +128,7 @@ public class RegView extends JDialog implements IView{
 	    this.txtAge.setBounds(123, 196, 134, 28);
 	    getContentPane().add(this.txtAge);
 	    this.txtAge.setColumns(10);
+*/
 	    
 	    this.lblWarning = new JLabel("");
 	    this.lblWarning.setBounds(22, 236, 235, 16);
@@ -200,7 +201,7 @@ public class RegView extends JDialog implements IView{
 	public void setTxtEmail(JTextField txtEmail) {
 		this.txtEmail = txtEmail;
 	}
-
+/*
 	public JTextField getTxtAge() {
 		return txtAge;
 	}
@@ -208,6 +209,7 @@ public class RegView extends JDialog implements IView{
 	public void setTxtAge(JTextField txtAge) {
 		this.txtAge = txtAge;
 	}
+*/
 
 	public JLabel getLblWarning() {
 		return lblWarning;
