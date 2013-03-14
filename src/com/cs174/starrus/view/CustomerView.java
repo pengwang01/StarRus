@@ -75,7 +75,6 @@ public class CustomerView extends JPanel implements IView{
 	private JLabel lblEmailfield;
 	private JLabel lblUserLevel;
 	private JLabel lblLevelfield;
-	private JLabel lblMAccountId;
 	private JLabel balancefield;
 	private JLabel lblSAccountId;
 	private JButton btnLogout;
@@ -99,6 +98,8 @@ public class CustomerView extends JPanel implements IView{
 	private JTextField txtTofield;
 	private JButton btnTopMovies;
 	private JPanel panel;
+	private JLabel lblMaccountid;
+	private JLabel lblSaccountid;
 		
 	private CustomerView(){
 		this.setSize(new Dimension(800, 600));
@@ -286,6 +287,11 @@ public class CustomerView extends JPanel implements IView{
 		this.balancefield.setBounds(392, 6, 132, 16);
 		this.Maccount.add(this.balancefield);
 		
+		this.lblMaccountid = new JLabel("m_account_id");
+		this.lblMaccountid.setBounds(119, 6, 87, 16);
+		this.lblMaccountid.setText(Integer.toString(c.getM_account_id()));
+		this.Maccount.add(this.lblMaccountid);
+		
 		this.Saccount = new JPanel();
 		this.Saccount.setLayout(null);
 		this.Saccount.setBackground(new Color(204, 153, 153));
@@ -333,6 +339,11 @@ public class CustomerView extends JPanel implements IView{
 		};
 		this.scrollPane_myStock.setViewportView(this.table_myStock);
 		this.Saccount.add(this.panel_myStock);
+		
+		this.lblSaccountid = new JLabel("s_account_id");
+		this.lblSaccountid.setText(Integer.toString(c.getS_account_id()));
+		this.lblSaccountid.setBounds(119, 6, 87, 16);
+		this.Saccount.add(this.lblSaccountid);
 	/*	
 		this.lblSAccountId = new JLabel();
 		this.lblSAccountId.setText(c.getS_account_id());
@@ -580,6 +591,4 @@ public class CustomerView extends JPanel implements IView{
 	public Vector<Vector<String>> getRow_Actor() {
 		return row_actor;
 	}
-
-
 }

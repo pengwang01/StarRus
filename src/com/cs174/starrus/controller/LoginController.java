@@ -61,6 +61,8 @@ public class LoginController implements IController{
 				c.setEmail(rs.getString("email"));
 				c.setClevel(rs.getInt("clevel"));
 				c.setBalance(rs.getFloat("balance"));
+				c.setM_account_id(rs.getInt("M_ACCOUNT_ID"));
+				c.setS_account_id(rs.getInt("S_ACCOUNT_ID"));
 
 
 //=========================STOCK TABLE CALCULATIONS===============================
@@ -81,13 +83,19 @@ public class LoginController implements IController{
 					int 	shares	= rs.getInt("TOTAL_SHARE");
 					String 	tkr		= rs.getString("SYMBOL");
 					Float	price	= rs.getFloat("PRICE");
-
+					
+					if(DEBUG == true){
+						System.out.println("Updating total shares, symbol, price");
+						System.out.println("shares: " + shares);
+						System.out.println("Symbol: " + tkr);
+						System.out.println("Price: " + price);
+					}
 					newRow.add(tkr);
 					newRow.add(Integer.toString(shares));
 					newRow.add(Float.toString(price));
 					cV.getRow_myStock().add(newRow);
 				}
-//				cV.updateView(c);
+				cV.updateView(c);
 				
 				
 //=========================STOCK LIST TAB ( TAB 2)===============================

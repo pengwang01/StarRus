@@ -228,9 +228,11 @@ public class BuyStockSubmitController implements IController{
 			while( rs.next() ){
 				Vector<String> newRow = new Vector<String>();
 				String symbol= rs.getString("SYMBOL");
+				float price1 = rs.getFloat("PRICE");
 				int shares	= rs.getInt("TOTAL_SHARE");	
 				newRow.add(symbol);
 				newRow.add(Integer.toString(shares));
+				newRow.add(Float.toString(price1));
 				cV.getRow_myStock().add(newRow);
 			}
 			cV.updateView(c);

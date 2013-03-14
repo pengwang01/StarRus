@@ -18,7 +18,7 @@ import com.cs174.starrus.controller.RegController;
 public class LoginView extends JPanel implements IView{
 	// SET LAZY TO FALSE TO START WITH BLANK USERNAME/PASSWORD
 	// SET LAZY TO TRURE TO START WITH BRYAN/BRYAN
-	public boolean LAZY = true;
+	public boolean LAZY = false;
 	
 	private static final long serialVersionUID = 1L;
 	

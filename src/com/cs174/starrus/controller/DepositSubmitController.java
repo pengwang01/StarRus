@@ -45,13 +45,17 @@ public class DepositSubmitController implements IController{
 				balance = Float.parseFloat(depoV.getTxtDeposit().getText()) + c.getBalance();
 				c.setBalance(balance);
 
-/*
+
 				// if account balance > 1000, then set up stock account
 				if(c.getBalance() >= 1000){
+					if(DEBUG == true)
+						System.out.println("testing: " + c.getM_account_id());
 					stmt.executeQuery("UPDATE customer set s_account_id = " + c.getM_account_id() +
 						"where username = '" + c.getUsername() + "'");
+					c.setS_account_id(c.getM_account_id());
 				}
-*/
+				cView.setView(c);
+
 				
 				// Insert into Money_trans Table	
 				// execute query for add row to money transaction table
