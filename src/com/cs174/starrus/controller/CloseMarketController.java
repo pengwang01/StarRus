@@ -67,8 +67,36 @@ public class CloseMarketController implements IController{
 
 				}
 
-			//TODO May need to increment the date 
-			// MOST LIKELY NOT
+			// Insert every customer's balance into the balance tbale
+			rs		= stmt.executeQuery("SELECT * FROM CUSTOMER");
+			ArrayList<String>	userList	= new ArrayList<String>();
+			float	balance = 0;
+			while(rs.next()){
+				userList.add(rs.getString("USERNAME"));
+			}
+			
+			for( int i =0;i<userList.size();i++){
+				if(DEBUG == true){
+					System.out.println("SELECT * FROM CUSTOMER WHERE USERNAME ='" + userList.get(i) +"'");
+				}
+				rs	= stmt.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME ='" + userList.get(i) +"'");
+				if(rs.next()){
+					balance = rs.getFloat("BALANCE");
+				}
+				if(DEBUG == true){
+					System.out.println("INSERT INTO BALANCE(USERNAME,BALANCE,BDATE) VALUES ('"
+									+ userList.get(i)	+ "',"
+									+ balance			+ ",'"
+									+ sD.getDateStr()	+ "')"
+									);
+
+				}
+				stmt.executeQuery(	"INSERT INTO BALANCE(USERNAME,BALANCE,BDATE) VALUES ('"
+									+ userList.get(i)	+ "',"
+									+ balance			+ ",'"
+									+ sD.getDateStr()	+ "')"
+									);
+			}
 
 									
 		}catch (SQLException e){

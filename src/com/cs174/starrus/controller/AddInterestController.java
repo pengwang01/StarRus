@@ -42,33 +42,30 @@ public class AddInterestController implements IController{
 			stmt	= conn.createStatement();
 			
 			if(DEBUG == true){
-				System.out.println(		"SELECT TUSERNAME, AVG(BALANCE) AS BALANCE FROM MONEY_TRANS WHERE "	+
-										"(M_TRANS_ID,TUSERNAME) IN "								+
-										"(SELECT MAX(M_TRANS_ID),TUSERNAME FROM MONEY_TRANS WHERE "	+
-										"TDATE IN "													+
-										"(SELECT MAX(TDATE) FROM MONEY_TRANS GROUP BY TDATE) "		+
-										"GROUP BY TDATE,TUSERNAME) GROUP BY TUSERNAME"				
+				System.out.println("SELECT USERNAME, AVG(BALANCE) AS BALANCE FROM BALANCE "
+									+ "GROUP BY USERNAME"
 									);
 			}
 
-			rs 		=stmt.executeQuery(	"SELECT TUSERNAME, AVG(BALANCE) AS BALANCE FROM MONEY_TRANS WHERE "	+
-										"(M_TRANS_ID,TUSERNAME) IN "								+
-										"(SELECT MAX(M_TRANS_ID),TUSERNAME FROM MONEY_TRANS WHERE "	+
-										"TDATE IN "													+
-										"(SELECT MAX(TDATE) FROM MONEY_TRANS GROUP BY TDATE) "		+
-										"GROUP BY TDATE,TUSERNAME) GROUP BY TUSERNAME"				
+			rs 		=stmt.executeQuery(	"SELECT USERNAME, AVG(BALANCE) AS BALANCE FROM BALANCE "
+										+ "GROUP BY USERNAME"
 										);
 			
 
 			while( rs.next()){
 //				user		= rs.getString("TUSERNAME");
 //				avgBalance 	= rs.getFloat("BALANCE");
-				userList.add(rs.getString("TUSERNAME"));
+				userList.add(rs.getString("USERNAME"));
 				aBalList.add((double)rs.getFloat("BALANCE"));
 
 			// Get balance for this user
 			// The result of doing a new query is that rs is rewritten
 			// Therefore, we need to redo the original query again
+			}
+			if ( DEBUG == true){
+				for( int i=0;i<userList.size();i++){
+					System.out.println("UserList[" + i + "]: " + userList.get(i));
+				}
 			}
 
 			for( int i = 0 ; i < userList.size() ; i ++){
