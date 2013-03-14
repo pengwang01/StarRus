@@ -41,6 +41,7 @@ public class STransactionController implements IController{
 			rs 		= stmt.executeQuery("SELECT * FROM STOCK_TRANS WHERE SUSERNAME = '"	+
 										c.getUsername()			+ "'"
 										);
+			stV.getRow().clear();
 			while( rs.next() ){
 				if(DEBUG == true){
 					System.out.println("Getting Row");

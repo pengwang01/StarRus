@@ -47,7 +47,7 @@ public class SetNewDateSubmitController implements IController{
 			}
 			
 			
-
+			sndV.dispose();
 									
 		}catch (Exception e){
 			System.out.println("SQLException in SetPriceController");

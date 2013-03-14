@@ -23,6 +23,7 @@ public class SetPriceController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
 	private SysDate		sD			= SysDate.getSysDate();
+	private SetNewPriceView snpView  = SetNewPriceView.getView();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -83,8 +84,8 @@ public class SetPriceController implements IController{
 								);
 			//TODO May need to increment the date 
 			// MOST LIKELY NOT
-
-									
+			snpView.dispose();
+				
 		}catch (SQLException e){
 			System.out.println("SQLException in SetPriceController");
 			e.printStackTrace();
