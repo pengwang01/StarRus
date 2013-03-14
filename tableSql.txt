@@ -1,0 +1,111 @@
+CREATE TABLE cutomer (
+username char(20),
+cname char(20),
+phone_num char(10),
+state char(2),
+tax_id integer,
+psd char(20) not null,
+email char(20),
+m_account_id integer,
+s_account_id integer,
+clevel integer not null,
+balance float default 0 not null enable,
+primary key (username))
+
+create table money_trans (
+m_trans_id integer,
+tdate date not null,
+tusername char(20),
+ttype integer not null,
+amount float not null,
+primary key (m_trans_id),
+foreign key (tusername) references customer)
+
+create table manage_money(
+username char(20),
+m_trans_id integer,
+curr_balance float,
+primary key(username, m_trans_id);
+foreign key (username) references customer,
+foreign key (m_trans_id) references money_trans)
+
+create table manage_stock(
+musername char(20),
+symbol char(3),
+total_share integer not null,
+primary key(musername, symbol),
+foreign key (musername) references customer
+	on delete cascade,)
+
+create table prices(
+pdate date,
+closing_price float not null,
+symbol char(3),
+primary key (pdate, symbol),
+foreign key(symbol) references stock)
+
+create table stock(
+symbol char(3),
+cur_price float,
+actor_id integer,
+primary key (symbol),
+foreign key (actor_id) references actor)
+
+create table actor(
+actor_id integer,
+name char(20),
+birthday date,
+actor_role char(20),
+director_role char(20),
+title char(40) not null,
+year char(5),
+total_value float not null,
+primary key (actor_id))
+
+create table contract(
+cid integer,
+title char(40) not null,
+year char(5),
+total_value float not null,
+actor_id integer,
+primary key (cid),
+foreign key (actor_id) references actor)
+
+create table stock_trans(
+s_trans_id integer,
+tdate date,
+susername char(20),
+symbol char(3),
+stype integer,
+shares integer,
+price float,
+primary key (s_trans_id),
+foreign key (symbol) references stock,
+foreign key (susername) references customer)
+
+
+
+/*creating auto increment*/
+CREATE SEQUENCE s_m_trans_id
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 100;
+
+CREATE OR REPLACE TRIGGER t_m_trans_id
+  BEFORE INSERT ON money_trans
+  FOR EACH ROW
+BEGIN
+  :new.m_trans_id := s_m_trans_id.nextval;
+END;
+
+
+
+
+
+1: manager / deposit / sell
+2: customer / withdraw / buy
+
+
+
+
+

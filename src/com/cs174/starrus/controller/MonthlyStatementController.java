@@ -172,6 +172,23 @@ public class MonthlyStatementController implements IController{
 				newRow.add(Float.toString(price));
 				msV.getRow_sAccount().add(newRow);
 			}
+			
+			//-----------------------calculate commission----------------------
+			if(DEBUG == true){
+				System.out.println("SELECT COUNT(*) FROM STOCK_TRANS WHERE TUSERNAME = '"	+
+										username			+ "'"
+									);
+
+			}
+			rs 		= stmt.executeQuery("SELECT COUNT(*) FROM STOCK_TRANS WHERE SUSERNAME = '"	+
+										username			+ "'"
+										);
+			int numOfTrans = 0;
+			if(rs.next())
+				numOfTrans = rs.getInt("COUNT(*)");
+			float commission = numOfTrans * 20;
+			System.out.println("commision test:  " + commission);
+			msV.getLblCommission().setText(Float.toString(commission));
 			msV.updateView();
 
 		}catch (SQLException e){

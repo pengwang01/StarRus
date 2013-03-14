@@ -209,5 +209,13 @@ public class MonthlyStatementView extends JDialog implements IView{
 	public void updateView(){
 		this.setView();
 	}
+
+	public JLabel getLblCommission() {
+		return lblCommission;
+	}
+
+	public void setLblCommission(JLabel lblCommission) {
+		this.lblCommission = lblCommission;
+	}
 	
 }
