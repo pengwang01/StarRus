@@ -38,7 +38,7 @@ public class LoginView extends JPanel implements IView{
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
-		//setView();
+		setView();
 	}
 	
 	public static LoginView getView(){
@@ -57,33 +57,33 @@ public class LoginView extends JPanel implements IView{
 		this.panel = new JPanel();
 		this.panel.setBackground(new Color(204, 153, 153));
 		this.panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		this.panel.setLocation(new Point(200, 150));
-		this.panel.setLocation(200, 150);
-		this.panel.setSize(new Dimension(400, 300));
+		this.panel.setLocation(new Point(172, 150));
+		this.panel.setLocation(172, 150);
+		this.panel.setSize(new Dimension(452, 300));
 		this.panel.setPreferredSize(new Dimension(400, 300));
 		this.add(panel);
 		this.panel.setLayout(null);
 		
 		this.lblUserLogin = new JLabel("User Login");
 		this.lblUserLogin.setFont(new Font("Lucida Grande", Font.BOLD, 25));
-		this.lblUserLogin.setBounds(114, 26, 166, 31);
+		this.lblUserLogin.setBounds(145, 26, 166, 31);
 		this.panel.add(this.lblUserLogin);
 		
 		this.lblUsername = new JLabel("Username:");
 		this.lblUsername.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		this.lblUsername.setBounds(52, 91, 116, 22);
+		this.lblUsername.setBounds(52, 91, 137, 22);
 		this.panel.add(this.lblUsername);
 		
 		this.lblPassword = new JLabel("Password:");
 		this.lblPassword.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		this.lblPassword.setBounds(52, 155, 116, 22);
+		this.lblPassword.setBounds(52, 155, 137, 22);
 		this.panel.add(this.lblPassword);
 		
 		this.txtEnterUsername = new JTextField();
 		if( LAZY == true ) {
 			this.txtEnterUsername.setText("bryan");
 		}
-		this.txtEnterUsername.setBounds(201, 90, 145, 28);
+		this.txtEnterUsername.setBounds(201, 90, 188, 28);
 		this.panel.add(this.txtEnterUsername);
 		this.txtEnterUsername.setColumns(10);
 		
@@ -91,13 +91,13 @@ public class LoginView extends JPanel implements IView{
 		if( LAZY == true){
 			this.txtEnterPassword.setText("bryan");
 		}
-		this.txtEnterPassword.setBounds(201, 154, 145, 28);
+		this.txtEnterPassword.setBounds(201, 154, 188, 28);
 		this.panel.add(this.txtEnterPassword);
 		this.txtEnterPassword.setColumns(10);
 		
 		this.btnLogin = new JButton("Login");
 		this.btnLogin.setRequestFocusEnabled(false);
-		this.btnLogin.setBounds(208, 233, 105, 29);
+		this.btnLogin.setBounds(255, 233, 105, 29);
 		
 		//associate a login listener with the login button
 		IController loginController = new LoginController();
@@ -107,7 +107,7 @@ public class LoginView extends JPanel implements IView{
 		this.panel.add(this.btnLogin);
 		this.btnRegister = new JButton("Register");
 		this.btnRegister.setRequestFocusEnabled(false);
-		this.btnRegister.setBounds(88, 233, 105, 29);
+		this.btnRegister.setBounds(110, 233, 105, 29);
 		this.panel.add(this.btnRegister);
 		//associate the register button with the register listener
 		IController regController = new RegController();
@@ -115,7 +115,7 @@ public class LoginView extends JPanel implements IView{
 		
 		this.lblMismatch = new JLabel("");
 		this.lblMismatch.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		this.lblMismatch.setBounds(52, 194, 294, 22);
+		this.lblMismatch.setBounds(62, 194, 338, 22);
 		this.panel.add(this.lblMismatch);
 	}
 

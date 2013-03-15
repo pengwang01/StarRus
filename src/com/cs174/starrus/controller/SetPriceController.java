@@ -1,28 +1,16 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
-import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.SetNewPriceView;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
-
-import java.text.DecimalFormat;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
 
 
 public class SetPriceController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection 	conn		= null;
-	private SysDate		sD			= SysDate.getSysDate();
 	private SetNewPriceView snpView  = SetNewPriceView.getView();
 	@Override
 	public void setView(IView view) {
@@ -32,7 +20,6 @@ public class SetPriceController implements IController{
 	public void process(String model) {
 		SetNewPriceView snpV	= SetNewPriceView.getView();
 		Statement 	stmt;
-		ResultSet	rs;
 
 		try{
 			conn 	= DBconnector.getConnection();
@@ -46,10 +33,10 @@ public class SetPriceController implements IController{
 
 			}
 
-			rs		= stmt.executeQuery(	"SELECT * FROM STOCK " 			+
+			/*ResultSet	rs		= stmt.executeQuery(	"SELECT * FROM STOCK " 			+
 											"WHERE SYMBOL = '"				+
 											snpV.getTxtTicker().getText().toUpperCase()	+ "'"			
-											);	
+											);	*/
 /*
 			if(rs.next()){
 				// STORE CURRENT PRICE INTO THE PRICES TABLE FOR FUTURE LOOKUP

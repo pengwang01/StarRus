@@ -23,8 +23,8 @@ public class SetNewPriceView extends JDialog implements IView{
 	
 	private SetNewPriceView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 170));
-		this.setPreferredSize(new Dimension(280, 170));
+		this.setSize(new Dimension(280, 160));
+		this.setPreferredSize(new Dimension(280, 160));
 	    getContentPane().setLayout(null);
 		//setView();
 	}
@@ -47,7 +47,7 @@ public class SetNewPriceView extends JDialog implements IView{
 	    this.txtTicker.setColumns(10);
 	    
 	    this.btnTicker = new JButton("Set New Price");
-	    this.btnTicker.setBounds(75, 99, 117, 29);
+	    this.btnTicker.setBounds(64, 99, 152, 29);
 	    listeners.associate(this.btnTicker, new SetPriceController());
 	    getContentPane().add(this.btnTicker);
 	    

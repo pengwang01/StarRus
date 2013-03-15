@@ -1,19 +1,11 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.model.SysDate;
-import com.cs174.starrus.view.SetNewPriceView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
-
-import java.text.DecimalFormat;
-
 import java.util.ArrayList;
 import java.util.Vector;
 

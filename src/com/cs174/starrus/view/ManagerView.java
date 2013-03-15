@@ -121,7 +121,7 @@ public class ManagerView extends JPanel implements IView{
 		
 		this.lblMyAccountInfo = new JLabel("My Account Infomation : ");
 		this.lblMyAccountInfo.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
-		this.lblMyAccountInfo.setBounds(6, 51, 178, 16);
+		this.lblMyAccountInfo.setBounds(6, 51, 263, 16);
 		this.left.add(this.lblMyAccountInfo);
 		
 		this.lblAge = new JLabel("Age:");
@@ -155,7 +155,7 @@ public class ManagerView extends JPanel implements IView{
 		
 		this.lblPhonefiled = new JLabel("phonefiled");
 		this.lblPhonefiled.setText(c.getPhone_num());
-		this.lblPhonefiled.setBounds(87, 163, 107, 16);
+		this.lblPhonefiled.setBounds(87, 163, 168, 16);
 		this.left.add(this.lblPhonefiled);
 		
 		this.lblStatefield = new JLabel("statefield");
@@ -300,7 +300,12 @@ public class ManagerView extends JPanel implements IView{
 		col_active.add("Username");
 		this.ActiveCustomer_panel.add(this.scrollPane_active);
 		this.table_active = new JTable(row_active, col_active){
-		    public boolean isCellEditable(int row, int col){
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 
@@ -320,7 +325,12 @@ public class ManagerView extends JPanel implements IView{
 		col_dter.add("State");
 		this.DrugNtax_panel.add(this.scrollPane_dter);
 		this.table_dter = new JTable(row_dter, col_dter){
-		    public boolean isCellEditable(int row, int col){
+		    /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 

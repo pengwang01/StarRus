@@ -6,7 +6,6 @@ import java.awt.Font;
 
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.border.LineBorder;
 import com.cs174.starrus.controller.DepositController;
 import com.cs174.starrus.controller.LoginController;
@@ -22,15 +21,9 @@ import java.awt.ComponentOrientation;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CustomerView extends JPanel implements IView{
-	
-	/**
-	 * 
-	 */
-	private boolean DEBUG = true;
+
 	private static final long serialVersionUID = 1L;
 	//-------------main window components--------------
 	private JPanel left;
@@ -87,7 +80,6 @@ public class CustomerView extends JPanel implements IView{
 	private JScrollPane scrollPane_listMovie;
 	private JScrollPane scrollPane_actor;
 	private JPanel panel_myStock;
-	private JPanel panel_actor;
 	private JTable table_myStock;
 	private JTable table_listStock;
 	private JTable table_listMovie;
@@ -142,12 +134,12 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.lblUsfield = new JLabel("pengwang");
 		this.lblUsfield.setText(c.getUsername());
-		this.lblUsfield.setBounds(87, 79, 107, 16);
+		this.lblUsfield.setBounds(16, 107, 168, 16);
 		this.left.add(this.lblUsfield);
 		
 		this.lblMyAccountInfo = new JLabel("My Account Infomation : ");
 		this.lblMyAccountInfo.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
-		this.lblMyAccountInfo.setBounds(6, 51, 178, 16);
+		this.lblMyAccountInfo.setBounds(6, 51, 188, 16);
 		this.left.add(this.lblMyAccountInfo);
 		
 		this.lblPassword = new JLabel("Password:");
@@ -177,7 +169,7 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.lblPhonefield = new JLabel("phonefield");
 		this.lblPhonefield.setText(c.getPhone_num());
-		this.lblPhonefield.setBounds(87, 163, 107, 16);
+		this.lblPhonefield.setBounds(87, 163, 188, 16);
 		this.left.add(this.lblPhonefield);
 		
 		this.lblStatefield = new JLabel("statefield");
@@ -245,12 +237,12 @@ public class CustomerView extends JPanel implements IView{
 		
 		this.lblMarketAccount = new JLabel("Market Account Summary");
 		this.lblMarketAccount.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		this.lblMarketAccount.setBounds(6, 6, 213, 16);
+		this.lblMarketAccount.setBounds(6, 6, 240, 16);
 		this.mainDisp.add(this.lblMarketAccount);
 		
 		this.lblStockAccount = new JLabel("Stock Account Summary");
 		this.lblStockAccount.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		this.lblStockAccount.setBounds(6, 114, 168, 16);
+		this.lblStockAccount.setBounds(6, 114, 230, 16);
 		this.mainDisp.add(this.lblStockAccount);
 		
 		this.Maccount = new JPanel();
@@ -264,7 +256,7 @@ public class CustomerView extends JPanel implements IView{
 		this.Maccount.add(this.lblAccount);
 		
 		this.lblAccountBalance = new JLabel("Account Balance:  $");
-		this.lblAccountBalance.setBounds(248, 6, 132, 16);
+		this.lblAccountBalance.setBounds(248, 6, 157, 16);
 		this.Maccount.add(this.lblAccountBalance);
 		
 		this.btnDeposit = new JButton("Deposit");
@@ -277,14 +269,14 @@ public class CustomerView extends JPanel implements IView{
 		this.btnWithdraw.setBounds(144, 34, 112, 29);
 		this.Maccount.add(this.btnWithdraw);
 		
-		this.btnViewTransactions = new JButton("View Transactions");
+		this.btnViewTransactions = new JButton("View Money Transactions");
 		listeners.associate(this.btnViewTransactions, new MTransactionController());
-		this.btnViewTransactions.setBounds(268, 34, 155, 29);
+		this.btnViewTransactions.setBounds(268, 34, 265, 29);
 		this.Maccount.add(this.btnViewTransactions);
 		
 		this.balancefield = new JLabel("New label");
 		this.balancefield.setText(Float.toString(c.getBalance()));
-		this.balancefield.setBounds(392, 6, 132, 16);
+		this.balancefield.setBounds(426, 6, 107, 16);
 		this.Maccount.add(this.balancefield);
 		
 		this.lblMaccountid = new JLabel("m_account_id");
@@ -312,11 +304,6 @@ public class CustomerView extends JPanel implements IView{
 		listeners.associate(this.btnBuyStocks, new BuyStockController());
 		this.Saccount.add(this.btnBuyStocks);
 		
-		this.btnViewTransactionsS = new JButton("View Transactions");
-		listeners.associate(this.btnViewTransactionsS, new STransactionController());
-		this.btnViewTransactionsS.setBounds(268, 334, 155, 29);
-		this.Saccount.add(this.btnViewTransactionsS);
-		
 		
 		//------------------------my stock list------------------------------------
 		this.panel_myStock = new JPanel();
@@ -333,6 +320,11 @@ public class CustomerView extends JPanel implements IView{
 	    col_myStock.add("Price");
 	    
 		this.table_myStock = new JTable(row_myStock, col_myStock){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int colIndex){
 				return false;
 			}
@@ -344,6 +336,11 @@ public class CustomerView extends JPanel implements IView{
 		this.lblSaccountid.setText(Integer.toString(c.getS_account_id()));
 		this.lblSaccountid.setBounds(119, 6, 87, 16);
 		this.Saccount.add(this.lblSaccountid);
+		
+		this.btnViewTransactionsS = new JButton("View Stock Transactions");
+		this.btnViewTransactionsS.setBounds(268, 334, 267, 29);
+		this.Saccount.add(this.btnViewTransactionsS);
+		listeners.associate(this.btnViewTransactionsS, new STransactionController());
 	/*	
 		this.lblSAccountId = new JLabel();
 		this.lblSAccountId.setText(c.getS_account_id());
@@ -367,7 +364,12 @@ public class CustomerView extends JPanel implements IView{
 	    col_listStock.add("Current Price");
 
 		this.table_listStock = new JTable(row_listStock, col_listStock){
-            public boolean isCellEditable(int row, int col){
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 		};
@@ -393,7 +395,12 @@ public class CustomerView extends JPanel implements IView{
 	    col_listMovie.add("Rating");
 
 		this.table_listMovie = new JTable(row_listMovie, col_listMovie){
-            public boolean isCellEditable(int row, int col){
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 		};
@@ -427,7 +434,12 @@ public class CustomerView extends JPanel implements IView{
 	    col_actor.add("Year");
 
 		this.table_actor = new JTable(row_actor, col_actor){
-            public boolean isCellEditable(int row, int col){
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 		};

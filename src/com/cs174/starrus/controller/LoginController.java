@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.cs174.starrus.model.Customer;
-import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.LoginView;
 import com.cs174.starrus.view.ManagerView;

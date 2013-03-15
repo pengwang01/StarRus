@@ -20,7 +20,7 @@ public class RegSubmitController implements IController{
 		conn = DBconnector.getConnection();
 		
 		try {
-			int age, taxid;
+			int taxid;
 			String username, cname, phone, psw, email,state;
 			username = rV.getTxtUsername().getText();
 			psw = rV.getTxtPassword().getText();

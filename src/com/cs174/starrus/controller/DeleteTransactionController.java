@@ -1,21 +1,9 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
-import com.cs174.starrus.view.ManagerView;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
-
-import java.text.DecimalFormat;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
 
 
 public class DeleteTransactionController implements IController{
@@ -29,7 +17,6 @@ public class DeleteTransactionController implements IController{
 	@Override
 	public void process(String model) {
 		Statement 	stmt;
-		ResultSet	rs;
 
 		try{
 			conn 	= DBconnector.getConnection();

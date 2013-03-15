@@ -42,12 +42,12 @@ public class BuyStockView extends JDialog implements IView{
 	    this.getContentPane().add(this.lblTicker);
 	    
 	    this.txtTicker = new JTextField();
-	    this.txtTicker.setBounds(118, 6, 140, 28);
+	    this.txtTicker.setBounds(118, 6, 151, 28);
 	    this.getContentPane().add(this.txtTicker);
 	    this.txtTicker.setColumns(10);
 	    
 	    this.btnTicker = new JButton("Buy");
-	    this.btnTicker.setBounds(75, 99, 117, 29);
+	    this.btnTicker.setBounds(81, 102, 117, 29);
 	    listeners.associate(this.btnTicker, new BuyStockSubmitController());
 	    getContentPane().add(this.btnTicker);
 	    
@@ -60,7 +60,7 @@ public class BuyStockView extends JDialog implements IView{
 	    getContentPane().add(this.lblQuantity);
 	    
 	    this.txtQuantity = new JTextField();
-	    this.txtQuantity.setBounds(118, 34, 140, 28);
+	    this.txtQuantity.setBounds(118, 34, 151, 28);
 	    getContentPane().add(this.txtQuantity);
 	    this.txtQuantity.setColumns(10);
 	    //this.setVisible(true);

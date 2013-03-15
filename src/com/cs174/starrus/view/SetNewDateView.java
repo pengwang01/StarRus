@@ -21,8 +21,8 @@ public class SetNewDateView extends JDialog implements IView{
 	
 	private SetNewDateView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(280, 170));
-		this.setPreferredSize(new Dimension(280, 170));
+		this.setSize(new Dimension(280, 160));
+		this.setPreferredSize(new Dimension(280, 160));
 	    getContentPane().setLayout(null);
 		//setView();
 	}
@@ -45,12 +45,12 @@ public class SetNewDateView extends JDialog implements IView{
 	    this.txtDate.setColumns(10);
 	    
 	    this.btnSetDate = new JButton("Set New Date");
-	    this.btnSetDate.setBounds(75, 99, 117, 29);
+	    this.btnSetDate.setBounds(42, 86, 196, 29);
 	    listeners.associate(this.btnSetDate, new SetNewDateSubmitController());
 	    getContentPane().add(this.btnSetDate);
 	    
 	    this.lblWarning = new JLabel("");
-	    this.lblWarning.setBounds(6, 71, 268, 16);
+	    this.lblWarning.setBounds(6, 46, 268, 16);
 	    getContentPane().add(this.lblWarning);
 
 	}

@@ -2,8 +2,6 @@ package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.ManagerView;
 import com.cs174.starrus.view.MonthlyStatementView;
-import com.cs174.starrus.model.Customer;
-
 import java.util.Vector;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +15,6 @@ public class MonthlyStatementController implements IController{
 	private Connection conn = null;
 	boolean DEBUG = true;
 	private ResultSet	rs			= null;
-	private ResultSet   rs1			= null;
 	
 	
 	@Override
@@ -49,7 +46,6 @@ public class MonthlyStatementController implements IController{
 				if(DEBUG == true){
 					System.out.println("Getting Row");
 				}
-				Vector<String> newRow = new Vector<String>();
 				email = rs.getString("EMAIL");			// getting email
 				finalBalance = rs.getFloat("BALANCE");	// getting final balance
 				msV.getLblUsernameField().setText(username);

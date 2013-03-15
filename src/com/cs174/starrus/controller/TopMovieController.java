@@ -1,26 +1,17 @@
 package com.cs174.starrus.controller;
 import com.cs174.starrus.view.IView;
 import com.cs174.starrus.view.CustomerView;
-import com.cs174.starrus.model.Customer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import java.text.DecimalFormat;
-
-import java.util.ArrayList;
 import java.util.Vector;
-
-import javax.swing.table.*;
-
 
 public class TopMovieController implements IController{
 	private boolean 	DEBUG		= true;
 	private Connection	conn		= null;
 	private CustomerView cV			= CustomerView.getView();
-	private Customer	c			= Customer.getCustomer();
 	@Override
 	public void setView(IView view) {
 		// TODO Auto-generated method stub
@@ -46,7 +37,6 @@ public class TopMovieController implements IController{
 										cV.getTextFromFieldString() + " AND " + cV.getTextToFieldString()
 										);
 
-			Vector<Vector<String>> 	newTable = new Vector<Vector<String>>();
 			Vector<String> 			newEntry = new Vector<String>();
 			
 			cV.getRow_listMovie().clear();

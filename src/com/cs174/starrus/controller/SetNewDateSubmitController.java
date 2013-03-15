@@ -4,20 +4,8 @@ import com.cs174.starrus.model.SysDate;
 import com.cs174.starrus.view.SetNewDateView;
 
 
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.util.Date;
-
-import java.text.DecimalFormat;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
-
-
 public class SetNewDateSubmitController implements IController{
 	private boolean 	DEBUG		= true;
-	private SysDate		sD			= SysDate.getSysDate();
 	private SetNewDateView	sndV	= SetNewDateView.getView();
 	@Override
 	public void setView(IView view) {
@@ -25,7 +13,6 @@ public class SetNewDateSubmitController implements IController{
 	}
 	@Override
 	public void process(String model) {
-		SetNewDateView snpV	= SetNewDateView.getView();
 
 		try{
 			String pattern 	= "\\d\\d-(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)-\\d\\d";

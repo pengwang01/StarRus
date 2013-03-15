@@ -20,11 +20,9 @@ public class MTransactionView extends JDialog implements IView{
 	
 	private MTransactionView(){
 		this.setLocation(new Point(350, 200));
-		this.setSize(new Dimension(400, 400));
-		this.setPreferredSize(new Dimension(400, 400));
+		this.setSize(new Dimension(500, 500));
+		this.setPreferredSize(new Dimension(500, 500));
 	    getContentPane().setLayout(null);
-	    
-	   
 	    setView();
 	}
 
@@ -43,15 +41,20 @@ public class MTransactionView extends JDialog implements IView{
 	    col.add("Amount");
 	    col.add("Balance");
 	    this.scrollPane = new JScrollPane();
-	    this.scrollPane.setBounds(6, 6, 388, 366);
+	    this.scrollPane.setBounds(6, 6, 488, 466);
 	    getContentPane().add(this.scrollPane);
 	    
 	    this.table = new JTable(row, col){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int row, int col){
 				return false;
 			}
 		};
-	    this.table.setPreferredSize(new Dimension(400, 400));
+	    this.table.setPreferredSize(new Dimension(500, 1000));
 	    this.scrollPane.setViewportView(this.table);
 	    //this.setVisible(true);
 	}
