@@ -72,9 +72,7 @@ public class CustomerReportView extends JDialog implements IView{
 	    this.table_1 = new JTable(row_sAccount, col_sAccount);
 	    this.table_1.setPreferredSize(new Dimension(800, 500));
 	    this.scrollPane_1.setViewportView(this.table_1);
-	    
-	   
-	    setView();
+	    //setView();
 	}
 
 	public static CustomerReportView getView() {
@@ -108,6 +106,14 @@ public class CustomerReportView extends JDialog implements IView{
 
 	public void setLblStockaccountidfield(JLabel lblStockaccountidfield) {
 		this.lblStockaccountidfield = lblStockaccountidfield;
+	}
+
+	public JLabel getLblUsernameField() {
+		return lblUsernameField;
+	}
+
+	public void setLblUsernameField(JLabel lblUsernameField) {
+		this.lblUsernameField = lblUsernameField;
 	}
 
 	public void updateView(){

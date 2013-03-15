@@ -42,7 +42,7 @@ public class MonthlyStatementView extends JDialog implements IView{
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 400));
 	    getContentPane().setLayout(null);
-	    setView();
+	    //setView();
 	}
 
 	public static MonthlyStatementView getView() {
@@ -53,8 +53,6 @@ public class MonthlyStatementView extends JDialog implements IView{
 		return msView;
 	}
 	public void setView(){
-		
-	    
 	    this.lblUsername = new JLabel("Username:");
 	    this.lblUsername.setBounds(6, 6, 89, 16);
 	    getContentPane().add(this.lblUsername);
@@ -208,6 +206,7 @@ public class MonthlyStatementView extends JDialog implements IView{
 
 	public void updateView(){
 		this.setView();
+		this.repaint();
 	}
 
 	public JLabel getLblCommission() {

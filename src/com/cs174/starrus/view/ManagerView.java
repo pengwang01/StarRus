@@ -34,7 +34,6 @@ public class ManagerView extends JPanel implements IView{
 	private JLabel lblUsername_1;
 	private JLabel lblUsfield;
 	private JLabel lblMyAccountInfo;
-	private JLabel lblAge;
 	private JLabel lblAgefield;
 	private JLabel lblPassword;
 	private static ManagerView mView = null;	
@@ -105,7 +104,7 @@ public class ManagerView extends JPanel implements IView{
 		this.left.add(this.lblWelcom);
 		
 		this.lblUsername = new JLabel("name");
-		this.lblUsername.setBounds(87, 23, 107, 16);
+		this.lblUsername.setBounds(75, 23, 125, 16);
 		this.lblUsername.setText(c.getCname());
 		this.left.add(this.lblUsername);
 		this.left.setPreferredSize(new Dimension(400, 600));
@@ -116,17 +115,13 @@ public class ManagerView extends JPanel implements IView{
 		
 		this.lblUsfield = new JLabel("pengwang");
 		this.lblUsfield.setText(c.getUsername());
-		this.lblUsfield.setBounds(87, 79, 107, 16);
+		this.lblUsfield.setBounds(16, 107, 168, 16);
 		this.left.add(this.lblUsfield);
 		
 		this.lblMyAccountInfo = new JLabel("My Account Infomation : ");
 		this.lblMyAccountInfo.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		this.lblMyAccountInfo.setBounds(6, 51, 263, 16);
 		this.left.add(this.lblMyAccountInfo);
-		
-		this.lblAge = new JLabel("Age:");
-		this.lblAge.setBounds(6, 107, 84, 16);
-		this.left.add(this.lblAge);
 		
 		this.lblPassword = new JLabel("Password:");
 		this.lblPassword.setBounds(6, 135, 84, 16);

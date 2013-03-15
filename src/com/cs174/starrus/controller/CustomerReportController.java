@@ -40,7 +40,7 @@ public class CustomerReportController implements IController{
 			rs 		= stmt.executeQuery("SELECT * FROM CUSTOMER WHERE USERNAME = '"	+
 										username			+ "'"
 										);
-			
+			crV.getLblUsernameField().setText(username);
 			crV.getRow_mAccount().clear();
 			while( rs.next() ){
 				if(DEBUG == true){
@@ -85,7 +85,6 @@ public class CustomerReportController implements IController{
 		}catch (SQLException e){
 			System.out.println("Exception in CustomerReportController");
 		}
-
 		crV.setVisible(true);
 	}
 		

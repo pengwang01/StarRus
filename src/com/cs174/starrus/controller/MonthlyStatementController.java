@@ -28,7 +28,13 @@ public class MonthlyStatementController implements IController{
 		String email;
 		float finalBalance = 0;
 		float initialBalance = 0;
-		
+
+		msV.getLblCommission().setText(null);
+		msV.getLblEmailfield().setText(null);
+		msV.getLblFinalbalancefield().setText(null);
+		msV.getLblGainlossfield().setText(null);
+		msV.getLblInitialbalancefield().setText(null);
+		msV.getLblUsernameField().setText(null);
 		try{
 			conn			= DBconnector.getConnection();
 			Statement stmt	= conn.createStatement();			
@@ -55,8 +61,18 @@ public class MonthlyStatementController implements IController{
 			
 			
 			// -----------------------get initial balance-------------------------------
-			rs = stmt.executeQuery("SELECT BALANCE FROM MONEY_TRANS WHERE " + 
-					" M_TRANS_ID = ( SELECT MIN(M_TRANS_ID) FROM MONEY_TRANS)");
+			if(DEBUG == true){
+				System.out.println("SELECT BALANCE FROM BALANCE WHERE" +
+						" USERNAME = '" + username + "' AND BDATE IN ( SELECT MIN(BDATE) FROM " + 
+						"BALANCE WHERE USERNAME = '" + username + "')"
+									);
+
+			}
+			
+			rs = stmt.executeQuery("SELECT BALANCE FROM BALANCE WHERE " +
+					"USERNAME = '" + username + "' AND BDATE IN ( SELECT MIN(BDATE) FROM " + 
+					"BALANCE WHERE USERNAME = '" + username + "')");
+
 			if(rs.next()){
 				initialBalance = rs.getFloat("BALANCE");
 			}
@@ -185,7 +201,8 @@ public class MonthlyStatementController implements IController{
 			float commission = numOfTrans * 20;
 			System.out.println("commision test:  " + commission);
 			msV.getLblCommission().setText(Float.toString(commission));
-			msV.updateView();
+			
+			//msV.setView();
 
 		}catch (SQLException e){
 			e.printStackTrace();
