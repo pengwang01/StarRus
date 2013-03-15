@@ -38,7 +38,7 @@ public class LoginView extends JPanel implements IView{
 		this.setSize(new Dimension(800, 600));
 		this.setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
-		setView();
+		//setView();
 	}
 	
 	public static LoginView getView(){
