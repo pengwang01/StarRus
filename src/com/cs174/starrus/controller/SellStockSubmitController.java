@@ -82,9 +82,10 @@ public class SellStockSubmitController implements IController{
 			// While the client is trying to sell more shares than he posses, 
 			// The system should loop waiting until he puts in a valid number
 			quantity	= Integer.parseInt(ssV.getTxtQuantityField().getText());
-			if( numStocksAvailable < quantity){
-				ssV.getLblWarning().setText("You do not have enough shares");
+
 				
+			if( numStocksAvailable < quantity || quantity < 0){
+				ssV.getLblWarning().setText("You do not have enough shares");
 			}
 			else{
 				ssV.getLblWarning().setText("");
@@ -109,7 +110,7 @@ public class SellStockSubmitController implements IController{
 				} 
 								
 
-				profit 	= ((price - buyPrice)* quantity ) - 20;
+				profit 	= ((price - buyPrice)* quantity ) -20;
 				sales	= (price * quantity ) - 20;
 
 				if( DEBUG == true){
@@ -171,14 +172,14 @@ public class SellStockSubmitController implements IController{
 				if( DEBUG == true){
 					System.out.println(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 											"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-											1			+ ","				+ profit	+ ","				+ balance			+ 
+											1			+ ","				+ sales	+ ","				+ balance			+ 
 											")"
 									);
 
 				}
 				stmt.executeQuery(		"INSERT INTO MONEY_TRANS ( TDATE, TUSERNAME,TTYPE,AMOUNT,BALANCE) VALUES" +
 										"('"		+ sD.getDateStr()	+ "','"	+ c.getUsername()	+ "',"	+
-										1			+ ","				+ profit	+ ","				+ balance	+	
+										1			+ ","				+ sales	+ ","				+ balance	+	
 										")"
 								);
 				

@@ -174,12 +174,13 @@ public class BuyStockSubmitController implements IController{
 			// Record transaction into stock_trans
 			// STYPE:	0 for Buy
 			// 			1 for Sell
+			float profit = -20;
 			sales = -sales;
 			if( DEBUG == true){
 				System.out.println(		"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '" + sD.getDateStr() + "','" 	+ c.getUsername()	+ "','"		+
 										ticker		+ "',"			+ 0			+ ","				+	
-										quantity	+ ","			+ price		+ ","				+ 0 +
+										quantity	+ ","			+ price		+ ","				+ profit +
 										")"
 							);
 
@@ -188,7 +189,7 @@ public class BuyStockSubmitController implements IController{
 			stmt.executeQuery(			"INSERT INTO STOCK_TRANS (TDATE,SUSERNAME, SYMBOL,STYPE,SHARES,PRICE,PROFIT) "	+
 										"VALUES( '" + sD.getDateStr() 	+ "','" 	+ c.getUsername()	+ "','"		+
 										ticker		+ "',"			+ 0			+ ","				+	
-										quantity	+ ","			+ price		+ ","				+ 0	+
+										quantity	+ ","			+ price		+ ","				+ profit	+
 										")"
 							);
 
